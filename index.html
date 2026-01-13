@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PITA診断 | Personality Ism Type Analyzer</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>PITA診断 | あなたは何主義者として生きるのか。</title>
+    <meta name="description" content="「あなたは何主義者として生きるのか。」100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。">
+    <meta name="keywords" content="性格診断, 心理テスト, 自己分析, 主義者, 大学生, PITA">
+    <link rel="canonical" href="https://pita-diagnosis.com/">
+
+    <!-- OGP (Open Graph Protocol) -->
+    <meta property="og:title" content="PITA診断 | あなたは何主義者として生きるのか">
+    <meta property="og:description" content="100の質問であなたの深層心理を解剖。魂の形を決定づける『イズム』を特定せよ。">
+    <meta property="og:image" content="https://pita-diagnosis.com/ogp-image.png">
+    <meta property="og:url" content="https://pita-diagnosis.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="PITA診断">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PITA診断 | 100問の精密性格診断">
+    <meta name="twitter:description" content="あなたは何主義者として生きるのか。100の質問があなたの魂の形を決定づける。">
+    <meta name="twitter:image" content="https://pita-diagnosis.com/ogp-image.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +31,6 @@
         body { font-family: 'Noto Sans JP', sans-serif; background-color: #ffffff; color: var(--primary); -webkit-font-smoothing: antialiased; overflow-x: hidden; word-break: break-word; }
         .serif { font-family: 'Noto Serif JP', serif; }
         
-        /* Interactive Buttons */
         .btn-choice { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #eeeeee; background: #ffffff; cursor: pointer; -webkit-tap-highlight-color: transparent; }
         .btn-choice:hover { border-color: var(--accent); background: #fafdff; transform: translateY(-2px); }
         .btn-choice:active { transform: translateY(0); scale: 0.98; }
@@ -22,27 +41,23 @@
         .btn-back { transition: all 0.2s; color: #999; }
         .btn-back:hover { color: var(--primary); text-decoration: underline; }
         
-        /* Elements */
         .progress-bar { transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
         .img-slot { aspect-ratio: 1 / 1; width: 100%; max-width: 300px; margin: 0 auto; border-radius: 50%; background-color: var(--bg-gray); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid #eeeeee; }
         .img-slot img { width: 100%; height: 100%; object-fit: cover; }
         .img-placeholder { font-weight: 900; font-size: 0.6rem; color: #cccccc; letter-spacing: 0.1em; text-transform: uppercase; }
 
-        /* Tickers */
         .ticker-container { width: 100%; overflow: hidden; white-space: nowrap; background: #fafafa; padding: 20px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 2px; }
         .ticker-content { display: inline-block; animation: ticker 80s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .ticker-item { display: inline-block; margin: 0 30px; font-weight: 700; color: #888; font-size: 0.9rem; }
         .ticker-char { color: var(--accent); opacity: 0.8; }
 
-        /* Animations */
         .hidden { display: none; }
         .fade-in { animation: fadeIn 1s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .slide-fade { animation: slideFade 4s infinite; }
         @keyframes slideFade { 0%, 15% { opacity: 0; transform: scale(0.98); } 25%, 75% { opacity: 1; transform: scale(1); } 85%, 100% { opacity: 0; transform: scale(1.02); } }
         
-        /* Debug UI */
         #dev-menu { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #111; color: #fff; padding: 15px; border-radius: 15px; font-size: 10px; opacity: 0.95; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
         #dev-menu button { background: #333; margin: 2px; padding: 6px 10px; border-radius: 6px; border: 1px solid #444; }
         #dev-menu button:hover { background: #3b82f6; }
@@ -56,7 +71,7 @@
             <div class="text-2xl md:text-3xl font-black tracking-tighter serif text-gray-900 leading-none text-left">PITA</div>
             <div class="text-[7px] md:text-[8px] font-bold text-gray-400 tracking-[0.15em] uppercase mt-1 leading-none text-left">Personality Ism Type Analyzer</div>
         </div>
-        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100 text-right">Core v4.5</div>
+        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100 text-right">Core v4.6</div>
     </nav>
 
     <!-- Hidden Developer Menu -->
@@ -85,7 +100,7 @@
                 日常に潜む100の分岐点。その無意識の選択の重みが、あなたの主義を定義する。
             </p>
             
-            <div class="mb-6 px-4">
+            <div class="mb-12 px-4">
                 <button onclick="startDiagnosis()" class="w-full md:w-auto group relative inline-block text-center">
                     <div class="absolute inset-0 bg-blue-600 rounded-full blur-2xl opacity-10 group-hover:opacity-30 transition"></div>
                     <div class="relative bg-gray-900 text-white px-12 py-5 rounded-full font-bold text-lg transition-all group-hover:bg-blue-700 shadow-2xl">
@@ -94,20 +109,13 @@
                 </button>
             </div>
 
-            <!-- Feedback Link (Intro) -->
-            <div class="mb-12">
-                <a href="https://forms.gle/1qTTixArEFQwjuqK9" target="_blank" class="text-[10px] font-bold text-gray-400 hover:text-blue-500 transition-colors uppercase tracking-widest border-b border-gray-200 hover:border-blue-200 pb-1">
-                    ご意見・ご要望はこちら
-                </a>
-            </div>
-
-            <div class="max-w-sm mx-auto bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-gray-50">
+            <div class="max-w-sm mx-auto bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-gray-50 text-center">
                 <div id="slide-content" class="slide-fade">
                     <p id="slide-pair-names" class="text-[9px] font-black tracking-[0.4em] mb-6 text-blue-600 uppercase italic"></p>
                     <div class="flex justify-around items-center gap-2">
-                        <div class="flex flex-col items-center gap-3 w-1/2"><div class="img-slot w-16 h-16 bg-gray-50 border-gray-100" id="preview-l"></div><span id="label-l" class="text-[9px] font-bold text-gray-400 uppercase"></span></div>
+                        <div class="flex flex-col items-center gap-3 w-1/2 text-center"><div class="img-slot w-16 h-16 bg-gray-50 border-gray-100 mx-auto" id="preview-l"></div><span id="label-l" class="text-[9px] font-bold text-gray-400 uppercase"></span></div>
                         <span class="text-gray-200 text-lg font-thin italic">vs</span>
-                        <div class="flex flex-col items-center gap-3 w-1/2"><div class="img-slot w-16 h-16 bg-gray-50 border-gray-100" id="preview-r"></div><span id="label-r" class="text-[9px] font-bold text-gray-400 uppercase"></span></div>
+                        <div class="flex flex-col items-center gap-3 w-1/2 text-center"><div class="img-slot w-16 h-16 bg-gray-50 border-gray-100 mx-auto" id="preview-r"></div><span id="label-r" class="text-[9px] font-bold text-gray-400 uppercase"></span></div>
                     </div>
                 </div>
             </div>
@@ -130,8 +138,8 @@
                 <h3 id="question-text" class="text-xl md:text-3xl font-bold text-center leading-relaxed serif text-gray-800"></h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8">
-                <button onclick="answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl md:rounded-[2rem] font-bold text-gray-800 text-lg md:text-xl shadow-sm">はい</button>
-                <button onclick="answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl md:rounded-[2rem] font-bold text-gray-800 text-lg md:text-xl shadow-sm">いいえ</button>
+                <button onclick="answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl md:rounded-[2rem] font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">はい</button>
+                <button onclick="answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl md:rounded-[2rem] font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">いいえ</button>
             </div>
             <div class="text-center">
                 <button id="btn-back" onclick="goBack()" class="btn-back text-[10px] font-bold uppercase tracking-widest hidden">← ひとつ前の質問に戻る</button>
@@ -170,7 +178,7 @@
                 </section>
 
                 <section class="border-t border-gray-100 pt-20 overflow-hidden">
-                    <h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic">Parallel Souls (Historical)</h4>
+                    <h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic text-center">Parallel Souls (Historical)</h4>
                     <div class="ticker-container"><div id="ticker-content" class="ticker-content"></div></div>
                 </section>
 
@@ -180,7 +188,7 @@
                 </section>
 
                 <section class="bg-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] mx-4 shadow-sm border border-gray-50 text-left text-gray-700">
-                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">Identity Report</h4>
+                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-center">Identity Report</h4>
                     <div id="result-desc" class="leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-8 serif"></div>
                 </section>
 
@@ -193,22 +201,20 @@
                 <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm">
                     <button onclick="shareOnX()" class="bg-[#1DA1F2] text-white py-5 px-10 rounded-full font-bold text-lg hover:opacity-90 transition-all shadow-xl text-center w-full">結果をXでシェアする</button>
                     
-                    <a href="https://forms.gle/1qTTixArEFQwjuqK9" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center w-full flex items-center justify-center gap-2">
-                        <span>💬 フィードバックを送る</span>
-                    </a>
-
                     <button onclick="location.reload()" class="bg-gray-900 text-white py-5 px-10 rounded-full font-bold text-lg hover:bg-black transition-all shadow-md text-center w-full">もう一度診断する</button>
-                    
-                    <p class="text-[9px] text-gray-300 tracking-[0.3em] max-w-xs mx-auto leading-loose uppercase font-bold mt-8 text-center">
-                        Personality Ism Type Analyzer © 2026
-                    </p>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="p-16 text-center border-t border-gray-50 bg-white">
+        <!-- Privacy & Contact Links -->
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] select-none">
+            <a href="privacy.html" class="hover:text-blue-500 transition-colors">Privacy Policy</a>
+            <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="hover:text-blue-500 transition-colors">Contact</a>
+        </div>
         <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] mb-2 font-bold italic text-center">PITA / Personality Ism Type Analyzer</div>
+        <div class="text-[7px] text-gray-200 uppercase tracking-tighter mt-4">&copy; 2026 pita-diagnosis.com. All rights reserved.</div>
     </footer>
 
     <script>
@@ -225,7 +231,7 @@
 
         const hintPool = [
             "いい選択だ。", "深層が揺れている。", "迷いもまた、答えだ。", "本質に近づいている。", "魂に嘘はないか？", "思考の解像度が上がる。", "その決断こそが、君だ。", "加速しよう。", "『イズム』が震えている。", "真実まで、あと少し。",
-            "理性か、本能か。", "君の輪郭が見えてきた。", "深い、もっと深く。", "その直感を信じろ。", "常識を捨て去れ。", "君の核へ触れる。", "面白い回答だ。", "本当の君は誰だ？", "世界のノイズを消せ。", "覚悟はいいか。"
+            "理性か、本能か。", "君の輪郭が見えてきた。", "深い、もっと深く。", "その直感を信しろ。", "常識を捨て去れ。", "君の核へ触れる。", "面白い回答だ。", "本当の君は誰だ？", "世界のノイズを消せ。", "覚悟はいいか。"
         ];
 
         const ismPairs = [{l:"利他",lk:"ALT",r:"利己",rk:"EGO"},{l:"楽観",lk:"OPT",r:"虚無",rk:"NIH"},{l:"理想",lk:"IDE",r:"現実",rk:"REA"},{l:"秩序",lk:"MOD",r:"混沌",rk:"ANA"}];
@@ -252,7 +258,7 @@
             { t: "公共の場で騒いでいる子供を、しつけ不足だと冷ややかに見なす。", a: "EGO", w: 2 },
             { t: "親しい友人が借金で困っていたら、返ってこない覚悟で救おうとする。", a: "ALT", w: 3 },
             { t: "自分のミスを他人のせいにできる状況なら、迷わずそうする。", a: "EGO", w: 2 },
-            { t: "SNS of 「いいね」の数は、自分の価値を証明する重要な尺度だ。", a: "EGO", w: 1 },
+            { t: "SNSの「いいね」の数は、自分の価値を証明する重要な尺度だ。", a: "EGO", w: 1 },
             { t: "知らない人に道を尋ねられたら、目的地まで実際に同行して案内するほうだ。", a: "ALT", w: 1 },
             { t: "「自分が良ければいい」と言い切る人間に、強烈な潔さを感じる。", a: "EGO", w: 2 },
             { t: "他人の顔色を伺って、自分の発言を微調整することが日常的だ。", a: "ALT", w: 1 },
@@ -333,7 +339,6 @@
             { t: "予定が埋まっているカレンダーを見ると、檻に閉じ込められたかのような息苦しさを感じる。", a: "ANA", w: 3 }
         ];
 
-        // --- Logic & State ---
         let currentIdx=0, scores={ALT:0,EGO:0,OPT:0,NIH:0,IDE:0,REA:0,MOD:0,ANA:0}, finalType='ALT';
         let history=[]; let slideIdx=0; let devClickCount=0;
 
@@ -365,7 +370,6 @@
             const q = questions[currentIdx];
             document.getElementById('question-text').innerText = q.t;
             document.getElementById('q-count').innerText = `Question ${(currentIdx+1).toString().padStart(2,'0')}`;
-            // Random hint per question
             document.getElementById('q-hint').innerText = hintPool[Math.floor(Math.random() * hintPool.length)];
             const progress = ((currentIdx+1)/100)*100;
             document.getElementById('progress').style.width = `${progress}%`;
