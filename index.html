@@ -6,368 +6,176 @@
     
     <!-- SEO Meta Tags -->
     <title>PITA診断 | あなたは何主義者として生きるのか。</title>
-    <meta name="description" content="「あなたは何主義者として生きるのか。」100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。">
+    <meta name="description" content="100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。">
     <meta name="keywords" content="性格診断, 心理テスト, 自己分析, 主義者, 大学生, PITA">
     <link rel="canonical" href="https://pita-diagnosis.com/">
 
-    <!-- OGP (Open Graph Protocol) -->
+    <!-- OGP -->
     <meta property="og:title" content="PITA診断 | あなたは何主義者として生きるのか">
-    <meta property="og:description" content="100の質問であなたの深層心理を解剖。魂の形を決定づける『イズム』を特定せよ。">
+    <meta property="og:description" content="100の質問であなたの深層心理を解剖。魂の形を特定せよ。">
     <meta property="og:image" content="https://pita-diagnosis.com/ogp-image.png">
     <meta property="og:url" content="https://pita-diagnosis.com/">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="PITA診断">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PITA診断 | 100問の精密性格診断">
-    <meta name="twitter:description" content="あなたは何主義者として生きるのか。100の質問があなたの魂の形を決定づける。">
-    <meta name="twitter:image" content="https://pita-diagnosis.com/ogp-image.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #111111; --accent: #3b82f6; --bg-gray: #f3f4f6; }
-        body { font-family: 'Noto Sans JP', sans-serif; background-color: #ffffff; color: var(--primary); -webkit-font-smoothing: antialiased; overflow-x: hidden; word-break: break-word; }
+        body { font-family: 'Noto Sans JP', sans-serif; background-color: #ffffff; color: var(--primary); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .serif { font-family: 'Noto Serif JP', serif; }
         
-        .btn-choice { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #eeeeee; background: #ffffff; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-        .btn-choice:hover { border-color: var(--accent); background: #fafdff; transform: translateY(-2px); }
-        .btn-choice:active { transform: translateY(0); scale: 0.98; }
+        /* インタラクティブ要素 */
+        .btn-choice { transition: all 0.2s ease-out; border: 1px solid #eeeeee; background: #ffffff; cursor: pointer; }
+        .btn-choice:active { transform: scale(0.98); background: #f9f9f9; }
         
-        .btn-secondary { transition: all 0.2s; border: 1px solid #e5e7eb; background: #fff; }
-        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+        .progress-bar { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .img-slot { aspect-ratio: 1/1; width: 100%; max-width: 340px; margin: 0 auto; border-radius: 50%; background-color: var(--bg-gray); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid #eee; }
+        .img-slot img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease-in-out; }
+        .img-loaded img { opacity: 1; }
 
-        .btn-back { transition: all 0.2s; color: #999; }
-        .btn-back:hover { color: var(--primary); text-decoration: underline; }
-        
-        .progress-bar { transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
-        .img-slot { aspect-ratio: 1 / 1; width: 100%; max-width: 300px; margin: 0 auto; border-radius: 50%; background-color: var(--bg-gray); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid #eeeeee; }
-        .img-slot img { width: 100%; height: 100%; object-fit: cover; }
-        .img-placeholder { font-weight: 900; font-size: 0.6rem; color: #cccccc; letter-spacing: 0.1em; text-transform: uppercase; }
-
-        .ticker-container { width: 100%; overflow: hidden; white-space: nowrap; background: #fafafa; padding: 20px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 2px; }
-        .ticker-content { display: inline-block; animation: ticker 80s linear infinite; }
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .ticker-item { display: inline-block; margin: 0 30px; font-weight: 700; color: #888; font-size: 0.9rem; }
-        .ticker-char { color: var(--accent); opacity: 0.8; }
+        /* ティッカー（描画負荷軽減版） */
+        .ticker-container { width: 100%; overflow: hidden; white-space: nowrap; background: #fafafa; padding: 15px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+        .ticker-content { display: inline-block; animation: ticker 90s linear infinite; will-change: transform; }
+        @keyframes ticker { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+        .ticker-item { display: inline-block; margin: 0 25px; font-weight: 700; color: #888; font-size: 0.9rem; }
 
         .hidden { display: none; }
-        .fade-in { animation: fadeIn 1s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .slide-fade { animation: slideFade 4s infinite; }
-        @keyframes slideFade { 0%, 15% { opacity: 0; transform: scale(0.98); } 25%, 75% { opacity: 1; transform: scale(1); } 85%, 100% { opacity: 0; transform: scale(1.02); } }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        #dev-menu { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #111; color: #fff; padding: 15px; border-radius: 15px; font-size: 10px; opacity: 0.95; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-        #dev-menu button { background: #333; margin: 2px; padding: 6px 10px; border-radius: 6px; border: 1px solid #444; }
-        #dev-menu button:hover { background: #3b82f6; }
+        #dev-menu { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #111; color: #fff; padding: 15px; border-radius: 15px; font-size: 10px; opacity: 0.9; }
+        #dev-menu button { background: #333; margin: 2px; padding: 5px 10px; border-radius: 5px; }
 
         .ad-space { background: #f9fafb; border: 1px dashed #d1d5db; padding: 20px; text-align: center; border-radius: 1rem; margin-top: 40px; font-size: 10px; color: #9ca3af; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-white">
 
-    <!-- Header -->
     <nav class="p-4 md:p-8 flex justify-between items-center border-b border-gray-50 bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div class="flex flex-col cursor-pointer select-none" onclick="devClick()">
-            <div class="text-2xl md:text-3xl font-black tracking-tighter serif text-gray-900 leading-none text-left">PITA</div>
-            <div class="text-[7px] md:text-[8px] font-bold text-gray-400 tracking-[0.15em] uppercase mt-1 leading-none text-left">Personality Ism Type Analyzer</div>
+            <div class="text-2xl md:text-3xl font-black tracking-tighter serif text-gray-900 leading-none">PITA</div>
+            <div class="text-[7px] md:text-[8px] font-bold text-gray-400 tracking-[0.15em] uppercase mt-1">Personality Ism Type Analyzer</div>
         </div>
-        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100 text-right">Core v4.6</div>
+        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100">v4.8.1</div>
     </nav>
 
-    <!-- Hidden Developer Menu -->
     <div id="dev-menu" class="hidden text-center">
-        <p class="mb-3 font-bold border-b border-gray-700 pb-1 text-blue-400 uppercase text-[12px]">Debug Preview</p>
+        <p class="mb-2 font-bold text-blue-400">DEBUG</p>
         <div class="grid grid-cols-2 gap-1">
             <button onclick="jumpToResult('ALT')">利他</button><button onclick="jumpToResult('EGO')">利己</button>
             <button onclick="jumpToResult('OPT')">楽観</button><button onclick="jumpToResult('NIH')">虚無</button>
             <button onclick="jumpToResult('IDE')">理想</button><button onclick="jumpToResult('REA')">現実</button>
             <button onclick="jumpToResult('MOD')">秩序</button><button onclick="jumpToResult('ANA')">混沌</button>
         </div>
-        <button class="mt-3 w-full text-red-400 font-bold" onclick="document.getElementById('dev-menu').classList.add('hidden')">CLOSE</button>
+        <button class="mt-2 w-full text-red-400 font-bold" onclick="this.parentElement.classList.add('hidden')">CLOSE</button>
     </div>
 
     <main class="flex-grow flex items-center justify-center p-4 md:p-6 bg-[#fcfcfc]">
         
-        <!-- Intro Screen -->
+        <!-- Intro -->
         <div id="intro" class="max-w-2xl w-full text-center fade-in py-8">
-            <div class="mb-4 inline-block px-4 py-1 rounded-full border border-gray-100 text-[9px] font-black tracking-widest text-gray-400 uppercase">
-                Official Personality Analysis System
-            </div>
-            <h2 class="text-3xl md:text-6xl font-bold mb-8 serif leading-tight text-gray-900">
-                あなたは何主義者として<br><span class="text-blue-600">生きるのか。</span>
-            </h2>
-            <p class="text-gray-500 mb-10 leading-relaxed text-xs md:text-sm tracking-widest max-w-lg mx-auto px-4">
-                日常に潜む100の分岐点。その無意識の選択の重みが、あなたの主義を定義する。
-            </p>
+            <div class="mb-4 inline-block px-4 py-1 rounded-full border border-gray-100 text-[9px] font-black tracking-widest text-gray-400 uppercase">Analysis Engine</div>
+            <h2 class="text-3xl md:text-6xl font-bold mb-8 serif leading-tight text-gray-900">あなたは何主義者として<br><span class="text-blue-600">生きるのか。</span></h2>
+            <p class="text-gray-500 mb-10 leading-relaxed text-xs md:text-sm tracking-widest max-w-lg mx-auto px-4">100の分岐点。その無意識の選択の重みが、あなたの主義を定義する。</p>
             
-            <div class="mb-6 px-4">
-                <button onclick="startDiagnosis()" class="w-full md:w-auto group relative inline-block text-center">
-                    <div class="absolute inset-0 bg-blue-600 rounded-full blur-2xl opacity-10 group-hover:opacity-30 transition"></div>
-                    <div class="relative bg-gray-900 text-white px-12 py-5 rounded-full font-bold text-lg transition-all group-hover:bg-blue-700 shadow-2xl">
-                        診断を開始する（全100問）
-                    </div>
-                </button>
-            </div>
+            <button onclick="startDiagnosis()" class="w-full md:w-auto bg-gray-900 text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-blue-700 transition shadow-2xl mb-8">診断を開始する</button>
 
-            <!-- Feedback Link (Intro) -->
             <div class="mb-12">
-                <a href="https://forms.gle/1qTTixArEFQwjuqK9" target="_blank" class="text-[10px] font-bold text-gray-400 hover:text-blue-500 transition-colors uppercase tracking-widest border-b border-gray-200 hover:border-blue-200 pb-1">
-                    ご意見・ご要望はこちら
-                </a>
-            </div>
-
-            <div class="max-w-sm mx-auto bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-gray-50 text-center">
-                <div id="slide-content" class="slide-fade">
-                    <p id="slide-pair-names" class="text-[9px] font-black tracking-[0.4em] mb-6 text-blue-600 uppercase italic"></p>
-                    <div class="flex justify-around items-center gap-2">
-                        <div class="flex flex-col items-center gap-3 w-1/2 text-center"><div class="img-slot w-16 h-16 bg-gray-50 border-gray-100 mx-auto" id="preview-l"></div><span id="label-l" class="text-[9px] font-bold text-gray-400 uppercase text-center"></span></div>
-                        <span class="text-gray-200 text-lg font-thin italic">vs</span>
-                        <div class="flex flex-col items-center gap-3 w-1/2 text-center"><div class="img-slot w-16 h-16 bg-gray-50 border-gray-100 mx-auto" id="preview-r"></div><span id="label-r" class="text-[9px] font-bold text-gray-400 uppercase text-center"></span></div>
-                    </div>
-                </div>
+                <a href="https://forms.gle/1qTTixArEFQwjuqK9" target="_blank" class="text-[10px] font-bold text-gray-400 hover:text-blue-500 transition-colors uppercase tracking-widest border-b border-gray-100 pb-1">ご意見・ご要望はこちら</a>
             </div>
         </div>
 
-        <!-- Quiz Screen -->
-        <div id="quiz" class="max-w-2xl w-full hidden py-4 md:py-16 text-left">
+        <!-- Quiz -->
+        <div id="quiz" class="max-w-2xl w-full hidden py-4 md:py-16">
             <div class="mb-10 md:mb-16 px-2">
-                <div class="w-full bg-gray-100 h-[1.5px] mb-6"><div id="progress" class="progress-bar bg-blue-600 h-full" style="width: 1%"></div></div>
+                <div class="w-full bg-gray-100 h-[2px] mb-6"><div id="progress" class="progress-bar bg-blue-600 h-full" style="width: 1%"></div></div>
                 <div class="flex justify-between items-end">
-                    <div class="flex flex-col text-left">
-                        <span id="q-hint" class="text-[10px] font-bold text-blue-500 italic mb-1 h-4 select-none">...</span>
-                        <span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase">Question 01</span>
-                    </div>
-                    <div class="text-right"><div id="q-percent" class="text-3xl md:text-4xl font-light text-blue-600 serif leading-none">1%</div></div>
+                    <div class="flex flex-col text-left"><span id="q-hint" class="text-[10px] font-bold text-blue-500 italic mb-1 h-4 select-none">...</span><span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase">Question 01</span></div>
+                    <div id="q-percent" class="text-3xl md:text-4xl font-light text-blue-600 serif">1%</div>
                 </div>
             </div>
-            <div class="min-h-[160px] md:min-h-[200px] flex flex-col items-center justify-center mb-12 px-2 text-center">
-                <h3 id="question-text" class="text-xl md:text-3xl font-bold text-center leading-relaxed serif text-gray-800"></h3>
+            <div class="min-h-[160px] md:min-h-[200px] flex items-center justify-center mb-12 px-2 text-center">
+                <h3 id="question-text" class="text-xl md:text-3xl font-bold leading-relaxed serif text-gray-800"></h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8">
-                <button onclick="answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl md:rounded-[2rem] font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">はい</button>
-                <button onclick="answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl md:rounded-[2rem] font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">いいえ</button>
+                <button onclick="answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm">はい</button>
+                <button onclick="answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm">いいえ</button>
             </div>
-            <div class="text-center">
-                <button id="btn-back" onclick="goBack()" class="btn-back text-[10px] font-bold uppercase tracking-widest hidden">← ひとつ前の質問に戻る</button>
-            </div>
+            <button id="btn-back" onclick="goBack()" class="btn-back text-[10px] font-bold uppercase tracking-widest hidden w-full">← ひとつ前の質問に戻る</button>
         </div>
 
-        <!-- Result Screen -->
+        <!-- Result -->
         <div id="result" class="max-w-4xl w-full hidden fade-in py-12 text-center">
-            <div class="text-center mb-16 px-4">
-                <p class="text-[9px] font-black text-blue-600 uppercase tracking-[0.6em] mb-4">Diagnostic Complete</p>
-                <h2 id="result-title" class="text-4xl md:text-7xl font-bold mb-1 serif tracking-tighter text-gray-900 leading-tight"></h2>
-                <p id="result-en" class="text-[12px] font-black text-gray-300 uppercase tracking-[0.4em] mb-6 italic text-center"></p>
-                <p id="result-catch" class="text-lg md:text-2xl text-gray-400 font-medium italic serif mb-10 text-center"></p>
-                
-                <div id="result-art-container" class="img-slot shadow-2xl bg-white mb-12 border-none scale-100 md:scale-110 mx-auto"></div>
+            <p class="text-[9px] font-black text-blue-600 uppercase tracking-[0.6em] mb-4">Diagnostics Archive</p>
+            <h2 id="result-title" class="text-4xl md:text-7xl font-bold mb-1 serif tracking-tighter text-gray-900"></h2>
+            <p id="result-en" class="text-[12px] font-black text-gray-300 uppercase tracking-[0.4em] mb-6 italic"></p>
+            <p id="result-catch" class="text-lg md:text-2xl text-gray-400 font-medium italic serif mb-10"></p>
+            
+            <div id="result-art-container" class="img-slot shadow-2xl bg-white mb-12 border-none scale-100 md:scale-110"></div>
 
-                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto">
-                    <div class="text-[8px] md:text-[9px] text-gray-400 uppercase font-black mb-1 tracking-[0.4em]">Deep PITA Index</div>
-                    <div class="flex items-baseline gap-2 justify-center">
-                        <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900"></div>
-                        <div class="text-[10px] font-bold text-gray-300">/ 200.0</div>
-                    </div>
-                    <button onclick="toggleScoreInfo()" class="mt-4 text-[9px] font-bold text-blue-500 border-b border-blue-200">What is this score?</button>
-                    <div id="score-info" class="hidden absolute top-full mt-4 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white p-6 rounded-2xl text-[10px] leading-loose z-50 text-left shadow-2xl">
-                        <button onclick="toggleScoreInfo()" class="absolute top-2 right-4 text-gray-500 hover:text-white text-base">×</button>
-                        <p class="mb-2 font-bold text-blue-400 italic text-[12px]">PITA Index とは？</p>
-                        あなたの主義の「純度」を示す指標。高いほど特定の価値観に特化した「妥協のない生き方」を意味します。理論上の最大値は200.0。
-                    </div>
+            <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto mb-16">
+                <div class="text-[8px] md:text-[9px] text-gray-400 uppercase font-black mb-1 tracking-[0.4em]">Deep PITA Index</div>
+                <div class="flex items-baseline gap-2 justify-center">
+                    <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900"></div>
+                    <div class="text-[10px] font-bold text-gray-300">/ 200.0</div>
+                </div>
+                <button onclick="toggleScoreInfo()" class="mt-4 text-[9px] font-bold text-blue-500 border-b border-blue-200">What is this score?</button>
+                <div id="score-info" class="hidden absolute top-full mt-4 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white p-6 rounded-2xl text-[10px] leading-loose z-50 text-left shadow-2xl">
+                    <button onclick="toggleScoreInfo()" class="absolute top-2 right-4 text-gray-400 text-base">×</button>
+                    <p class="mb-2 font-bold text-blue-400 italic text-[12px]">PITA Index とは？</p>
+                    特定の主義への「純度」を示す指標。理論上の最大値は200.0。高いほど歴史的偉人級の尖った価値観を宿しています。
                 </div>
             </div>
 
-            <div class="space-y-24 md:space-y-32">
-                <section class="max-w-2xl mx-auto px-6">
-                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] italic">Spectrum Balance</h4>
-                    <div id="axis-details" class="space-y-10 md:space-y-12"></div>
-                </section>
+            <div class="space-y-24">
+                <section class="max-w-2xl mx-auto px-6"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] italic">Spectrum Balance</h4><div id="axis-details" class="space-y-8"></div></section>
+                <section class="border-t border-gray-100 pt-20 overflow-hidden"><h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic">Parallel Souls</h4><div class="ticker-container"><div id="ticker-content" class="ticker-content"></div></div></section>
+                <section class="border-t border-gray-100 pt-16 overflow-hidden"><h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic">Modern Icons</h4><div class="ticker-container"><div id="ticker-char-content" class="ticker-content"></div></div></section>
+                <section class="bg-white p-8 md:p-24 rounded-[3rem] mx-4 shadow-sm border border-gray-50 text-left"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center">Identity Report</h4><div id="result-desc" class="leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-8 serif text-gray-700"></div></section>
+                <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] shadow-2xl relative overflow-hidden mx-4 text-left"><h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center relative z-10">Future Guidance</h4><div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.4] text-base md:text-xl relative z-10 text-center mx-auto max-w-lg"></div></section>
 
-                <section class="border-t border-gray-100 pt-20 overflow-hidden">
-                    <h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic text-center">Parallel Souls (Historical)</h4>
-                    <div class="ticker-container"><div id="ticker-content" class="ticker-content"></div></div>
-                </section>
-
-                <section class="border-t border-gray-100 pt-16 overflow-hidden">
-                    <h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic text-center">Modern Icons (Characters)</h4>
-                    <div class="ticker-container"><div id="ticker-char-content" class="ticker-content"></div></div>
-                </section>
-
-                <section class="bg-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] mx-4 shadow-sm border border-gray-50 text-left text-gray-700">
-                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-center">Identity Report</h4>
-                    <div id="result-desc" class="leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-8 serif"></div>
-                </section>
-
-                <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl relative overflow-hidden mx-4 text-left">
-                    <div class="absolute top-0 right-0 p-12 text-blue-500 text-7xl md:text-9xl opacity-20 serif italic font-black pointer-events-none">PITA</div>
-                    <h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center relative z-10 text-center">Future Guidance</h4>
-                    <div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.4] text-base md:text-xl space-y-6 relative z-10 text-center mx-auto max-w-lg"></div>
-                </section>
-
-                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm">
-                    <button onclick="shareOnX()" class="bg-[#1DA1F2] text-white py-5 px-10 rounded-full font-bold text-lg hover:opacity-90 transition-all shadow-xl text-center w-full">結果をXでシェアする</button>
-                    
-                    <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center w-full flex items-center justify-center gap-2">
-                        <span>💬 フィードバックを送る</span>
-                    </a>
-
-                    <button onclick="location.reload()" class="bg-gray-900 text-white py-5 px-10 rounded-full font-bold text-lg hover:bg-black transition-all shadow-md text-center w-full">もう一度診断する</button>
+                <div class="flex flex-col gap-4 pt-12 pb-24 px-6 mx-auto max-w-xs">
+                    <button onclick="shareOnX()" class="bg-[#1DA1F2] text-white py-4 px-8 rounded-full font-bold shadow-lg">結果をXでシェア</button>
+                    <a href="https://forms.gle/1qTTixArEFQwjuqK9" target="_blank" class="btn-secondary text-gray-700 py-4 px-8 rounded-full font-bold text-center">フィードバックを送る</a>
+                    <button onclick="location.reload()" class="bg-gray-900 text-white py-4 px-8 rounded-full font-bold shadow-md">もう一度診断する</button>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="p-16 text-center border-t border-gray-50 bg-white">
-        <!-- Privacy & Contact Links for Google Review -->
-        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] select-none">
-            <a href="privacy.html" class="hover:text-blue-500 transition-colors">Privacy Policy</a>
-            <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="hover:text-blue-500 transition-colors">Contact</a>
+        <div class="flex justify-center gap-8 mb-8 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">
+            <a href="privacy.html" class="hover:text-blue-500">Privacy Policy</a>
+            <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="hover:text-blue-500">Contact</a>
         </div>
-        <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] mb-2 font-bold italic text-center">PITA / Personality Ism Type Analyzer</div>
-        <div class="text-[7px] text-gray-200 uppercase tracking-tighter mt-4">&copy; 2026 pita-diagnosis.com. All rights reserved.</div>
+        <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] font-bold italic">PITA / Personality Ism Type Analyzer</div>
+        <div class="text-[7px] text-gray-200 mt-4 tracking-tighter">&copy; 2026 pita-diagnosis.com</div>
     </footer>
 
     <script>
         const resultData = {
-            ALT: { en: "Altruist", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "alt.png", celebs: ["マザー・テレサ", "ガンジー", "シュバイツァー", "ナイチンゲール", "オードリー・ヘップバーン", "キング牧師", "ネルソン・マンデラ", "エレノア・ルーズベルト", "デスモンド・ツツ", "ダイアナ妃"], chars: ["竈門炭治郎", "緑谷出久", "沢田綱吉", "ベル・クラネル", "夏目貴志", "乙骨憂太", "竈門禰󠄀豆子", "藤丸立香", "アルフォンス", "潮田渚", "アレン", "花垣武道", "有馬かな", "黒子テツヤ", "澤村大地", "清水潔子", "木之本桜", "本田透", "鹿目まどか", "赤城", "ウェンティ", "ナウシカ", "エミリア", "レム", "ジョナサン", "ファルコ", "日向ヒナタ", "井上織姫", "ヨル", "ミリオ"], d: "あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、現代社会における唯一の良心と言えるでしょう。周囲からは時として『お節介』と言われるかもしれませんが、それはあなたの魂の器が大きすぎるための誤解に過ぎません。", dir: "まずは自分を愛することから始めてください。他者のために使い果たしたエネルギーを、たまには自分のために浪費する贅沢を覚えることで、慈愛はより深まります。" },
-            EGO: { en: "Egoist", n: "利己主義者", c: "「自己を統治する気高き孤高の王」", img: "ego.png", celebs: ["ナポレオン", "スティーブ・ジョブズ", "織田信長", "ユリウス・カエサル", "アレクサンダー大王", "ハワード・ヒューズ", "アイン・ランド", "サルバドール・ダリ", "ヘンリー・フォード", "マキアヴェッリ"], chars: ["ギルガメッシュ", "海馬瀬人", "ルルーシュ", "夜神月", "ベジータ", "フリーザ", "爆豪勝己", "志々雄真実", "クロロ", "エレン", "ドフラミンゴ", "クロコダイル", "藍染惣右介", "DIO", "赤司征十郎", "跡部景吾", "殺生丸", "飛影", "綾小路清隆", "司波達也", "五条悟", "両面宿儺", "馬狼照英", "糸師凛", "高杉晋助", "範馬勇次郎", "言峰綺礼", "シャルル", "エンデヴァー", "ハンコック"], d: "あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。王座は常に、一人のために用意されているのです。", dir: "その揺るぎない自己愛を、世界を動かすエンジンにしてください。あなたが自分を極限まで大切にすることは、周囲に強烈なインスピレーションを与えます。" },
-            OPT: { en: "Optimist", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "opt.png", celebs: ["ウォルト・ディズニー", "トーマス・エジソン", "坂本九", "アンネ・フランク", "ヘレン・ケラー", "チャーリー・チャップリン", "アンドリュー・カーネギー", "本田宗一郎", "松下幸之助", "渋沢栄一"], chars: ["ルフィ", "孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "喜多郁代", "日向翔陽", "切島鋭児郎", "パック", "ベアトリス", "フェルト", "ラインハルト(リゼロ)", "諸星あたる", "ポプ子", "ピピ美", "高坂穂乃果", "湊あくあ"], d: "あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための最も純粋な動力源です。", dir: "根拠のない自信を、そのまま根拠にしてください。論理や確率が『不可能だ』と告げた時、あなたの『きっと大丈夫』という一言が物理法則を凌駕します。" },
-            NIH: { en: "Nihilist", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "nih.png", celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "シオラン", "サミュエル・ベケット", "芥川龍之介", "レオパルディ", "三島由紀夫"], chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "フェイタン", "九条玲那", "忍野メメ", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "芥川(文スト)", "ジン(コナン)", "スカー", "うちはオビト", "マダラ", "虚(銀魂)", "貝木泥舟", "キルア", "セバスチャン"], d: "あなたは世界の『無』を見抜いた賢者です。虚飾に満ちた社会の価値観から脱却し、何物にも執着しないその静かなる視点は、あらゆる苦悩を超越した究極の自由を象徴しています。", dir: "『意味がない』からこそ、何をやっても自由なのだという悟りを楽しんでください。冷めた瞳で、この喜劇のような世界を優雅に鑑賞し続けましょう。" },
-            IDE: { en: "Idealist", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "ide.png", celebs: ["ジョン・レノン", "宮沢賢治", "サン=テグジュペリ", "フィンセント・ファン・ゴッホ", "オスカー・ワイルド", "ルソー", "ボブ・ディラン", "プラトン", "シェイクスピア", "アンデルセン"], chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "シャル・ド・ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "獄寺隼人", "山本武", "雨宮蓮", "鳳凰院凶真", "枢木スザク", "ユーフェミア", "アルミンの巨匠", "エドワード", "ニコ・ロビン", "星海光来", "宮侑", "宮治", "北信介", "中島敦", "太宰治"], d: "あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、人類を更なる高みへと押し上げる崇高な意志です。", dir: "あなたの脳内にある完璧な世界を、一歩ずつ現実へ翻訳してください。現実とのギャップに苦しむのは、あなたが正しい証拠です。" },
-            REA: { en: "Realist", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "rea.png", celebs: ["福沢諭吉", "徳川家康", "マルクス-アウレリウス", "ベンジャミン-フランクリン", "チャーチル", "鄧小平", "リー-クアンユー", "ビスマルク", "アダム-スミス", "ロックフェラー"], chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "堀北学", "灰崎祥吾", "花宮真", "吉良吉影", "加治リョウジ", "ニコ・ロビン", "高坂麗奈", "黄前久美子", "鎧塚みぞれ", "一条将輝"], d: "あなたは揺るぎない地平に立つ実力者です。曖昧な幻想を排除し、事実と論理で世界を読み解く知性は、現代を生き抜く最も強力な武器です。", dir: "数字と事実の背後にある『人間の感情』という変数も計算に入れてください。そのノイズさえも管理下に置くことで、あなたの支配力は揺るぎないものになります。" },
-            MOD: { en: "Modernist", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "mod.png", celebs: ["カント", "リンカーン", "ジョージ・ワシントン", "孔子", "マックス・ウェーバー", "ロバート・ピール", "ピーター・ドラッカー", "ジョン・スチュアート・ミル", "ハミルトン", "福沢諭吉"], chars: ["飯田天哉", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "高木渉", "安室透", "赤井秀一", "ターニャ", "ラインハルト(銀英伝)", "ヤン", "オーベルシュタイン", "ロイ・マスタング", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂", "白鳥任三郎"], d: "あなたは文明の根幹を支える守護神です。規律を重んじ、美しい秩序を構築・維持する誠実さは、社会が崩壊することなく存続するための要石です。", dir: "ルールを守るだけでなく、ルールを創る側に立ってください。あなたの高い規律性と公平さは、他者を導くためにあります。" },
-            ANA: { en: "Anarchist", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "ana.png", celebs: ["坂本龍馬", "パブロ・ピカソ", "チェ・ゲバラ", "エマ・ゴールドマン", "ガイ・フォークス", "バクーニン", "マルコムX", "ディオゲネス", "シド・ヴィシャス", "土方歳三"], chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "空条徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー(炎炎)", "諸星あたる", "範馬刃牙", "折原臨也", "ラッド・ルッソ", "セルティ", "東堂葵", "トガヒミコ", "両面宿儺", "死柄木弔", "バギー", "ジェビル"], d: "あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です。", dir: "破壊のあとに何が残るかを考える必要はありません。あなたは、ただひたすらに風であり続けてください。" }
+            ALT: { en: "Altruist", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "PITA ALT.png", celebs: ["マザー・テレサ", "ガンジー", "シュバイツァー", "ナイチンゲール", "キング牧師", "オードリー・ヘップバーン"], chars: ["竈門炭治郎", "緑谷出久", "ベル・クラネル", "夏目貴志", "乙骨憂太", "藤丸立香", "アルフォンス", "潮田渚", "本田透", "鹿目まどか", "エミリア", "レム", "ジョナサン", "ミリオ"], d: "あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、現代社会における唯一の良心と言えるでしょう。周囲からは時として『お節介』と言われるかもしれませんが、それはあなたの魂の器が大きすぎるための誤解に過ぎません。", dir: "まずは自分を愛することから始めてください。他者のために使い果たしたエネルギーを、たまには自分のために浪費する贅沢を覚えることで、慈愛はより深まります。" },
+            EGO: { en: "Egoist", n: "利己主義者", c: "「自己を統治する気高き孤高の王」", img: "PITA EGO.png", celebs: ["ナポレオン", "スティーブ・ジョブズ", "織田信長", "カエサル", "アレクサンダー大王", "ハワード・ヒューズ"], chars: ["ギルガメッシュ", "海馬瀬人", "ルルーシュ", "夜神月", "ベジータ", "フリーザ", "爆豪勝己", "志々雄真実", "クロロ", "エレン", "ドフラミンゴ", "藍染惣右介", "DIO", "赤司征十郎", "跡部景吾", "殺生丸", "飛影", "五条悟", "両面宿儺"], d: "あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。王座は常に、一人のために用意されているのです。", dir: "その揺るぎない自己愛を、世界を動かすエンジンにしてください。あなたが自分を極限まで大切にすることは、周囲に強烈なインスピレーションを与えます。" },
+            OPT: { en: "Optimist", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA OPT.png", celebs: ["ウォルト・ディズニー", "エジソン", "坂本九", "アンネ・フランク", "ヘレン・ケラー", "チャーリー・チャップリン"], chars: ["ルフィ", "孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "日向翔陽", "ラインハルト(リゼロ)", "湊あくあ"], d: "あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための最も純粋な動力源です。", dir: "根拠のない自信を、そのまま根拠にしてください。論理や確率が『不可能だ』と告げた時、あなたの『きっと大丈夫』という一言が物理法則を凌駕します。" },
+            NIH: { en: "Nihilist", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA NIH.png", celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫"], chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "ジン(コナン)", "貝木泥舟", "キルア"], d: "あなたは世界の『無』を見抜いた賢者です。虚飾に満ちた社会の価値観から脱却し、何物にも執着しないその静かなる視点は、あらゆる苦悩を超越した究極の自由を象徴しています。", dir: "『意味がない』からこそ、何をやっても自由なのだという悟りを楽しんでください。冷めた瞳で、この喜劇のような世界を優雅に鑑賞し続けましょう。" },
+            IDE: { en: "Idealist", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA IDE.png", celebs: ["ジョン・レノン", "宮沢賢治", "サン=テグジュペリ", "ファン・ゴッホ", "オスカー・ワイルド", "プラトン"], chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "シャル・ド・ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "鳳凰院凶真", "枢木スザク", "エドワード", "ニコ・ロビン", "中島敦", "太宰治"], d: "あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、人類を更なる高みへと押し上げる崇高な意志です。", dir: "あなたの脳内にある完璧な世界を、一歩ずつ現実へ翻訳してください。現実とのギャップに苦しむのは、あなたが正しい証拠です。" },
+            REA: { en: "Realist", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA REA.png", celebs: ["福沢諭吉", "徳川家康", "フランクリン", "チャーチル", "鄧小平", "リー・クアンユー", "ロックフェラー"], chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "灰崎祥吾", "吉良吉影", "高坂麗奈"], d: "あなたは揺るぎない地平に立つ実力者です。曖昧な幻想を排除し、事実と論理で世界を読み解く知性は、現代を生き抜く最も強力な武器です。", dir: "数字と事実の背後にある『人間の感情』という変数も計算に入れてください。そのノイズさえも管理下に置くことで、あなたの支配力は揺るぎないものになります。" },
+            MOD: { en: "Modernist", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA MOD.png", celebs: ["カント", "リンカーン", "ワシントン", "孔子", "ドラッカー", "ミル", "ハミルトン"], chars: ["飯田天哉", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "高木渉", "安室透", "赤井秀一", "ターニャ", "ラインハルト(銀英伝)", "ヤン", "オーベルシュタイン", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "夜久衛輔", "白鳥任三郎", "鏑木・T・虎徹"], d: "あなたは文明の根幹を支える守護神です。規律を重んじ、美しい秩序を構築・維持する誠実さは、社会が崩壊することなく存続するための要石です。", dir: "ルールを守るだけでなく、ルールを創る側に立ってください。あなたの高い規律性と公平さは、他者を導くためにあります。" },
+            ANA: { en: "Anarchist", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA ANA.png", celebs: ["坂本龍馬", "ピカソ", "チェ・ゲバラ", "バクーニン", "マルコムX", "ディオゲネス", "シド・ヴィシャス"], chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "空条徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー(炎炎)", "範馬刃牙", "折原臨也", "セルティ", "東堂葵", "トガヒミコ", "死柄木弔", "バギー", "ジェビル", "神威"], d: "あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です。", dir: "破壊のあとに何が残るかを考える必要はありません。あなたは、ただひたすらに風であり続けてください。" }
         };
 
-        const hintPool = ["いい選択だ。","深層が揺れている。","迷いもまた、答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断こそが、君だ。","加速しよう。","『イズム』が震えている。","真実まで、あと少し。","理性か、本能か。","君の輪郭が見えてきた。","深い、もっと深く。","その直感を信じろ。","常識を捨て去れ。","君の核へ触れる。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。"];
-        const ismPairs = [{l:"利他",lk:"ALT",r:"利己",rk:"EGO"},{l:"楽観",lk:"OPT",r:"虚無",rk:"NIH"},{l:"理想",lk:"IDE",r:"現実",rk:"REA"},{l:"秩序",lk:"MOD",r:"混沌",rk:"ANA"}];
+        const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信じろ。","常識を捨てろ。","君の核に触れる。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。"];
 
-        const questions = [
-            { t: "コンビニの会計。後ろに行列があるとき、小銭を出すのを優先して支払う。", a: "ALT", w: 1 },
-            { t: "他人の失敗談を聞くと、口では同情しながらどこか「安心」を感じるほうだ。", a: "EGO", w: 2 },
-            { t: "グループの空気が悪いとき、自分がピエロになってでも場を和ませる努力をする。", a: "ALT", w: 2 },
-            { t: "「人生で最も大切なのは自分自身だ」という言葉に、強く惹かれる。", a: "EGO", w: 3 },
-            { t: "電車で席を譲る際、「誰かに見られているのではないか」と自意識が過剰に働く。", a: "EGO", w: 1 },
-            { t: "SNSで誰かが炎上しているのを見ると、詳細を積極的に追ってしまう。", a: "EGO", w: 2 },
-            { t: "友人の結婚報告を聞くと、お祝いの前に「焦り」や「対抗心」が芽生える。", a: "EGO", w: 2 },
-            { t: "チームの勝利よりも、自分自身の成果を重視する。", a: "EGO", w: 3 },
-            { t: "道に迷っている外国人を見かけたら、積極的に声をかけようとする。", a: "ALT", w: 1 },
-            { t: "悩み相談。解決策を提示するより、ただ相手の悲しみに深く寄り添う。", a: "ALT", w: 2 },
-            { t: "自分が損をしても、周囲が幸せならそれでいいと思える価値観を持っている。", a: "ALT", w: 3 },
-            { t: "嫌いな相手が苦境に立たされているのを知ると、密かに喜びを感じる。", a: "EGO", w: 2 },
-            { t: "対立を避けるためなら、自分の本当の意見を飲み込む選択をする。", a: "ALT", w: 2 },
-            { t: "「人は結局、自分一人のために生きている」という考えを支持する。", a: "EGO", w: 3 },
-            { t: "誰かに必要とされていると実感することに、生きる意味を見出す。", a: "ALT", w: 3 },
-            { t: "匿名掲示板やSNSで、誰かの落ち度を厳しく指摘した経験がある。", a: "EGO", w: 2 },
-            { t: "相手が喜ぶ姿を想像しながら、お土産を真剣に選ぶことが好きだ。", a: "ALT", w: 1 },
-            { t: "行列でマナーの悪い人を見ても、平和のために見て見ぬふりをする。", a: "ALT", w: 1 },
-            { t: "公共の場で騒いでいる子供を、しつけ不足だと冷ややかに見なす。", a: "EGO", w: 2 },
-            { t: "親しい友人が借金で困っていたら、返ってこない覚悟で救おうとする。", a: "ALT", w: 3 },
-            { t: "自分のミスを他人のせいにできる状況なら、迷わずそうする。", a: "EGO", w: 2 },
-            { t: "SNSの「いいね」の数は、自分の価値を証明する重要な尺度だ。", a: "EGO", w: 1 },
-            { t: "知らない人に道を尋ねられたら、目的地まで実際に同行して案内するほうだ。", a: "ALT", w: 1 },
-            { t: "「自分が良ければいい」と言い切る人間に、強烈な潔さを感じる。", a: "EGO", w: 2 },
-            { t: "他人の顔色を伺って、自分の発言を微調整することが日常的だ。", a: "ALT", w: 1 },
-            { t: "寝る前、明日の予定を考えるとワクワクして眠れないことがある。", a: "OPT", w: 1 },
-            { t: "成功者の体験談を読むと、成功は単なる運だと冷ややかに思う。", a: "NIH", w: 2 },
-            { t: "100円の宝くじで、1億円が当たる可能性を夢想して楽しむタイプだ。", a: "OPT", w: 1 },
-            { t: "どんなに努力しても、生まれ持った才能の壁は絶対だと信じている。", a: "NIH", w: 3 },
-            { t: "凄惨なニュースを見ても、どこか他人事のように冷徹に観察する。", a: "NIH", w: 2 },
-            { t: "「人生は一度きり」という言葉に、希望よりも重圧を感じる。", a: "NIH", w: 2 },
-            { t: "自分が死んだ後の世界がどうなっていようが、完全に無関心である。", a: "NIH", w: 3 },
-            { t: "「死ねばすべて無に帰す」という考えに、深い安堵感を覚える。", a: "NIH", w: 3 },
-            { t: "失敗したときは「今回は運が悪かった、次は大丈夫」と直感的に思う。", a: "OPT", w: 2 },
-            { t: "初対面の人に対しても、まずは「善人だ」と信じて接するほうだ。", a: "OPT", w: 1 },
-            { t: "「この世界には本質的に何の価値もない」という言葉に、同意する。", a: "NIH", w: 3 },
-            { t: "世界平和を願うよりも、自分の利益を優先させるほうが現実的だと考える。", a: "NIH", w: 2 },
-            { t: "新しいことに挑戦する時、成功した時の報酬を常に先に考えて行動する。", a: "OPT", w: 2 },
-            { t: "過去の失敗は、すべて今の自分にとって不可欠な肯定すべきステップだ。", a: "OPT", w: 2 },
-            { t: "自分には、まだ誰にも見せていない特別な才能が眠っていると確信している。", a: "OPT", w: 2 },
-            { t: "ネットの悲観的な意見を読むと、自分の不安を正しく代弁されていると感じる。", a: "NIH", w: 2 },
-            { t: "「100年後の地球」について、暗い終末のイメージを常に持っている。", a: "NIH", w: 2 },
-            { t: "夢を語る人を見ると、いつか現実を知って絶望するだろうと予測する。", a: "NIH", w: 2 },
-            { t: "「努力は必ず報われる」という言葉を、今も本気で信じている。", a: "OPT", w: 3 },
-            { t: "人生において「意味」を探す行為そのものが、最大の時間の無駄である。", a: "NIH", w: 3 },
-            { t: "最悪の事態の中でも、必ず一筋の希望を見つける自信がある。", a: "OPT", w: 2 },
-            { t: "自分の命は、宇宙の長い歴史の中では完全に無価値なチリだと認識している。", a: "NIH", w: 2 },
-            { t: "道端に咲く花を見て、生命の力強さに心から感動する。", a: "OPT", w: 1 },
-            { t: "「いつか人類は滅亡する」と考えると、穏やかな安堵感を覚える。", a: "NIH", w: 3 },
-            { t: "もし生まれ変わるなら、また「自分自身」に生まれたいと切望する。", a: "OPT", w: 3 },
-            { t: "映画や小説を楽しむ前に、あらすじや結末を詳細に確認するほうだ。", a: "REA", w: 1 },
-            { t: "「愛があればお金はいらない」という言葉を、非現実的だと笑い飛ばす。", a: "REA", w: 3 },
-            { t: "行列ができる人気店には、どんなに価値があっても並ぶことを避ける。", a: "REA", w: 1 },
-            { t: "自分の部屋には、他人には理解されない独自の「こだわり」が詰まっている。", a: "IDE", w: 2 },
-            { t: "具体的な数値よりも、感情を激しく揺さぶる物語に高い価値を感じる。", a: "IDE", w: 2 },
-            { t: "スペックの数値よりも、直感的に「美しい」と思ったデザインで買い物を決める。", a: "IDE", w: 2 },
-            { t: "直感や占いよりも、客観的なデータや検索結果を圧倒的に信頼する。", a: "REA", w: 2 },
-            { t: "「正しさ」よりも「美しさ」を優先して判断する瞬間が多々ある。", a: "IDE", w: 2 },
-            { t: "大きな夢を語るよりも、まずは明日の収支計算を確実に行いたい。", a: "REA", w: 3 },
-            { t: "正論で論破されると、たとえ自分が間違っていても強い憤りを感じる。", a: "IDE", w: 2 },
-            { t: "「効率化」という言葉を聞くと、無機質でつまらない世界を連想する。", a: "IDE", w: 2 },
-            { t: "悩みを聞いたとき、まず「なぜそれが起きたか」の原因を特定しようとする。", a: "REA", w: 2 },
-            { t: "自分にしか見えていない「世界の真理」が存在すると密かに信じている。", a: "IDE", w: 3 },
-            { t: "ファンタジー映画よりも、実在の人物を描いたドキュメンタリーに強く惹かれる。", a: "REA", w: 2 },
-            { t: "説明書を読む前に、まずは自分の感覚で触って動かし方を覚えたい。", a: "IDE", w: 1 },
-            { t: "「普通はこうする」という言葉を、思考停止の極みだと強く拒絶する。", a: "IDE", w: 3 },
-            { t: "旅行は計画を完璧に立て、実際に行くとその予定を死守することに快感を覚える。", a: "REA", w: 2 },
-            { t: "恋愛において、情熱よりも「生活力の安定」を最優先するのは当然だと考える。", a: "REA", w: 3 },
-            { t: "空想にふけっていて、いつの間にか数時間が経過していることがよくある。", a: "IDE", w: 2 },
-            { t: "芸術にお金を使うくらいなら、確実に満足できる食事にお金を使いたい。", a: "REA", w: 2 },
-            { t: "「目に見えるもの」だけが唯一の真実だと言い切れる。", a: "REA", w: 3 },
-            { t: "直感で「これだ！」と思ったことは、他人が何を言おうと実行する。", a: "IDE", w: 3 },
-            { t: "自分の人生は、壮大な物語の主人公として描かれていると感じる。", a: "IDE", w: 2 },
-            { t: "リスクが1%でもあるなら、その計画は即座に中止か再考すべきだと考える。", a: "REA", w: 2 },
-            { t: "何をするにも、まず「それには何の意味（実利）があるか」を計算する。", a: "REA", w: 2 },
-            { t: "スマホの充電が 50% を切ると、落ち着かなくなり充電器を探す。", a: "MOD", w: 1 },
-            { t: "予定がない休日でも、何時に起きるかを前日に決めてアラームをかけてから眠る。", a: "MOD", w: 1 },
-            { t: "他人の靴が揃っていないのを見ると、反射的に直してしまう。", a: "MOD", w: 1 },
-            { t: "既成のルールやマナーを壊すことに、強い解放感と快感を覚える。", a: "ANA", w: 3 },
-            { t: "自分の葬式は、従来の宗教的・形式的な儀礼を一切排除したい。", a: "ANA", w: 2 },
-            { t: "「予定は未定」という言葉を、人生のモットーとして愛している。", a: "ANA", w: 2 },
-            { t: "整理整頓が完璧な空間よりも、少し生活感のある場所のほうが好きだ。", a: "ANA", w: 1 },
-            { t: "寄り道をせずに最短ルートで目的地に到着することに達成感を感じる。", a: "MOD", w: 1 },
-            { t: "「締め切り」という束縛を感じると、すべてを放り出して逃げたくなる。", a: "ANA", w: 2 },
-            { t: "初めての場所へ行く時、あえて地図を見ずに直感だけで歩くことが好きだ。", a: "ANA", w: 2 },
-            { t: "デスクの上の配置は、常にセンチ単位で一定でないと気が済まない。", a: "MOD", w: 2 },
-            { t: "明確なルールがあるからこそ、その中で「自由」を満喫できるのだと信じている。", a: "MOD", w: 2 },
-            { t: "新しいお店に入る時、事前にSNSやネットで内装やメニューを完全に把握してから行く。", a: "MOD", w: 1 },
-            { t: "「とりあえずやってみる」より「まず準備する」ほうが、最終的な効率が良いと考える。", a: "MOD", w: 2 },
-            { t: "決まったルーチンワークを淡々とこなすことに、深い安心感を見出す。", a: "MOD", w: 2 },
-            { t: "予測不可能な行動をとって、周囲の反応を伺うことが好きだ。", a: "ANA", w: 2 },
-            { t: "誰かに「指示されること」を、自分の尊厳に対する侵害だと感じる。", a: "ANA", w: 3 },
-            { t: "ゴミの分別を徹底しない人に対し、強い嫌悪感を抱く。", a: "MOD", w: 2 },
-            { t: "人生は、計算通りにいかない「不確実性」こそが醍醐味だ。", a: "ANA", w: 2 },
-            { t: "毎日の食事の時間が厳密に決まっていると、精神的に安定する。", a: "MOD", w: 1 },
-            { t: "自分がリーダーの時は、部下に対し例外なくマニュアルの遵守を求める。", a: "MOD", w: 2 },
-            { t: "既成概念をあえて破壊し、わざと空気が読まない行動をとることがある。", a: "ANA", w: 3 },
-            { t: "カバンの中身が常に整理されており、どこになにが入っているか把握している。", a: "MOD", w: 1 },
-            { t: "他人の「5分程度の遅刻」が、どうしても許しがたい不誠実だと感じる。", a: "MOD", w: 2 },
-            { t: "予定が埋まっているカレンダーを見ると、檻に閉じ込められたかのような息苦しさを感じる。", a: "ANA", w: 3 }
-        ];
+        // State
+        let currentIdx=0, scores={ALT:0,EGO:0,OPT:0,NIH:0,IDE:0,REA:0,MOD:0,ANA:0}, history=[], devClickCount=0, finalType='ALT';
 
-        // --- Logic & State ---
-        let currentIdx = 0, scores = { ALT:0, EGO:0, OPT:0, NIH:0, IDE:0, REA:0, MOD:0, ANA:0 }, finalType = 'ALT', history = [], slideIdx = 0, devClickCount = 0;
-
-        window.onload = function() {
+        window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const resParam = urlParams.get('result');
-            if(resParam && resultData[resParam]) { jumpToResult(resParam); }
-            updateIsmPreview(); setInterval(updateIsmPreview, 4000);
+            if(resParam && resultData[resParam]) jumpToResult(resParam);
         };
 
-        function updateIsmPreview(){
-            const p = ismPairs[slideIdx];
-            document.getElementById('slide-pair-names').innerText=`${p.lk} vs ${p.rk}`;
-            document.getElementById('label-l').innerText=p.l; document.getElementById('label-r').innerText=p.r;
-            document.getElementById('preview-l').innerHTML=`<span class="img-placeholder text-[8px]">${p.lk}</span>`;
-            document.getElementById('preview-r').innerHTML=`<span class="img-placeholder text-[8px]">${p.rk}</span>`;
-            slideIdx = (slideIdx+1)%ismPairs.length;
-        }
-
         function devClick() { devClickCount++; if(devClickCount>=5){document.getElementById('dev-menu').classList.remove('hidden');devClickCount=0;}}
-
         function startDiagnosis(){ document.getElementById('intro').classList.add('hidden'); document.getElementById('quiz').classList.remove('hidden'); showQuestion(); }
 
         function showQuestion(){
@@ -378,7 +186,7 @@
             const progress = ((currentIdx+1)/100)*100;
             document.getElementById('progress').style.width = `${progress}%`;
             document.getElementById('q-percent').innerText = `${Math.floor(progress)}%`;
-            if (currentIdx>0) document.getElementById('btn-back').classList.remove('hidden'); else document.getElementById('btn-back').classList.add('hidden');
+            document.getElementById('btn-back').style.display = currentIdx > 0 ? 'block' : 'none';
         }
 
         function answer(isYes){
@@ -397,8 +205,7 @@
             let maxVal = -1, totalDev = 0;
             const pairs = [{lk:'ALT',rk:'EGO'},{lk:'OPT',rk:'NIH'},{lk:'IDE',rk:'REA'},{lk:'MOD',rk:'ANA'}];
             pairs.forEach(p => {
-                const sum = scores[p.lk] + scores[p.rk];
-                const ratio = sum === 0 ? 50 : (scores[p.lk]/sum)*100;
+                const sum = scores[p.lk] + scores[p.rk], ratio = sum === 0 ? 50 : (scores[p.lk]/sum)*100;
                 totalDev += Math.abs(ratio - 50);
                 if(scores[p.lk] >= maxVal){ maxVal=scores[p.lk]; finalType=p.lk; }
                 if(scores[p.rk] >= maxVal){ maxVal=scores[p.rk]; finalType=p.rk; }
@@ -409,32 +216,32 @@
             document.getElementById('result-catch').innerText=data.c;
             document.getElementById('result-desc').innerHTML=data.d.split('。').filter(s=>s).map(s=>`<p class="mb-6">${s}。</p>`).join('');
             document.getElementById('result-direction').innerHTML=`✦ ${data.dir}`;
-            const pIndex = (100 + (totalDev * 0.45) + Math.random()*5).toFixed(1);
-            document.getElementById('stat-1').innerText=Math.min(pIndex, 200.0);
+            document.getElementById('stat-1').innerText=Math.min((100 + (totalDev * 0.45) + Math.random()*5), 200.0).toFixed(1);
+            
             const artSlot = document.getElementById('result-art-container');
-            const imgEl = document.createElement('img'); imgEl.src=data.img; imgEl.alt=data.n;
-            imgEl.onerror=function(){ artSlot.innerHTML=`<span class="img-placeholder text-[8px]">${finalType} Visualization</span>`; };
+            artSlot.classList.remove('img-loaded');
+            const imgEl = document.createElement('img');
+            imgEl.src = encodeURI(data.img); // 半角スペースを含むファイル名を安全に読み込み
+            imgEl.onload = () => artSlot.classList.add('img-loaded');
+            imgEl.onerror = () => { artSlot.innerHTML=`<span class="img-placeholder text-[8px]">${finalType} Visualization</span>`; };
             artSlot.innerHTML=''; artSlot.appendChild(imgEl);
+
             const tC = document.getElementById('ticker-content'); tC.innerHTML='';
             [...data.celebs,...data.celebs].forEach(c=>{ tC.innerHTML+=`<span class="ticker-item">${c}</span>`; });
             const chT = document.getElementById('ticker-char-content'); chT.innerHTML='';
             [...data.chars,...data.chars].forEach(c=>{ chT.innerHTML+=`<span class="ticker-item ticker-char">${c}</span>`; });
+
             const axisB = document.getElementById('axis-details'); axisB.innerHTML='';
             const labels = [{l:"献身",r:"孤高",lk:'ALT',rk:'EGO'},{l:"渇望",r:"静観",lk:'OPT',rk:'NIH'},{l:"夢幻",r:"実利",lk:'IDE',rk:'REA'},{l:"調和",r:"変革",lk:'MOD',rk:'ANA'}];
             labels.forEach(p => {
                 const sum = scores[p.lk] + scores[p.rk], lp = sum===0?50:Math.round((scores[p.lk]/sum)*100), rp = 100-lp;
-                axisB.innerHTML += `<div class="space-y-4 text-center"><div class="flex justify-between text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] px-1 italic"><span>${p.l}(${p.lk}) ${lp}%</span><span>${rp}% ${p.r}(${p.rk})</span></div><div class="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden"><div class="bg-blue-400 h-full progress-bar" style="width:${lp}%"></div><div class="bg-gray-800 h-full progress-bar" style="width:${rp}%"></div></div></div>`;
+                axisB.innerHTML += `<div class="space-y-4"><div class="flex justify-between text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] px-1 italic"><span>${p.l}(${p.lk}) ${lp}%</span><span>${rp}% ${p.r}(${p.rk})</span></div><div class="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden"><div class="bg-blue-400 h-full progress-bar" style="width:${lp}%"></div><div class="bg-gray-800 h-full progress-bar" style="width:${rp}%"></div></div></div>`;
             });
             window.scrollTo({top:0,behavior:'smooth'});
         }
 
         function jumpToResult(type){ finalType=type; document.getElementById('intro').classList.add('hidden'); document.getElementById('quiz').classList.add('hidden'); document.getElementById('result').classList.remove('hidden'); scores={ALT:0,EGO:0,OPT:0,NIH:0,IDE:0,REA:0,MOD:0,ANA:0}; scores[type]=75; showResult(); }
-
-        function shareOnX(){
-            const idx=document.getElementById('stat-1').innerText;
-            const text=encodeURIComponent(`PITA診断結果：私は【${resultData[finalType].n}】でした。PITA Index: ${idx} / 200.0\n${resultData[finalType].c}\n\nあなたは何主義者として生きるのか。深層心理を解剖せよ。\n#PITA診断 #PersonalityIsmTypeAnalyzer\n`);
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.href)}`,'_blank');
-        }
+        function shareOnX(){ const idx=document.getElementById('stat-1').innerText; const text=encodeURIComponent(`PITA診断結果：私は【${resultData[finalType].n}】でした。PITA Index: ${idx} / 200.0\n${resultData[finalType].c}\n\nあなたは何主義者として生きるのか。深層心理を解剖せよ。\n#PITA診断 #PersonalityIsmTypeAnalyzer\n`); window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.href)}`,'_blank'); }
     </script>
 </body>
 </html>
