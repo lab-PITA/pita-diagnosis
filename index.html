@@ -80,7 +80,7 @@
 
     <!-- Developer Menu -->
     <div id="dev-menu" class="hidden">
-        <p class="mb-4 font-bold border-b border-gray-700 pb-2 text-blue-400 uppercase text-xs text-center">Debug Preview</p>
+        <p class="mb-4 font-bold border-b border-gray-700 pb-2 text-blue-400 uppercase text-xs text-center text-balance text-white text-white">Debug Preview</p>
         <div class="grid grid-cols-2 gap-2 text-center text-xs text-white">
             <button onclick="jumpToResult('ALT')" class="p-2 bg-gray-800 rounded">利他主義者</button>
             <button onclick="jumpToResult('EGO')" class="p-2 bg-gray-800 rounded">利己主義者</button>
@@ -98,49 +98,49 @@
     <main class="flex-grow flex flex-col items-center justify-start p-4 md:p-6 bg-[#fcfcfc]">
         
         <!-- Intro Screen -->
-        <div id="intro" class="max-w-4xl w-full text-center fade-in py-8">
+        <div id="intro" class="max-w-4xl w-full text-center fade-in py-8 text-balance">
             <div class="mb-4 inline-block px-4 py-1 rounded-full border border-gray-100 text-[9px] font-black tracking-widest text-gray-400 uppercase text-center">
                 Identity Structure Verification
             </div>
-            <h2 class="text-3xl md:text-7xl font-bold mb-8 serif leading-tight text-gray-900 text-center text-balance">
+            <h2 class="text-3xl md:text-7xl font-bold mb-8 serif leading-tight text-gray-900 text-center">
                 あなたは何主義者として<br><span class="text-blue-600">生きるのか。</span>
             </h2>
-            <p class="text-gray-500 mb-10 leading-relaxed text-xs md:text-sm tracking-widest max-w-lg mx-auto px-4 text-center text-balance">
+            <p class="text-gray-500 mb-10 leading-relaxed text-xs md:text-sm tracking-widest max-w-lg mx-auto px-4 text-center">
                 日常に潜む100の分岐点。その無意識の選択の重みが、あなたの主義を定義する。
             </p>
             
             <div class="mb-16 px-4 text-center">
-                <button onclick="startDiagnosis()" class="w-full md:w-auto group relative inline-block text-center mx-auto transition transform active:scale-95">
+                <button onclick="startDiagnosis()" class="w-full md:w-auto group relative inline-block text-center mx-auto transition transform active:scale-95 text-balance">
                     <div class="absolute inset-0 bg-blue-600 rounded-full blur-2xl opacity-10 group-hover:opacity-30 transition"></div>
                     <div class="relative bg-gray-900 text-white px-16 py-6 rounded-full font-bold text-xl transition-all group-hover:bg-blue-700 shadow-2xl">
                         診断を開始する（全100問）
                     </div>
                 </button>
-                <div class="mt-8 text-center text-balance">
+                <div class="mt-8 text-center text-balance text-balance">
                     <button onclick="showView('guide')" class="text-[10px] font-bold text-gray-400 hover:text-blue-500 transition-colors uppercase tracking-widest border-b border-gray-200 hover:border-blue-200 pb-1">
                         初めての方はこちら
                     </button>
                 </div>
             </div>
 
-            <div class="w-full bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-gray-50 text-left text-balance">
-                <h3 class="text-[10px] font-black tracking-[0.4em] mb-10 text-gray-300 uppercase italic text-center">8 Types of Soul Architecture</h3>
+            <div class="w-full bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-gray-50 text-left">
+                <h3 class="text-[10px] font-black tracking-[0.4em] mb-10 text-gray-300 uppercase italic text-center text-balance">8 Types of Soul Architecture</h3>
                 <div class="ism-grid" id="ism-intro-grid"></div>
             </div>
         </div>
 
         <!-- Guide View -->
-        <div id="guide" class="max-w-2xl w-full hidden fade-in py-12 px-4 text-left text-balance">
+        <div id="guide" class="max-w-2xl w-full hidden fade-in py-12 px-4 text-left text-balance text-balance">
             <button onclick="showView('intro')" class="mb-8 text-gray-400 hover:text-black font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 transition">
                 <span>← BACK</span>
             </button>
-            <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border border-gray-50 text-left">
+            <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border border-gray-50">
                 <h2 class="text-2xl md:text-4xl font-bold mb-10 serif border-b pb-6 text-center">初めての方へ：PITAの楽しみ方</h2>
                 
                 <section class="mb-12">
                     <h3 class="text-xs font-black text-blue-600 uppercase tracking-widest mb-6 border-l-4 border-blue-600 pl-3">01. PITA診断の楽しみ方</h3>
                     <div class="space-y-4 text-sm leading-relaxed text-gray-600">
-                        <p>・<strong>直感に従う：</strong> 100の質問に対し、深く考えすぎず、直感でパッと答えてください。その迷いこそがあなたの深層心理を映し出します。</p>
+                        <p>・<strong>直感に従う：</strong> 100の質問に対し、深く考えすぎず、直感でパッと答えてください。その迷いこそがあなたの深層心理を映し出す鍵となります。</p>
                         <p>・<strong>自分の「イズム」を知る：</strong> 結果画面では、あなたの価値観のバランスを可視化します。特定の主義に特化しているか、あるいは複数の主義が調和しているかを確認しましょう。</p>
                         <p>・<strong>シェアして比較する：</strong> 結果を友人や同僚とシェアし、お互いの「主義」の違いを比べることで、コミュニケーションの新しい視点が得られます。</p>
                     </div>
@@ -161,13 +161,13 @@
 
                 <section class="mb-12 text-left">
                     <h3 class="text-xs font-black text-blue-600 uppercase tracking-widest mb-6 border-l-4 border-blue-600 pl-3">03. 診断結果の種類</h3>
-                    <div class="text-sm leading-relaxed text-gray-600 text-balance">
+                    <div class="text-sm leading-relaxed text-gray-600">
                         <p>診断後、あなたは最も強く現れた指標に基づき、8つのタイプ（利他主義者・利己主義者・楽観主義者・虚無主義者・理想主義者・現実主義者・秩序主義者・混沌主義者）のいずれかに分類されます。</p>
                     </div>
                 </section>
 
-                <section class="mb-12 p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center text-balance">
-                    <p class="text-xs text-gray-500 mb-4 font-bold tracking-tight">診断を開始する前に、プライバシーポリシーもお読みください。</p>
+                <section class="mb-12 p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                    <p class="text-xs text-gray-500 mb-4 font-bold tracking-tight text-balance">診断を開始する前に、プライバシーポリシーもお読みください。</p>
                     <a href="privacy.html" target="_self" class="text-xs font-bold text-blue-600 border-b border-blue-200 pb-0.5 hover:text-blue-800 transition uppercase tracking-widest">Privacy Policy</a>
                 </section>
 
@@ -180,27 +180,27 @@
         </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz" class="max-w-2xl w-full hidden py-4 md:py-16 text-left">
-            <div class="mb-10 md:mb-16 px-2 text-left text-balance">
+        <div id="quiz" class="max-w-2xl w-full hidden py-4 md:py-16 text-left text-balance text-balance text-balance">
+            <div class="mb-10 md:mb-16 px-2 text-left">
                 <div class="w-full bg-gray-100 h-[2px] mb-6 text-left"><div id="progress" class="progress-bar bg-blue-600 h-full text-left" style="width: 1%"></div></div>
                 <div class="flex justify-between items-end text-left h-10">
                     <div class="flex flex-col text-left">
                         <span id="q-hint" class="text-[10px] font-bold text-blue-500 italic mb-1 h-4 select-none text-left">...</span>
                         <span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase text-left">Question 01</span>
                     </div>
-                    <div class="text-right text-balance" id="q-percent-container">
+                    <div class="text-right" id="q-percent-container">
                         <div id="q-percent" class="text-3xl md:text-4xl font-light text-blue-600 serif leading-none">1%</div>
                     </div>
                 </div>
             </div>
-            <div class="min-h-[160px] md:min-h-[200px] flex flex-col items-center justify-center mb-12 px-2 text-center text-balance">
+            <div class="min-h-[160px] md:min-h-[200px] flex flex-col items-center justify-center mb-12 px-2 text-center">
                 <h3 id="question-text" class="text-xl md:text-3xl font-bold leading-relaxed serif text-gray-800 text-center"></h3>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8 text-balance">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8 text-white">
                 <button onclick="answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">はい</button>
                 <button onclick="answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">いいえ</button>
             </div>
-            <div class="flex flex-col items-center gap-6 mt-4 text-balance text-center">
+            <div class="flex flex-col items-center gap-6 mt-4 text-center">
                 <div class="flex justify-center gap-8 w-full">
                     <button id="btn-back" onclick="goBack()" class="btn-back text-[10px] font-bold uppercase tracking-widest hidden transition">← BACK</button>
                     <button onclick="abortToEPH()" class="btn-abort text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full transition">もう飽きた</button>
@@ -209,7 +209,7 @@
         </div>
 
         <!-- Result Screen -->
-        <div id="result" class="max-w-4xl w-full hidden fade-in py-12 text-center">
+        <div id="result" class="max-w-4xl w-full hidden fade-in py-12 text-center text-balance text-balance">
             <div class="text-center mb-16 px-4 mx-auto text-balance">
                 <p class="text-[9px] font-black text-blue-600 uppercase tracking-[0.6em] mb-4 text-center">Diagnostic Complete</p>
                 <h2 id="result-title" class="text-4xl md:text-7xl font-bold mb-1 serif tracking-tighter text-gray-900 text-center"></h2>
@@ -226,30 +226,30 @@
             </div>
 
             <div class="space-y-24 md:space-y-32 text-center mx-auto text-balance">
-                <section class="max-w-2xl mx-auto px-6 text-center text-balance">
+                <section class="max-w-2xl mx-auto px-6 text-center text-balance text-balance">
                     <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] italic text-center">Spectrum Balance</h4>
                     <div id="axis-details" class="space-y-10 md:space-y-12"></div>
                 </section>
                 
                 <section class="border-t border-gray-100 pt-20 overflow-hidden text-center text-balance">
-                    <h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic text-center text-balance">Parallel Souls (Historical)</h4>
+                    <h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic text-center">Parallel Souls (Historical)</h4>
                     <div id="historical-ticker-area" class="space-y-1"></div>
                 </section>
 
                 <section class="border-t border-gray-100 pt-16 overflow-hidden text-center text-balance">
-                    <h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic text-center text-balance">Modern Icons (Characters)</h4>
+                    <h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic text-center">Modern Icons (Characters)</h4>
                     <div id="modern-ticker-area" class="space-y-1"></div>
                 </section>
 
                 <section class="bg-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] mx-4 shadow-sm border border-gray-50 text-left text-gray-700 text-balance text-left text-balance">
-                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-balance">Identity Report</h4>
+                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">Identity Report</h4>
                     <div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-left"></div>
                 </section>
                 <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl relative overflow-hidden mx-4 text-center text-balance">
                     <h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center relative z-10 text-center text-balance text-balance">Future Guidance</h4>
-                    <div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 text-center mx-auto max-w-lg text-balance"></div>
+                    <div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 text-center mx-auto max-w-lg"></div>
                 </section>
-                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm text-center text-balance text-balance">
+                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm text-center text-balance text-balance text-balance text-balance">
                     <button onclick="shareOnX()" class="bg-[#1DA1F2] text-white py-5 px-10 rounded-full font-bold text-lg hover:opacity-90 transition-all shadow-xl text-center w-full">結果をXでシェアする</button>
                     <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center w-full flex items-center justify-center gap-2 text-gray-700 transition"><span>フィードバックを送る</span></a>
                     <button onclick="location.reload()" class="bg-gray-900 text-white py-5 px-10 rounded-full font-bold text-lg hover:bg-black transition-all shadow-md text-center w-full">もう一度診断する</button>
@@ -269,39 +269,76 @@
     </footer>
 
     <script>
-        // --- 1. Global Constants & Content ---
+        // --- データ定義 ---
         const resultData = {
             ALT: { 
                 en: "ALT", k: "アルトルイスト", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "PITA-ALT.png", 
                 celebs: ["マザー-テレサ", "ガンジー", "シュバイツァー", "ナイチンゲール", "キング牧師", "デスモンド-ツツ", "ダイアナ妃", "ヘレン-ケラー", "杉原千畝", "新渡戸稲造", "孔子", "ソクラテス", "アリストテレス", "プラトン", "リンカーン", "聖徳太子", "宮沢賢治", "ジャンヌ-ダルク", "アンネ-フランク", "ヘンリー-デュナン", "緒方貞子", "ペスタロッチ", "渋沢栄一", "ジョン-ラスキン", "トマ-ピケティ", "カント", "ヘーゲル", "ハイデガー", "アインシュタイン", "チャップリン"],
                 chars: ["竈門炭治郎", "緑谷出久", "沢田綱吉", "ベル・クラネル", "夏目貴志", "乙骨憂太", "竈門禰󠄀豆子", "藤丸立香", "アルフォンス", "潮田渚", "アレン・ウォーカー", "花垣武道", "有馬かな", "黒子テツヤ", "澤村大地", "清水潔子", "木之本桜", "本田透", "鹿目まどか", "赤城", "ウェンティ", "ナウシカ", "エミリア", "レム", "ジョナサン", "ファルコ", "日向ヒナタ", "井上織姫", "ヨル・フォージャー", "通形ミリオ"], 
-                d: "【慈愛の性質】あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、現代社会における唯一の良心と言えるでしょう。【社会的役割】調和と癒やしの中心として機能します。あなたが輪の中にいるだけで、トゲのある空気が和らぎ、人々は本来の優しさを取り戻します。【潜在的リスク】他人の問題を自分のことのように抱え込みすぎ、自己を摩耗させる危険があります。自分を後回しにすることが習慣化すると、いつの間にか魂が空っぽになってしまうかもしれません。", 
+                d: "【慈愛の性質】あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、枯渇した現代社会における唯一の良心と言えるでしょう。周囲の感情に極めて敏感で、痛みを感じている者を見捨てることができません。【社会的役割】調和と癒やしの中心として機能します。あなたが輪の中にいるだけで、トゲのある空気が和らぎ、人々は本来の優しさを取り戻します。コミュニティの守護者であり、潤滑油でもあります。【潜在的リスク】他人の問題を自分のことのように抱え込みすぎ、自己を摩耗させる危険があります。自分を後回しにすることが習慣化すると、いつの間にか魂が空っぽになってしまうかもしれません。", 
                 dir: "✦【強みの最大化】あなたの『共感力』を具体的なアクションへ昇華させてください。✦【弱点の克服】『断る勇気』を習得しましょう。✦【理想の環境】感謝として還元される温かな居場所が最適です。" 
             },
             EGO: { 
                 en: "EGO", k: "エゴイスト", n: "利己主義者", c: "「自己を統治する気高き孤高の王」", img: "PITA-EGO.png", 
                 celebs: ["ナポレオン", "スティーブ-ジョブズ", "織田信長", "カエサル", "アレクサンダー大王", "ハワード-ヒューズ", "ダリ", "マキアヴェッリ", "フリードリヒ2世", "エリザベス1世", "ルイ14世", "チンギス-ハン", "ピョートル大帝", "ビスマルク", "ロックフェラー", "カーネギー", "シャネル", "ピカソ", "ミケランジェロ", "ベートーヴェン", "ワーグナー", "ニーチェ", "三島由紀夫", "本田宗一郎", "堀江貴文", "トランプ", "マスク", "ベゾス", "ゲイツ", "ザッカーバーグ"],
                 chars: ["ギルガメッシュ", "海馬瀬人", "ルルーシュ", "夜神月", "ベジータ", "フリーザ", "爆豪勝己", "志々雄真実", "クロロ", "エレン", "ドフラミンゴ", "クロコダイル", "藍染惣右介", "DIO", "赤司征十郎", "跡部景吾", "殺生丸", "飛影", "綾小路清隆", "司波達也", "五条悟", "両面宿儺", "馬狼照英", "糸師凛", "高杉晋助", "範馬勇次郎", "言峰綺礼", "シャルル", "エンデヴァー", "ハンコック"], 
-                d: "【独立の性質】あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。【社会的役割】カリスマ。あなたの揺るぎない自信は、新しい時代を創造する強力なエンジンとなります。【潜在的リスク】他者を自分の目的の道具として見なしやすく、孤独を招くことがあります。", dir: "✦【強みの最大化】圧倒的な自己愛をビジョンへ。✦【弱点の克服】他者の卓越さを認める度量を。✦【理想の環境】トップスピードで走り続けられる環境。" 
+                d: "【独立の性質】あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。他人の評価に左右されず、自分の価値基準のみで世界を裁定します。【社会的役割】停滞した状況を打破する「開拓者」や「カリスマ」として君臨します。あなたの揺るぎない自信は、迷える大衆を惹きつけ、新しい時代を創造する強力なエンジンとなります。【潜在的リスク】他者を自分の目的の道具として見なしやすく、孤独を招くことがあります。自分の弱さを認めることが難しく、周囲を頼れない強情さが仇となることもあるでしょう。", 
+                dir: "✦【強みの最大化】その圧倒的な自己愛を世界を動かす『ビジョン』へ。✦【弱点の克服】他者の卓越さを認める度量を。✦【理想の環境】トップスピードで走り続けられる環境。" 
             },
-            OPT: { en: "OPT", k: "オプティミスト", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA-OPT.png", celebs: ["ウォルト-ディズニー", "エディソン", "坂本九", "アンネ-フランク", "ヘレン-ケラー", "チャップリン", "松下幸之助", "本田宗一郎", "ダ-ヴィンチ", "モーツァルト", "ルーベン-フェイン", "リチャード-ブランソン", "ジム-キャリー", "オプラ-ウィンフリー", "ジョン-レノン", "ポール-マッカートニー", "シェイクスピア", "ゲーテ", "シュリーマン", "ダーウィン", "ファーブル", "牧野富太郎", "手塚治虫", "藤子-F-不二雄", "宮崎駿", "黒澤明", "北野武", "イチロー", "大谷翔平", "孫正義", "トーマス-モア", "トマス-アクィナス", "デカルト"], chars: ["孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "喜多郁代", "日向翔陽", "切島鋭児郎", "パック", "ベアトリス", "フェルト", "ラインハルト", "諸星あたる", "ポプ子", "ピピ美", "高坂穂乃果", "湊あくあ", "神楽"], d: "【希望の性質】あなたは絶望を塗り替える天才です。", dir: "✦【強みの最大化】継続力へ。✦【弱点の克服】現実主義者の耳を。" },
-            NIH: { en: "NIH", k: "ニヒリスト", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA-NIH.png", celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫", "中原中也", "芥川龍之介", "江戸川乱歩", "萩原朔太郎", "ボードレール", "ランボー", "ポオ", "ドストエフスキー", "トルストイ", "サルトル", "ボーヴォワール", "アラン", "パスカル", "モンテーニュ", "デカルト", "スピノザ", "ライプニッツ", "カント", "ヘーゲル", "ハイデガー", "ウィトゲンシュタイン", "フーコー", "デリダ", "ドゥルーズ"], chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "フェイタン", "九条玲那", "忍野メメ", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "芥川龍之介", "ジン", "スカー", "オビト", "マダラ", "虚", "貝木泥舟", "キルア", "セバスチャン"], d: "【空の性質】あなたは世界の『無』を見抜いた賢者です。", dir: "✦【強みの最大化】開き直りを。✦【弱点の克服】小さな感覚を。" },
-            IDE: { en: "IDE", k: "イデアリスト", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA-IDE.png", celebs: ["レノン", "宮沢賢治", "サン=テグジュペリ", "ゴッホ", "ワイルド", "プラトン", "ソクラテス", "ルソー", "ゲーテ", "シラー", "カント", "フィヒテ", "シェリング", "ヘーゲル", "夏目漱石", "島崎藤村", "泉鏡花", "谷崎潤一郎", "川端康成", "三島由紀夫", "村上春樹", "手塚治虫", "高畑勲", "庵野秀明", "新海誠", "細田守", "湯浅政明", "押井守", "大友克洋"], chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "シャル・ド・ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "獄寺隼人", "山本武", "雨宮蓮", "鳳凰院凶真", "枢木スザク", "ユーフェミア", "アルミン", "エドワード", "ニコ・ロビン", "星海光来", "宮侑", "宮治", "北信介", "中島敦", "太宰治"], d: "【イデアの性質】現実を理想で描く芸術家です。", dir: "✦【強みの最大化】翻訳し続けて。✦【弱点の克服】不完全の美を。" },
-            REA: { en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png", celebs: ["福沢諭吉", "徳川家康", "フランクリン", "チャーチル", "鄧小平", "ビスマルク", "ロックフェラー", "マキアヴェッリ", "カエサル", "アウグストゥス", "トラヤヌス", "ハドリアヌス", "アウレリウス", "コンスタンティヌス", "ユスティニアヌス", "カール大帝", "オットー1世", "フィリップ2世", "エドワード1世", "アンリ4世", "リシュリュー", "マザラン", "コルベール", "タルレーラン", "メッテルニヒ", "キャニング", "パーマストン", "ディズレーリ", "グラッドストン"], chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "堀北学", "灰崎祥吾", "花宮真", "吉良吉影", "高坂麗奈", "黄前久美子", "鎧塚みぞれ", "比企谷小町", "一条将輝", "折木奉太郎"], d: "【実利の性質】揺るぎない地平の実力者です。", dir: "✦【強みの最大化】心理学を加えて。✦【弱点の克服】無駄を実行。" },
-            MOD: { en: "MOD", k: "モダニスト", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA-MOD.png", celebs: ["カント", "リンカーン", "ワシントン", "孔子", "マックス-ウェーバー", "ドラッカー", "ミル", "ハミルトン", "聖徳太子", "北条泰時", "北条時宗", "徳川吉宗", "松平定信", "水野忠邦", "井伊直弼", "岩倉具視", "大久保利通", "伊藤博文", "山県有朋", "松方正義", "西園寺公望", "原敬", "高橋是清", "犬養毅", "広田弘毅", "吉田茂", "池田勇人", "佐藤栄作", "中曽根康弘", "小泉純一郎"], chars: ["飯田天哉", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "安室透", "赤井秀一", "ターニャ", "ラインハルト", "ヤン", "オーベルシュタイン", "ロイ", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂永亮", "白鳥任三郎", "鏑木虎徹"], d: "【規律の性質】文明の根幹を支える守護神です。", dir: "✦【強みの最大化】ルールを創る。✦【弱点の克服】遊びの価値。" },
-            ANA: { en: "ANA", k: "アナーキスト", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA-ANA.png", celebs: ["坂本龍馬", "ピカソ", "チェ-ゲバラ", "バクーニン", "マルコムX", "ディオゲネス", "シド-ヴィシャス", "ジャン-ジュネ", "バタイユ", "ブルトン", "デュシャン", "ウォーホル", "バスキア", "バンクシー", "ケルアック", "バロウズ", "ギンズバーグ", "ボブ-ディラン", "ジム-モリソン", "デヴィッド-ボウイ", "マーキュリー", "カート-コバーン", "ジョン-ライドン", "イギー-ポップ", "ルー-リード", "パティ-スミス", "ビョーク", "レディー-ガガ"], chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー・ボイル", "諸星あたる", "範馬刃牙", "折原臨也", "ラッド・ルッソ", "セルティ", "東堂葵", "トガヒミコ", "両面宿儺", "死柄木弔", "バギー", "ジェビル"], d: "【変革の性質】あらゆる鎖を断ち切る変革者です。", dir: "✦【強みの最大化】野性的直感を。✦【弱点の克服】破壊後の更地を。" },
+            OPT: { 
+                en: "OPT", k: "オプティミスト", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA-OPT.png", 
+                celebs: ["ウォルト-ディズニー", "エディソン", "坂本九", "アンネ-フランク", "ヘレン-ケラー", "チャップリン", "松下幸之助", "本田宗一郎", "ダ-ヴィンチ", "モーツァルト", "リチャード-ブランソン", "ジム-キャリー", "オプラ-ウィンフリー", "ジョン-レノン", "シェイクスピア", "ゲーテ", "シュリーマン", "ダーウィン", "ファーブル", "牧野富太郎", "手塚治虫", "宮崎駿", "黒澤明", "北野武", "イチロー", "大谷翔平", "孫正義", "トーマス-モア", "トマス-アクィナス", "デカルト"], 
+                chars: ["孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "喜多郁代", "日向翔陽", "切島鋭児郎", "パック", "ベアトリス", "フェルト", "ラインハルト", "諸星あたる", "ポプ子", "ピピ美", "高坂穂乃果", "湊あくあ", "神楽"], 
+                d: "【希望の性質】あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための最も純粋な動力源です。失敗を単なる成功へのプロセスと心から信じています。【社会的役割】沈みかけたチームの士気を一瞬で引き上げるムードメーカーであり、不可能な挑戦に火をつける点火者です。あなたの「きっと大丈夫」という一言は、時に物理的な限界を超えさせます。【潜在的リスク】現実的なリスクや警告を軽視しがちで、無謀な行動に出てしまうことがあります。周囲の悲しみに対しても明るさを強要してしまい、デリカシーの欠如には注意が必要です。", 
+                dir: "✦【強みの最大化】その根拠のない自信を『継続力』へ繋げてください。✦【弱点の克服】冷徹な『現実主義者』のアドバイスに耳を傾ける耳を持ちましょう。✦【理想の環境】新しい試みが常に歓迎されるポジティブなエネルギーに満ちた場所。" 
+            },
+            NIH: { 
+                en: "NIH", k: "ニヒリスト", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA-NIH.png", 
+                celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫", "中原中也", "芥川龍之介", "江戸川乱歩", "萩原朔太郎", "ボードレール", "ランボー", "ポオ", "ドストエフスキー", "トルストイ", "サるとる", "ボーヴォワール", "アラン", "パスカル", "モンテーニュ", "デカルト", "スピノザ", "ライプニッツ", "ウィトゲンシュタイン", "フーコー", "デリダ", "ドゥルーズ", "バタイユ", "ブランショ", "チョムスキー", "ジジェク"], 
+                chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "フェイタン", "九条玲那", "忍野メメ", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "芥川龍之介", "ジン", "スカー", "オビト", "マダラ", "虚", "貝木泥舟", "キルア", "セバスチャン"], 
+                d: "【空の性質】あなたは世界の『無』を見抜いた賢者です。虚飾に満ちた社会の価値観から脱却し、何物にも執着しない静かなる視点は、あらゆる苦悩を超越した究極の自由を象徴しています。虚無の果てに立つあなたの姿は、気高く美しい。周囲の些末な騒動は、あなたにはただのノイズです。【社会的役割】熱狂や混乱に呑まれない観察者として機能します。多くの人が幻想を追って迷走する中、あなたは冷徹に本質を見抜き、無駄なエネルギー消費を止める『ブレーキ』の役割を果たします。【潜在的リスク】『どうせ意味がない』という考えに支配され、必要な行動まで放棄してしまう可能性があります。無気力が長期化すると、自分自身の生命感さえも希薄になり、他者との接続を断ってしまう危険があります。", 
+                dir: "✦【強みの最大化】意味がないからこそ何をやっても自由だという開き直りを。✦【弱点の克服】今この瞬間の心地よさを大切にしましょう。✦【理想の環境】一人の時間が確保された、静かで知的な思索に耽ることができる場所。" 
+            },
+            IDE: { 
+                en: "IDE", k: "イデアリスト", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA-IDE.png", 
+                celebs: ["レノン", "宮沢賢治", "サン=テグジュペリ", "ゴッホ", "ワイルド", "プラトン", "ソクラテス", "ルソー", "ゲーテ", "シラー", "カント", "フィヒテ", "シェリング", "ヘーゲル", "夏目漱石", "島崎藤村", "泉鏡花", "谷崎潤一郎", "川端康成", "三島由紀夫", "村上春樹", "手塚治虫", "高畑勲", "庵野秀明", "新海誠", "細田守", "湯浅政明", "押井守", "大友克洋"], 
+                chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "ド-ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "獄寺隼人", "山本武", "雨宮蓮", "鳳凰院凶真", "枢木スザク", "ユーフェミア", "アルミン", "エドワード", "ニコ・ロビン", "星海光来", "宮侑", "宮治", "北信介", "中島敦", "太宰治"], 
+                d: "【イデアの性質】あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、人類を更なる高みへと押し上げる崇高な意志です。泥の中でも空を見上げ、星を数え続けることができる人です。【社会的役割】導師や予言者。凡庸な現実に飽き足らない人々を鼓舞し、不可能と思われたイノベーションを成し遂げる原動力となります。【潜在的リスク】理想への純粋さが強すぎるあまり、不完全な現実を激しく拒絶してしまう潔癖さがあります。理想と現実のギャップに絶望し、世捨て人のようになってしまう脆さも持っています。", 
+                dir: "✦【強みの最大化】脳内の完璧な世界を、一歩ずつ現実の言葉や形へ翻訳し続けてください。✦【弱点の克服】不完全さの中にある『美しさ』を見出す訓練を。✦【理想の環境】高い理想を嘲笑せず、協力してくれる仲間がいる場所。" 
+            },
+            REA: { 
+                en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png", 
+                celebs: ["福沢諭吉", "徳川家康", "フランクリン", "チャーチル", "鄧小平", "ビスマルク", "ロックフェラー", "マキアヴェッリ", "カエサル", "アウグストゥス", "トラヤヌス", "ハドリアヌス", "アウレリウス", "コンスタンティヌス", "ユスティニアヌス", "カール大帝", "オットー1世", "フリードリヒ1世", "フィリップ2世", "エドワード1世", "アンリ4世", "リシュリュー", "マザラン", "コルベール", "タルレーラン", "メッテルニヒ", "キャニング", "パーマストン", "ディズレーリ", "グラッドストン"], 
+                chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "堀北学", "灰崎祥吾", "花宮真", "吉良吉影", "高坂麗奈", "黄前久美子", "鎧塚みぞれ", "比企谷小町", "一条将輝", "折木奉太郎"], 
+                d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。曖昧な幻想を排除し、事実と論理で世界を読み解く知性は、現代を生き抜く強力な武器です。確実に勝機を掴むその手腕は芸術的ですらあります。【社会的役割】組織の頭脳や土台。熱狂に流されず冷静にリスクを管理するあなたの存在は、プロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーです。【潜在的リスク】人の感情や直感を軽視しがちで、冷酷な印象を与えることがあります。また、計算できないイレギュラーに直面すると必要以上に混乱することがあります。", 
+                dir: "✦【強みの最大化】論理的思考に心理学の知見を加えて。✦【弱点の克服】たまには『非効率な体験』をあえて実行。✦【理想の環境】合理的な判断が正当に評価される、プロフェッショナルな職場。" 
+            },
+            MOD: { 
+                en: "MOD", k: "モダニスト", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA-MOD.png", 
+                celebs: ["カント", "リンカーン", "ワシントン", "孔子", "マックス-ウェーバー", "ドラッカー", "ミル", "ハミルトン", "聖徳太子", "北条泰時", "北条時宗", "徳川吉宗", "松平定信", "水野忠邦", "井伊直弼", "岩倉具視", "大久保利通", "伊藤博文", "山県有朋", "松方正義", "西園寺公望", "原敬", "高橋是清", "犬養毅", "広田弘毅", "吉田茂", "池田勇人", "佐藤栄作", "中曽根康弘", "小泉純一郎"], 
+                chars: ["飯田天哉", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "安室透", "赤井秀一", "ターニャ", "ラインハルト", "ヤン", "オーベルシュタイン", "ロイ", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂永亮", "白鳥任三郎", "鏑木虎徹"], 
+                d: "【規律の性質】あなたは文明の根幹を支える守護神です。規律を重んじ、美しい秩序を構築・維持する誠実さは、社会が崩壊することなく存続するための要石です。あなたがルーチンを守る時、世界は初めて安心して自転を続けることができます。【社会的役割】管理、教育の分野で無類の強さを発揮します。ルールを公平に運用することで、組織に安定感をもたらします。人々が安心して能力を発揮できる場を創る人です。【潜在的リスク】固定観念に縛られやすく、既存ルールの破壊に対して強い拒絶反応を示します。柔軟性を欠いた対応で自らも周囲も息苦しくさせてしまうことがあります。", 
+                dir: "✦【強みの最大化】ルールを守る側から、時代に即したルールを創る側へ。✦【弱点の克服】適当さや遊びの価値を認めましょう。✦【理想の環境】歴史と伝統があり、誠実な働きが報われる安定した組織。" 
+            },
+            ANA: { 
+                en: "ANA", k: "アナーキスト", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA-ANA.png", 
+                celebs: ["坂本龍馬", "ピカソ", "チェ-ゲバラ", "バクーニン", "マルコムX", "ディオゲネス", "シド-ヴィシャス", "ジャン-ジュネ", "バタイユ", "ブルトン", "デュシャン", "ウォーホル", "バスキア", "バンクシー", "ケルアック", "バロウズ", "ギンズバーグ", "ボブ-ディラン", "ジム-モリソン", "デヴィッド-ボウイ", "フレディ-マーキュリー", "カート-コバーン", "ジョン-ライドン", "イギー-ポップ", "ルー-リード", "パティ-スミス", "ビョーク", "レディー-ガガ", "ビリー-アイリッシュ"], 
+                chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー・ボイル", "諸星あたる", "範馬刃牙", "折原臨也", "ラッド・ルッソ", "セルティ", "東堂葵", "トガヒミコ", "両面宿儺", "死柄木弔", "バギー", "ジェビル"], 
+                d: "【変革の性質】あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です。檻の中にいることに耐えられない、真の自由人です。【社会的役割】破壊的イノベーター。常識が通用しない新しい視点を持ち込み、硬硬直した社会に風穴を開けます。あなたが動くとき、新しい時代の幕が上がります。【潜在的リスク】破壊のあとに何を遺すかを考えないため、周囲に混乱や傷跡を残してしまうことがあります。持続性に欠け、人生が流浪しがちです。", 
+                dir: "✦【強みの最大化】その『野性的な直感』を信じ抜いてください。✦【弱点の克服】破壊の後の更地を管理してくれるパートナーを。✦【理想の環境】制約がなく、予測不能で突飛な行動が歓迎される現場。" 
+            },
             EPH: {
-                en: "EPH", k: "エフェメラリスト", n: "刹那主義者", c: "「今この瞬間に全てを懸ける閃光の自由人」", img: "PITA-EPH.png",
+                en: "EPH", k: "エフェメラリスト", n: "刹那主義者", c: "「今この瞬間に全てを懸ける閃光の自由人」", img: "PNG-EPH.png",
                 celebs: [], 
                 chars: [], 
                 d: "【瞬間の性質】あなたは「未来」や「継続」といった時間的重力から解き放たれた存在です。100問の果てにある結論よりも、今この瞬間に沸き起こる「飽きた」「面白くない」という直感を何よりも尊重します。完遂を美徳とする社会において、あなたの「サンクコストに囚われない軽やかさ」は、ある種の究極の自由を体現しています。【社会的役割】停滞した空気を一瞬で破壊し、新しい風を呼び込む「トリガー」となります。計画性はありませんが、あなたの「気まぐれ」や「唐突な方向転換」は、時にガチガチに固まった組織に予測不能なブレイクスルーをもたらします。既存のレールを平然と降りるその姿は、周囲に「生き方の多様性」を無言で突きつけます。【潜在的リスク】持続力が極めて低く、形に残る成果を築く前に次の刺激へ移ってしまうため、周囲からは「無責任」「飽き性」と誤解されがちです。長期的な信頼の積み上げが必要な場面で、孤立してしまうリスクを抱えています。※あなたは100問の壁を直感で飛び越えた、特別な存在です。",
-                dir: "✦【強みの最大化】その「爆発的な瞬発力」を、短期間のプロジェクトや即興性が求められる場に注いでください。✦【弱点の克服】「飽きた後のバトンタッチ」を覚えましょう。自分が興味を失った後を引き継いでくれる「秩序主義者」や「現実主義者」を味方につける術を学べば、あなたの破壊的衝動は創造的変革へと昇華されます。✦【理想の環境】毎日が違う景色で、瞬発的な判断が求められる現場が最適です。ルーチンワークはあなたにとって毒になります。"
+                dir: "✦【強みの最大化】その「爆発的な瞬発力」を、短期間のプロジェクトや即興性が求められる場に注いでください。長く続けることよりも、一瞬で誰かを魅了する表現やアイデアにおいて、あなたは無敵の力を発揮します。✦【弱点の克服】「飽きた後のバトンタッチ」を覚えましょう。自分が興味を失った後を引き継いでくれる「秩序主義者」や「現実主義者」を味方につける術を学べば、あなたの破壊的衝動は創造的変革へと昇華されます。✦【理想の環境】毎日が違う景色で、瞬発的な判断が求められる現場が最適です。ルーチンワークはあなたにとって毒になります。イベント、スタートアップの初期、あるいは常に「今」が変化し続けるクリエイティブな場所が、あなたの輝ける舞台です。"
             }
         };
 
-        const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信しろ。","常識を捨てろ。","君の核に触れる。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。","ここでやめたら一生自分は謎のままだ。","素晴らしい、その迷いこそが人間だ。","この1問が君を定義する。","順調だ、深淵まで潜れ。","君の『イズム』が悲鳴を上げている。","常識の檻を壊せ。","自分への嘘を暴け。","面白い、君はそんな風に考えるのか。","半分まで来たな、魂は無事か？","加速する思考、止まるな。","今の回答、少し震えなかったか？","君の本性が剥き出しになっていく.","理論を超えろ、直感に従え。","いいね、その潔さ。","真実へのカウントダウンだ。","思考の霧が晴れていく。","君という物語のクライマックスへ。","全神経をこの1問に注げ。","素晴らしい集中力だ。","魂の純度が高まっていく。","自分を騙すのはもうやめだ。","深層心理の鍵が開く音がする。","いいぞ、その調和。","混沌を恐れるな。","現実を見据える目は鋭いか？","理想の旗を掲げ続けろ。","利己的な自分を愛せるか？","利彼の精神を忘れるな。","楽観は知恵だ。", "虚無こそが真の自由だ。", "秩序を守る盾となれ。", "混沌を巻き起こす嵐となれ。", "君の答えを世界が待っている。", "その一手が運命を変える。", "鼓動を感じるか？", "自分を疑うな。", "君の真実はそこにある。", "未来は君の手の中に。", "歴史はこうして作られる。"];
+        const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信じろ。","常識を捨てろ。","君の核に触れる。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。","ここでやめたら一生自分は謎のままだ。","素晴らしい、その迷いこそが人間だ。","この1問が君を定義する。","順調だ、深淵まで潜れ。","君の『イズム』が悲鳴を上げている。","常識の檻を壊せ。","自分への嘘を暴け。","面白い、君はそんな風に考えるのか。","半分まで来たな、魂は無事か？","加速する思考、止まるな。","今の回答、少し震えなかったか？","君の本性が剥き出しになっていく.","理論を超えろ、直感に従え。","いいね、その潔さ。","真実へのカウントダウンだ。","思考の霧が晴れていく。","君という物語のクライマックスへ。","全神経をこの1問に注げ。","素晴らしい集中力だ。","魂の純度が高まっていく。","自分を騙すのはもうやめだ。","深層心理の鍵が開く音がする。","いいぞ、その調和。","混沌を恐れるな。","現実を見据える目は鋭いか？","理想の旗を掲げ続けろ。","利己的な自分を愛せるか？","利彼の精神を忘れるな。","楽観は知恵だ。", "虚無こそが真の自由だ。", "秩序を守る盾となれ。", "混沌を巻き起こす嵐となれ。", "君の答えを世界が待っている。", "その一手が運命を変える。", "鼓動を感じるか？", "自分を疑うな。", "君の真実はそこにある。", "未来は君の手の中に。", "歴史はこうして作られる。"];
 
-        // ご提示いただいた全100問を精査し配列化
+        // ご提示いただいた全100問の完全リスト
         const questions = [
             { t: "レジの会計。後ろに人が並んでいるとき、小銭で支払いたくても、お札やカードなど時間のかからない方法を選んでしまう。", a: "ALT", w: 1 },
             { t: "他人の失敗談を聞くと、口では同情しながらどこか「安心」を感じるほうだ。", a: "EGO", w: 2 },
@@ -460,11 +497,14 @@
 
             if (currentIdx === 99) {
                 if(qCountEl) qCountEl.innerText = `Question 100`;
-                // 100% の箇所を英語のイタリック体 FINAL QUESTION に
+                // 指示：英語のイタリック体でFINAL QUESTION
                 if(qPercentEl) qPercentEl.innerHTML = `<i class="italic font-light text-[14px] md:text-[18px] uppercase tracking-tighter">FINAL QUESTION</i>`;
             } else {
                 if(qCountEl) qCountEl.innerText = `Question ${(currentIdx+1).toString().padStart(2,'0')}`;
-                if(qPercentEl) qPercentEl.innerText = `${Math.floor(progress)}%`;
+                if(qPercentEl) {
+                    qPercentEl.innerHTML = `${Math.floor(progress)}%`;
+                    qPercentEl.classList.remove('italic'); 
+                }
             }
 
             const hintEl = document.getElementById('q-hint');
@@ -475,8 +515,11 @@
         }
 
         function answer(isYes){
-            // 戻るボタン用に現在のスコアとインデックスを保存
-            history.push({ scores: JSON.parse(JSON.stringify(scores)), idx: currentIdx });
+            // 戻るボタン用にディープコピーして保存
+            history.push({ 
+                scores: JSON.parse(JSON.stringify(scores)), 
+                idx: currentIdx 
+            });
             
             const q = questions[currentIdx];
             const oppMap = { ALT:'EGO', EGO:'ALT', OPT:'NIH', NIH:'OPT', IDE:'REA', REA:'IDE', MOD:'ANA', ANA:'MOD' };
@@ -514,14 +557,14 @@
             document.getElementById('result-en').innerText=data.en;
             document.getElementById('result-catch').innerText=data.c;
             
-            // Identity Report パース (【 】を保持)
+            // Identity Report パース
             const reportHTML = data.d.split('【').filter(s=>s).map(s => {
                 const parts = s.split('】');
                 return `<div class="mb-12 last:mb-0 text-left"><span class="block font-black text-blue-600 text-lg mb-4 text-balance">【${parts[0]}】</span><p class="pl-4 border-l-4 border-blue-50 text-gray-700 leading-loose text-balance">${parts[1]}</p></div>`;
             }).join('');
             document.getElementById('result-desc').innerHTML = reportHTML;
 
-            // Future Guidance パース (✦【 】を保持)
+            // Future Guidance パース (✦【 】形式を維持)
             const guidanceHTML = data.dir.split('✦').filter(s=>s).map(s => {
                 const parts = s.split('】');
                 const title = parts[0].replace('【','').trim();
@@ -536,38 +579,46 @@
             document.getElementById('stat-1').innerText=pIndex;
             
             const artSlot = document.getElementById('result-art-container');
-            // SyntaxErrorを防止するためバックティックで結合
+            // アップロードされた PNG-EPH.png を反映
             artSlot.innerHTML = `<img src="${data.img}" class="result-img" onload="this.parentElement.classList.add('img-loaded')" onerror="this.parentElement.innerHTML='<span class=\'img-placeholder\'>${finalType}</span>'">`;
 
             const historicalArea = document.getElementById('historical-ticker-area');
             const modernArea = document.getElementById('modern-ticker-area');
             historicalArea.innerHTML = ''; modernArea.innerHTML = '';
 
-            // 刹那主義者の時だけ3行、それ以外は1行
-            const rowCount = (finalType === 'EPH') ? 3 : 1;
-
-            for(let i=0; i<rowCount; i++) {
+            if (finalType === 'EPH') {
+                // 刹那主義者のみ特別な3行構成
+                const quotes = [
+                    "HISTORIES ARE NOT WRITTEN BY THOSE WHO CANNOT ENDURE THE WEIGHT OF TIME. ",
+                    "A STORY WITHOUT CONTINUITY IS MERELY AN ECHO IN AN EMPTY ROOM. ",
+                    "TRANSITORY LIVES LEAVE NO TRACE IN THE TAPESTRY OF DESTINY. "
+                ];
+                for(let i=0; i<3; i++) {
+                    const hCont = document.createElement('div'); hCont.className = 'ticker-container';
+                    const hRow = document.createElement('div'); hRow.className = 'ticker-row text-balance';
+                    const mCont = document.createElement('div'); mCont.className = 'ticker-container';
+                    const mRow = document.createElement('div'); mRow.className = 'ticker-row text-balance';
+                    
+                    for(let j=0; j<15; j++) {
+                        hRow.innerHTML += `<span class="ticker-item opacity-20 text-[10px] italic tracking-widest uppercase">${quotes[i]}</span>`;
+                        mRow.innerHTML += `<span class="ticker-item opacity-20 text-[10px] italic tracking-widest text-blue-400 uppercase">${quotes[(i+1)%3]}</span>`;
+                    }
+                    hCont.appendChild(hRow); historicalArea.appendChild(hCont);
+                    mCont.appendChild(mRow); modernArea.appendChild(mCont);
+                }
+            } else {
+                // それ以外は1行構成に戻す
                 const hCont = document.createElement('div'); hCont.className = 'ticker-container';
                 const hRow = document.createElement('div'); hRow.className = 'ticker-row text-balance';
                 const mCont = document.createElement('div'); mCont.className = 'ticker-container';
                 const mRow = document.createElement('div'); mRow.className = 'ticker-row text-balance';
 
-                if (finalType === 'EPH') {
-                    const quoteH = "HISTORIES ARE NOT WRITTEN BY THOSE WHO CANNOT ENDURE THE WEIGHT OF TIME. ";
-                    const quoteC = "A STORY WITHOUT CONTINUITY IS MERELY AN ECHO IN AN EMPTY ROOM. ";
-                    for(let j=0; j<30; j++) {
-                        hRow.innerHTML += `<span class="ticker-item opacity-20 text-[10px] italic tracking-widest uppercase">${quoteH}</span>`;
-                        mRow.innerHTML += `<span class="ticker-item opacity-20 text-[10px] italic tracking-widest text-blue-400 uppercase">${quoteC}</span>`;
-                    }
-                } else {
-                    // 通常時：30名を精査したリストを表示（1行の場合は全リストを3倍複製）
-                    const hFull = [...data.celebs, ...data.celebs, ...data.celebs];
-                    hFull.forEach(c => hRow.innerHTML += `<span class="ticker-item">${c}</span>`);
-                    
-                    const mFull = [...data.chars, ...data.chars, ...data.chars];
-                    mFull.forEach(c => mRow.innerHTML += `<span class="ticker-item ticker-char">${c}</span>`);
-                }
+                const hFull = [...data.celebs, ...data.celebs, ...data.celebs];
+                hFull.forEach(c => hRow.innerHTML += `<span class="ticker-item">${c}</span>`);
                 
+                const mFull = [...data.chars, ...data.chars, ...data.chars];
+                mFull.forEach(c => mRow.innerHTML += `<span class="ticker-item ticker-char">${c}</span>`);
+
                 hCont.appendChild(hRow); historicalArea.appendChild(hCont);
                 mCont.appendChild(mRow); modernArea.appendChild(mCont);
             }
