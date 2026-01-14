@@ -81,6 +81,10 @@
         .ism-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
         .ism-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 1.5rem; padding: 1.5rem 1rem; transition: all 0.3s; text-align: center; }
         .ism-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        /* Modal Styles */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-blur: 4px; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+        .modal-content { background: white; width: 100%; max-width: 500px; border-radius: 2.5rem; position: relative; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-white text-left">
@@ -111,11 +115,39 @@
         <button class="mt-6 w-full text-red-400 font-bold border border-red-900/30 p-2 rounded" onclick="document.getElementById('dev-menu').classList.add('hidden')">CLOSE</button>
     </div>
 
+    <!-- PITA Index Detail Modal -->
+    <div id="index-modal" class="modal-overlay hidden" onclick="window.closeIndexModal(event)">
+        <div class="modal-content fade-in" onclick="event.stopPropagation()">
+            <button onclick="window.toggleIndexModal(false)" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-black transition text-2xl font-light">×</button>
+            <h3 class="text-xl font-bold mb-6 serif border-b pb-4">PITA Indexとは何か？</h3>
+            <div class="space-y-6 text-sm text-gray-600 leading-relaxed overflow-y-auto max-h-[60vh] pr-2">
+                <p>PITA Index（Personality Ism Type Analyzer Index）は、100の質問への回答プロセスを通じて算出される、あなたの<strong>「主義の純度」</strong>と<strong>「魂の解像度」</strong>を統合した独自指標です。</p>
+                
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-2">1. 主義の純度 (Purity)</h4>
+                    <p>あなたが特定の価値観に対してどれだけ揺るぎない確信を持っているかを測定します。相反する選択肢を突きつけられた際、迷いなく一方を選び続けることで、この純度は高まります。Indexが高いほど、あなたの思考の軸が強固であることを示します。</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-2">2. 魂の解像度 (Resolution)</h4>
+                    <p>自己に対する嘘や無意識のバイアスをどれだけ排除できているかを示します。PITAのアルゴリズムは、回答の矛盾を検知し、あなたが自分自身の深層心理をどれだけ客観的に捉えられているかを解像度として評価します。</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-2">3. 数値の読み解き</h4>
+                    <p>Indexが200に近い場合、あなたは特定のイズムにおける「極致」に達しており、時代を動かす強力な一貫性を持っています。逆に数値が中央値に近い場合は、複数の主義を状況に応じて使い分ける「多層的な魂」の持ち主であることを意味します。</p>
+                </div>
+
+                <p class="text-[10px] text-gray-400 italic pt-4">※この数値は、あなたが世界をどのようなレンズで、どれだけの明瞭さで見ているかを可視化したものです。</p>
+            </div>
+        </div>
+    </div>
+
     <main class="flex-grow flex flex-col items-center justify-start p-4 md:p-6 bg-[#fcfcfc]">
         
         <!-- Intro Screen -->
         <div id="intro" class="max-w-4xl w-full text-center fade-in py-8 text-balance">
-            <div class="mb-4 inline-block px-4 py-1 rounded-full border border-gray-100 text-[9px] font-black tracking-widest text-gray-400 uppercase text-center text-balance">Identity Structure Verification</div>
+            <div class="mb-4 inline-block px-4 py-1 rounded-full border border-gray-100 text-[9px] font-black tracking-widest text-gray-400 uppercase text-center text-balance text-balance">Identity Structure Verification</div>
             <h2 class="text-3xl md:text-7xl font-bold mb-8 serif text-gray-900 text-center">
                 あなたは何主義者として<br><span class="text-blue-600">生きるのか。</span>
             </h2>
@@ -138,7 +170,7 @@
 
         <!-- Guide View -->
         <div id="guide" class="max-w-2xl w-full hidden fade-in py-12 px-4 text-left text-balance">
-            <button onclick="window.showView('intro')" class="mb-8 text-gray-400 hover:text-black font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 transition text-balance">
+            <button onclick="window.showView('intro')" class="mb-8 text-gray-400 hover:text-black font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 transition text-balance text-balance">
                 <span>← BACK</span>
             </button>
             <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border border-gray-50 text-left text-balance leading-relaxed">
@@ -168,7 +200,7 @@
                 <div class="flex justify-between items-end text-left h-10">
                     <div class="flex flex-col text-left text-balance">
                         <span id="q-hint" class="text-[10px] font-bold text-blue-500 italic mb-1 h-4 select-none text-left">...</span>
-                        <span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase text-left">Question 01</span>
+                        <span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase text-left text-balance">Question 01</span>
                     </div>
                     <div class="text-right text-balance" id="q-percent-container">
                         <div id="q-percent" class="text-3xl md:text-4xl font-light text-blue-600 serif leading-none">1%</div>
@@ -178,12 +210,12 @@
             <div class="min-h-[160px] md:min-h-[200px] flex flex-col items-center justify-center mb-12 px-2 text-center text-balance">
                 <h3 id="question-text" class="text-xl md:text-3xl font-bold leading-relaxed serif text-gray-800 text-center text-balance text-balance"></h3>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8 text-white text-balance">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8 text-white text-balance text-balance">
                 <button onclick="window.answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center text-primary">はい</button>
                 <button onclick="window.answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center text-primary">いいえ</button>
             </div>
             <div class="flex flex-col items-center gap-6 mt-4 text-center">
-                <div class="flex justify-center gap-8 w-full text-balance">
+                <div class="flex justify-center gap-8 w-full text-balance text-balance">
                     <button id="btn-back" onclick="window.goBack()" class="btn-back text-[10px] font-bold uppercase tracking-widest hidden transition">← BACK</button>
                     <button onclick="window.abortToEPH()" class="btn-abort text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full transition text-balance">もう飽きた</button>
                 </div>
@@ -191,25 +223,28 @@
         </div>
 
         <!-- Result Screen -->
-        <div id="result" class="max-w-4xl w-full hidden fade-in py-12 text-center text-balance">
+        <div id="result" class="max-w-4xl w-full hidden fade-in py-12 text-center text-balance text-balance">
             <div class="text-center mb-16 px-4 mx-auto text-balance text-balance text-balance text-balance">
-                <p class="text-[9px] font-black text-blue-600 uppercase tracking-[0.6em] mb-4 text-center text-balance text-balance text-balance">Diagnostic Complete</p>
-                <h2 id="result-title" class="text-4xl md:text-7xl font-bold mb-1 serif tracking-tighter text-gray-900 text-center text-balance"></h2>
-                <p id="result-en" class="text-[12px] font-black text-gray-300 uppercase tracking-[0.4em] mb-6 italic text-center text-balance"></p>
-                <p id="result-catch" class="text-lg md:text-2xl text-gray-400 font-medium italic serif mb-10 text-center text-balance text-balance text-balance text-balance"></p>
-                <div id="result-art-container" class="img-slot shadow-2xl bg-white mb-12 border-none scale-100 md:scale-110 mx-auto text-balance"></div>
-                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto text-center text-balance">
-                    <div class="text-[8px] md:text-[9px] text-gray-400 uppercase font-black mb-1 tracking-[0.4em] text-center text-balance">Deep PITA Index</div>
-                    <div class="flex items-baseline gap-2 justify-center text-balance">
-                        <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900 text-center text-balance"></div>
-                        <div class="text-[10px] font-bold text-gray-300 text-center">/ 200.0</div>
+                <p class="text-[9px] font-black text-blue-600 uppercase tracking-[0.6em] mb-4 text-center text-balance text-balance">Diagnostic Complete</p>
+                <h2 id="result-title" class="text-4xl md:text-7xl font-bold mb-1 serif tracking-tighter text-gray-900 text-center text-balance text-balance"></h2>
+                <p id="result-en" class="text-[12px] font-black text-gray-300 uppercase tracking-[0.4em] mb-6 italic text-center text-balance text-balance"></p>
+                <p id="result-catch" class="text-lg md:text-2xl text-gray-400 font-medium italic serif mb-10 text-center text-balance text-balance text-balance"></p>
+                <div id="result-art-container" class="img-slot shadow-2xl bg-white mb-12 border-none scale-100 md:scale-110 mx-auto text-balance text-balance text-balance"></div>
+                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto text-center">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="text-[8px] md:text-[9px] text-gray-400 uppercase font-black tracking-[0.4em] text-center text-balance">Deep PITA Index</div>
+                        <button onclick="window.toggleIndexModal(true)" class="w-4 h-4 rounded-full bg-gray-100 text-[8px] text-gray-400 flex items-center justify-center hover:bg-blue-500 hover:text-white transition">?</button>
                     </div>
-                    <!-- Deep PITA Index Explanation Restored -->
+                    <div class="flex items-baseline gap-2 justify-center text-balance text-balance">
+                        <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900 text-center text-balance"></div>
+                        <div class="text-[10px] font-bold text-gray-300 text-center text-balance">/ 200.0</div>
+                    </div>
                     <p class="text-[9px] text-gray-400 mt-2 font-bold tracking-tighter text-balance">PITA Indexは、あなたの主義の純度と魂の解像度を数値化したものです。</p>
+                    <button onclick="window.toggleIndexModal(true)" class="mt-2 text-[8px] font-black text-blue-500 uppercase tracking-widest border-b border-blue-100 pb-0.5 hover:text-blue-800 transition">PITA Indexとは何か？ →</button>
                 </div>
             </div>
 
-            <div class="space-y-24 md:space-y-32 text-center mx-auto text-balance text-balance text-balance text-balance">
+            <div class="space-y-24 md:space-y-32 text-center mx-auto text-balance">
                 <!-- indicator before Spectrum Balance -->
                 <div class="text-center animate-bounce">
                     <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance">Spectrum Analysis Below</p>
@@ -219,14 +254,14 @@
 
                 <section class="max-w-2xl mx-auto px-6 text-center text-balance">
                     <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] italic text-center">Spectrum Balance</h4>
-                    <div id="axis-details" class="space-y-10 md:space-y-12 text-balance"></div>
+                    <div id="axis-details" class="space-y-10 md:space-y-12 text-balance text-balance"></div>
                 </section>
 
                 <!-- indicator after Spectrum Balance -->
                 <div class="text-center animate-bounce">
                     <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance">Parallel Souls Below</p>
                     <div class="text-blue-400 text-2xl">▼</div>
-                    <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance">この下に続き（類似した魂）があります</p>
+                    <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance text-balance">この下に続き（類似した魂）があります</p>
                 </div>
                 
                 <section class="border-t border-gray-100 pt-20 overflow-hidden text-center text-balance">
@@ -234,46 +269,46 @@
                     <div id="historical-ticker-area"></div>
                 </section>
 
-                <section class="border-t border-gray-100 pt-16 overflow-hidden text-center text-balance text-balance text-balance">
-                    <h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic text-center text-balance">Modern Icons (Characters)</h4>
+                <section class="border-t border-gray-100 pt-16 overflow-hidden text-center text-balance text-balance text-balance text-balance">
+                    <h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic text-center text-balance text-balance text-balance">Modern Icons (Characters)</h4>
                     <div id="modern-ticker-area"></div>
                 </section>
 
                 <!-- indicator before Identity Report -->
                 <div class="text-center animate-bounce">
-                    <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance">Detailed Report Below</p>
+                    <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance text-balance">Detailed Report Below</p>
                     <div class="text-blue-400 text-2xl">▼</div>
-                    <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance">この下に続き（深層心理の解剖）があります</p>
+                    <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance text-balance">この下に続き（深層心理の解剖）があります</p>
                 </div>
 
-                <section class="bg-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] mx-4 shadow-sm border border-gray-50 text-left text-gray-700 text-balance text-left text-balance text-balance">
+                <section class="bg-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] mx-4 shadow-sm border border-gray-50 text-left text-gray-700 text-balance text-left text-balance text-balance text-balance">
                     <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">Identity Report</h4>
-                    <div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-left text-balance text-balance text-balance text-balance"></div>
+                    <div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-left text-balance text-balance text-balance"></div>
                 </section>
 
                 <!-- TOP Indicator for Books -->
                 <div class="text-center animate-bounce">
                     <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance">Recommendation Below</p>
                     <div class="text-blue-400 text-2xl">▼</div>
-                    <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance">この下に続き（書籍紹介）があります</p>
+                    <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance text-balance">この下に続き（書籍紹介）があります</p>
                 </div>
 
                 <!-- RECOMMENDED BOOKS Section -->
-                <section class="max-w-5xl mx-auto px-6 text-balance text-balance text-balance">
-                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-balance text-balance text-balance text-balance">RECOMMENDED BOOKS TO DEEPEN YOUR ISM</h4>
+                <section class="max-w-5xl mx-auto px-6 text-balance text-balance text-balance text-balance">
+                    <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-balance text-balance text-balance">RECOMMENDED BOOKS TO DEEPEN YOUR ISM</h4>
                     <div id="recommended-books" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-balance text-balance text-balance"></div>
                 </section>
 
                 <!-- BOTTOM Indicator for Guidance -->
-                <div class="text-center animate-bounce">
-                    <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance">Future Guidance Below</p>
-                    <div class="text-blue-400 text-2xl">▼</div>
+                <div class="text-center animate-bounce text-balance text-balance">
+                    <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 text-balance text-balance">Future Guidance Below</p>
+                    <div class="text-blue-400 text-2xl text-balance">▼</div>
                     <p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-[0.3em] text-balance text-balance">この下に続き（今後の指針）があります</p>
                 </div>
 
-                <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl relative overflow-hidden mx-4 text-center text-balance text-balance text-balance text-balance">
+                <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl relative overflow-hidden mx-4 text-center text-balance text-balance text-balance">
                     <h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center relative z-10 text-balance text-balance">Future Guidance</h4>
-                    <div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 text-center mx-auto max-w-lg mb-12 text-balance text-balance text-balance"></div>
+                    <div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 text-center mx-auto max-w-lg mb-12 text-balance text-balance text-balance text-balance"></div>
                     <div class="relative z-10 text-balance">
                         <a id="stripe-link" href="https://buy.stripe.com/test_placeholder" target="_blank" class="btn-stripe inline-flex flex-col items-center px-12 py-6 rounded-2xl font-bold shadow-2xl transform transition hover:scale-105 active:scale-95 text-balance text-balance">
                             <span class="text-lg">回答履歴＆詳細分析レポート（PDF版）を購入</span>
@@ -282,28 +317,27 @@
                     </div>
                 </section>
 
-                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm text-center text-balance text-balance text-balance text-balance text-balance">
-                    <div class="flex gap-3 text-balance">
+                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm text-center text-balance text-balance text-balance">
+                    <div class="flex gap-3 text-balance text-balance text-balance">
                         <button onclick="window.shareOnX()" class="flex-1 bg-[#1DA1F2] text-white py-4 rounded-full font-bold hover:opacity-90 transition shadow-xl text-balance">Xでシェア</button>
-                        <button onclick="window.shareOnLINE()" class="flex-1 btn-line py-4 rounded-full font-bold hover:opacity-90 transition shadow-xl text-balance text-balance">LINEで送る</button>
+                        <button onclick="window.shareOnLINE()" class="flex-1 btn-line py-4 rounded-full font-bold hover:opacity-90 transition shadow-xl text-balance text-balance text-balance text-balance">LINEで送る</button>
                     </div>
-                    <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center w-full flex items-center justify-center gap-2 transition text-balance text-gray-700 text-balance text-balance"><span>フィードバックを送る</span></a>
-                    <button onclick="location.reload()" class="bg-gray-900 text-white py-5 px-10 rounded-full font-bold text-lg hover:bg-black transition shadow-md text-center w-full text-balance text-balance text-balance text-balance">もう一度診断する</button>
+                    <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center w-full flex items-center justify-center gap-2 transition text-balance text-gray-700"><span>フィードバックを送る</span></a>
+                    <button onclick="location.reload()" class="bg-gray-900 text-white py-5 px-10 rounded-full font-bold text-lg hover:bg-black transition shadow-md text-center w-full text-balance text-balance text-balance">もう一度診断する</button>
                 </div>
                 <section class="max-w-xl mx-auto px-6 py-12 text-[9px] text-gray-400 leading-relaxed text-center text-balance"><p class="font-bold mb-2">特定商取引法に基づく表記</p><p>販売業者：藤井 慶一朗 / 所在地：京都府京都市西京区嵐山薬師下町3-3 嵐山ファミリオ303号室 / お問い合わせ：saisakukais22340@gmail.com / 販売価格：300円（税込）/ 支払方法：クレジットカード（Stripe経由）/ 引き渡し時期：決済完了後直ちにダウンロード / 返品・キャンセル：デジタルコンテンツの性質上不可。</p></section>
             </div>
         </div>
     </main>
 
-    <!-- Footer Restoration -->
     <footer class="p-16 text-center border-t border-gray-50 bg-white">
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] select-none text-center">
             <button onclick="window.showView('guide')" class="hover:text-blue-500 transition-colors text-balance text-balance">GUIDE</button>
             <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="hover:text-blue-500 transition-colors text-balance text-balance">CONTACT</a>
             <a href="privacy.html" class="hover:text-blue-500 transition-colors text-balance text-balance">PRIVACY POLICY</a>
         </div>
-        <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] mb-2 font-bold italic text-center text-balance text-balance">PITA / Personality Ism Type Analyzer</div>
-        <div class="text-[7px] text-gray-200 tracking-tighter mt-4 text-center">&copy; 2026 pita-diagnosis.com. All rights reserved.</div>
+        <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] mb-2 font-bold italic text-center">PITA / Personality Ism Type Analyzer</div>
+        <div class="text-[7px] text-gray-200 tracking-tighter mt-4 text-center text-balance">&copy; 2026 pita-diagnosis.com. All rights reserved.</div>
     </footer>
 
     <script type="module">
@@ -311,13 +345,12 @@
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- 1. CONFIG & SETUP ---
+        // --- 1. CONFIG & RECOVERY ---
         const amazonId = "pitadiagnosis-22";
         const firebaseConfigDirect = { apiKey: "AIza...", authDomain: "pita-diagnosis.firebaseapp.com", projectId: "pita-diagnosis", storageBucket: "pita-diagnosis.appspot.com", messagingSenderId: "...", appId: "..." };
-
         const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信しろ。","常識を捨てろ。","君の核に触める。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。","ここでやめたら一生自分は謎のままだ。","素晴らしい、その迷いこそが人間だ。","この1問が君を定義する。","順調だ、深淵まで潜れ。","君の『イズム』が悲鳴を上げている。","常識の檻を壊せ。","自分への嘘を暴け。","面白い、君はそんな風に考えるのか。","半分まで来たな、魂は無事か？","加速する思考、止まるな。","今の回答、少し震えなかったか？","君の本性が剥き出しになっていく.","理論を超えろ、直感に従え。","いいね、その潔さ。","真実へのカウントダウンだ。","思考の霧が晴れていく。","君という物語のクライマックスへ。","全神経をこの1問に注げ。","素晴らしい集中力だ。","魂の純度が高まっていく。","自分を騙すのはもうやめだ。","深層心理の鍵が開く音がする。","いいぞ、その調和。","混沌を恐めるな。","現実を見據える目は鋭いか？","理想の旗を掲げ続けろ。","利己的な自分を愛せるか？","利彼の精神を忘れるな。","楽観は知恵だ。", "虚無こそが真の自由だ。", "秩序を守る盾となれ。", "混沌を巻き起こす嵐となれ。", "君の答えを世界が待っている。", "その一手が運命を変える。", "鼓動を感じるか？", "自分を疑うな。", "君の真実はそこにある。", "未来は君の手の中に。", "歴史はこうして作られる。"];
 
-        // ISM DATA (Catchphrases, Full Texts, 30 Celebs, 30 Chars, Search Links Fixed)
+        // ISM DATA (Catchphrases, Full Texts restored, Amazon Search Links Fixed, 30 Celebs/Chars)
         const resultData = {
             ALT: { 
                 en: "ALT", k: "アルトルイスト", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "PITA-ALT.png", 
@@ -345,7 +378,7 @@
             },
             OPT: { 
                 en: "OPT", k: "オプティミスト", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA-OPT.png", 
-                celebs: ["ディズニー", "エディソン", "松下幸之助", "本田宗一郎", "大谷翔平", "孫正義", "モーツァルト", "リチャード-ブランソン", "ジム-キャリー", "オプラ-ウィンフリー", "ジョン-レノン", "シェイクスピア", "ゲーテ", "シュリーマン", "ダーウィン", "ファーブル", "牧野富太郎", "手塚治虫", "藤子-F-不二雄", "宮崎駿", "黒澤明", "北野武", "イチロー", "孫正義", "ルーベン-フェイン", "ダ-ヴィンチ", "坂本九", "アンネ-フランク", "ヘンリー-デュナン", "ダイアナ妃"], 
+                celebs: ["ディズニー", "エディソン", "松下幸之助", "本田宗一郎", "大谷翔平", "孫正義", "モーツァルト", "リチャード-ブランソン", "ジム-キャリー", "オプラ-ウィンフリー", "ジョン-レノン", "シェイクスピア", "ゲーテ", "シュリーマン", "ダーウィン", "ファーブル", "牧野富太郎", "手塚治虫", "藤子-F-不二雄", "宮崎駿", "黒澤明", "北野武", "イチロー", "大谷翔平", "ルーベン-フェイン", "ダ-ヴィンチ", "坂本九", "アンネ-フランク", "ヘンリー-デュナン", "ダイアナ妃"], 
                 chars: ["孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "喜多郁代", "日向翔陽", "切島鋭児郎", "パック", "ベアトリス", "フェルト", "ラインハルト", "諸星あたる", "ポプ子", "ピピ美", "高坂穂乃果", "湊あくあ", "神楽"], 
                 d: "【希望の性質】あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための動力源です。失敗を単なるプロセスと信じ、常に前を向く姿勢は他者に勇気を与えます。【社会的役割】ムードメーカー。沈みかけたチームの士気を一瞬で引き上げ、不可能な挑戦に火をつける点火者。あなたの「きっと大丈夫」という言葉は、時に物理的な限界を超えさせる魔法の力となります。【潜在的リスク】現実的なリスクを軽視しがちで、無謀な行動に出てしまうことがあります。周囲の悲しみに対しても明るさを強要してしまい、デリカシーの欠如による反発を招く可能性がある点は注意が必要です。", 
                 dir: "✦【強みの最大化】その根拠のない自信を『継続力』へ繋げてください。挑戦し続ける限り、あなたの楽観は単なる空想ではなく、必然の予言となります。✦【弱点の克服】冷徹な『現実主義者』の視点を安全装置として借りましょう。彼らの警告はあなたの翼をより高く飛ばすための重りです。✦【理想の環境】新しい試みが常に歓迎され、失敗を笑い飛ばせるポジティブなエネルギーに満ちたクリエイティブな場所が最適です。",
@@ -357,7 +390,7 @@
             },
             NIH: { 
                 en: "NIH", k: "ニヒリスト", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA-NIH.png", 
-                celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫", "中原中也", "芥川龍之介", "江戸川乱歩", "萩原朔太郎", "ボードレール", "ランボー", "ポオ", "ドストエフスキー", "トルストイ", "サるとる", "ボーヴォワール", "アラン", "パスカル", "モンテーニュ", "スピノザ", "ライプニッツ", "ウィトゲンシュタイン", "フーコー", "デリダ", "ドゥルーズ", "バタイユ", "チョムスキー", "ジジェク"], 
+                celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫", "中原中也", "芥川龍之介", "江戸川乱歩", "萩原朔太郎", "ボードレール", "ランボー", "ポオ", "ドストエフスキー", "トルストイ", "サルトル", "ボーヴォワール", "アラン", "パスカル", "モンテーニュ", "スピノザ", "ライプニッツ", "ウィトゲンシュタイン", "フーコー", "デリダ", "ドゥルーズ", "バタイユ", "チョムスキー", "ジジェク"], 
                 chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "フェイタン", "九条玲那", "忍野メメ", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "芥川龍之介", "ジン", "スカー", "オビト", "マダラ", "虚", "貝木泥舟", "キルア", "セバスチャン"], 
                 d: "【空の性質】あなたは世界の『無』を見抜いた賢者です。虚飾から脱却し、何物にも執着しない視点は、あらゆる苦悩を超越した自由を象徴しています。虚無の果てに立つあなたの姿は、気高く美しい。【社会的役割】観察者。熱狂や混乱に呑まれず、無駄なエネルギー消費を止める『ブレーキ』の役割を果たします。冷徹に本質を見抜く目は、組織が幻想に踊らされるのを防ぎます。【潜在性リスク】『どうせ意味がない』という考えに支配され、必要な行動まで放棄してしまう可能性があります。無気力が長期化すると、生命感さえも希薄になり、他者との接続を断ってしまう危険があります。", 
                 dir: "✦【強みの最大化】『意味がないからこそ、何をやっても自由だ』という能動的な虚無主義を楽しんで。何物にも依存しないあなたの視点は、独創的な表現を生み出します。✦【弱点の克服】一過性の『感覚の快楽』を否定せずに受け入れましょう。今飲む茶の美味しさは否定できない事実です。✦【理想の環境】知的な思索に耽ることができる静かな環境。過度な期待を押し付けられない一人の時間が確保された場所がベストです。",
@@ -369,7 +402,7 @@
             },
             IDE: { 
                 en: "IDE", k: "イデアリスト", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA-IDE.png", 
-                celebs: ["レノン", "宮沢賢治", "サン=テグジュペリ", "ゴッホ", "ワイルド", "プラトン", "ソクラテス", "ルソー", "ゲーテ", "シラー", "カント", "フィヒテ", "シェリング", "ヘーゲル", "夏目漱石", "島崎藤村", "泉鏡花", "谷崎潤一郎", "川端康成", "三島由紀夫", "村上春樹", "手塚治虫", "高畑勲", "庵野秀明", "新海誠", "細田守", "湯浅政明", "押井守", "大友克洋"], 
+                celebs: ["レノン", "宮沢賢治", "サン=テグジュペリ", "ゴッホ", "ワイルド", "プラトン", "ソクラテス", "ルソー", "ゲーテ", "シラー", "カント", "フィヒテ", "シェリング", "ヘーゲル", "夏目漱石", "島崎藤村", "泉鏡花", "谷崎潤一郎", "川端康成", "三島由紀夫", "村上春樹", "手塚治虫", "宮崎駿", "高畑勲", "庵野秀明", "新海誠", "細田守", "湯浅政明", "押井守", "大友克洋"], 
                 chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "ド-ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "獄寺隼人", "山本武", "雨宮蓮", "鳳凰院凶真", "枢木スザク", "ユーフェミア", "アルミン", "エドワード", "ニコ・ロビン", "星海光来", "宮侑", "宮治", "北信介", "中島敦", "太宰治"], 
                 d: "【イデアの性質】あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、人類を更なる高みへと押し上げる崇高な意志です。泥の中でも空を見上げ続けられる人です。【社会的役割】導師や予言者。凡庸な現実に飽き足らない人々を鼓舞し、不可能と思われたイノベーションを成し遂げる原動力となります。あなたのビジョンは未来の道標です。【潜在的リスク】不完全な現実を激しく拒絶してしまう潔癖さがあります。理想と現実のギャップに絶望し、世捨て人のようになってしまう脆さも持ち合わせています。完璧主義による過度な自己批判には注意が必要です。", 
                 dir: "✦【強みの最大化】脳内の完璧な世界を『具体化の力』で現実に翻訳してください。あなたの理想が共有されたとき、それは世界を変える巨大な力となります。✦【弱点の克服】不完全さの中にある『美しさ』を見出す訓練を。完璧ではないからこそ愛おしいという感覚があなたを救います。✦【理想の環境】高い志を嘲笑せず、その価値を理解し協力してくれる仲間がいる場所。理念が重んじられる価値観主導のコミュニティが最適です。",
@@ -381,38 +414,38 @@
             },
             REA: { 
                 en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png", 
-                celebs: ["福沢諭吉", "徳川家康", "ビスマルク", "ロックフェラー", "フランクリン", "チャーチル", "鄧小平", "カエサル", "アウグストゥス", "トラヤヌス", "ハドリアヌス", "アウレリウス", "コンスタンティヌス", "ユスティニアヌス", "カール大帝", "オットー1世", "バルバロッサ", "フィリップ2世", "エドワード1世", "アンリ4世", "リシュリュー", "マザラン", "コルベール", "タルレーラン", "メッテルニヒ", "キャニング", "パーマストン", "ディズレーリ", "グラッドストン"], 
+                celebs: ["福沢諭吉", "徳川家康", "ビスマルク", "ロックフェラー", "フランクリン", "チャーチル", "鄧小平", "カエサル", "アウグストゥス", "トラヤヌス", "ハドリアヌス", "アウレリウス", "コンスタンティヌス", "ユスティニアヌス", "カール大帝", "バルバロッサ", "フィリップ2世", "エドワード1世", "アンリ4世", "リシュリュー", "マザラン", "コルベール", "タルレーラン", "メッテルニヒ", "キャニング", "パーマストン", "ディズレーリ", "グラッドストン"], 
                 chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "堀北学", "灰崎祥吾", "花宮真", "吉良吉影", "高坂麗奈", "黄前久美子", "鎧塚みぞれ", "比企谷小町", "一条将輝", "折木奉太郎"], 
-                d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。幻想を排除し、事実と論理で世界を読み解く知性は現代を生き抜く最も強力な武器です。生存確率を計算し勝機を掴む手腕は芸術的ですらあります。【社会的役割】組織の頭脳や土台。熱狂に流されず冷静に数値を分析し、リスクを管理するあなたの存在はプロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーであり実務家です。【潜在的リスク】人の感情や直感を軽視しがちで、冷酷な印象を与えることがあります。計算できないイレギュラーに直面すると必要以上に混乱することも。論理の檻に閉じ込められないよう自制してください。", 
+                d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。幻想を排除し、事実と論理で世界を読み解く知性は現代を生き抜く最も強力な武器です。生存確率を計算し勝機を掴む手腕は芸術的ですらあります。【社会的役割】組織の頭脳や土台. 熱狂に流されず冷静に数値を分析し、リスクを管理するあなたの存在はプロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーであり実務家です。【潜在的リスク】人の感情や直感を軽視しがちで、冷酷な印象を与えることがあります。計算できないイレギュラーに直面すると必要以上に混乱することも。論理の檻に閉じ込められないよう自制してください。", 
                 dir: "✦【強みの最大化】その圧倒的な論理に『心理学』の知見を加えてください。人間の非合理さも計算式に入れれば、あなたの現実は無敵となります。✦【弱点の克服】たまには『意図的な無駄』を。非効率な体験の中に、論理では導き出せなかった新しい発見が眠っています。✦【理想の環境】成果が数値化され、合理的な判断が評価される、プロフェッショナルな自立が求められる職場。",
                 books: [
                     { title: "FACTFULNESS", author: "ハンス・ロスリング", url: `https://www.amazon.co.jp/s?k=FACTFULNESS+ハンス・ロスリング&tag=${amazonId}`, desc: "事実に基づいて世界を正しく見る。あなたの冷静な分析眼をさらに研ぎ澄ます現代の必読書。" },
-                    { title: "影響力の武器", author: "ロバート・チャルディーニ", url: `https://www.amazon.co.jp/s?k=影響力の武器+ロバート・チャルディーニ&tag=${amazonId}`, desc: "人の行動を支配する心理学的原理。実利を追求するあなたのための、社会という戦場を生き抜く強力な武器。"},
+                    { title: "影響力の武器", author: "ロバート・チャルディーニ", url: `https://www.amazon.co.jp/s?k=影響力の武器+ロバート・チャルディーニ&tag=${amazonId}`, desc: "人の行動を支配する心理学的原理. 実利を追求するあなたのための、社会という戦場を生き抜く強力な武器。"},
                     { title: "完訳 7つの習慣", author: "スティーブン・R・コヴィー", url: `https://www.amazon.co.jp/s?k=完訳+7つの習慣+スティーブン・R・コヴィー&tag=${amazonId}`, desc: "長期的な成功への原理原則。感情ではなく「効果性」を重視するあなたの性質に完璧にフィットします。"}
                 ]
             },
             MOD: { 
                 en: "MOD", k: "モダニスト", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA-MOD.png", 
-                celebs: ["カント", "リンカーン", "聖徳太子", "ドラッカー", "ワシントン", "孔子", "ウェーバー", "ミル", "ハミルトン", "北条泰時", "北条時宗", "徳川吉宗", "松平定信", "水野忠邦", "井伊直弼", "岩倉具視", "大久保利通", "伊藤博文", "山県有朋", "松方正義", "西園寺公望", "原敬", "高橋是清", "犬養毅", "広田弘毅", "吉田茂", "池田勇人", "佐藤栄作", "中曽根弘", "小泉純一郎"], 
-                chars: ["飯田天哉", "影山飛雄", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "安室透", "赤井秀一", "ターニャ", "ラインハルト", "ヤン", "オーベルシュタイン", "ロイ", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂永亮", "白鳥任三郎", "鏑木虎徹"], 
+                celebs: ["カント", "リンカーン", "聖徳太子", "ドラッカー", "ワシントン", "孔子", "マックス-ウェーバー", "ミル", "ハミルトン", "北条泰時", "北条時宗", "徳川吉宗", "松平定信", "水野忠邦", "井伊直弼", "岩倉具視", "大久保利通", "伊藤博文", "山県有朋", "松方正義", "西園寺公望", "原敬", "高橋是清", "犬養毅", "広田弘毅", "吉田茂", "池田勇人", "佐藤栄作", "中曽根弘", "小泉純一郎"], 
+                chars: ["飯田天哉", "影山飛雄", "国木田独歩", "手塚国光", "真田弦一郎", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "安室透", "赤井秀一", "ターニャ", "ラインハルト", "ヤン", "オーベルシュタイン", "ロイ", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂永亮", "白鳥任三郎", "鏑木虎徹"], 
                 d: "【規律の性質】あなたは文明の根幹を支える守護神です。誠実に秩序を維持する姿勢は、社会が崩壊することなく存続するための要石です。あなたがルーチンを守る時、世界は初めて安心して自転を続けることができます。【社会的役割】管理、教育。ルールを公平に運用することで組織に安定感をもたらします。人々が安心して能力を発揮できる場を創る人です。あなたの誠実さがチームの土台となります。【潜在的リスク】固定観念に縛られやすく、既存ルールの破壊に対して強い拒絶反応を示します。柔軟性を欠いた対応で、自らも周囲も息苦しくさせてしまうことがある点は改善の余地があります。", 
                 dir: "✦【強みの最大化】ルールを守る側から『創る側』へ。あなたの公平な視点は、堅牢なシステム構築にこそ活かされます。✦【弱点の克服】完璧な秩序よりも『ゆらぎ』の価値を認めましょう。多少の遊びがある方が、システム強度は高まります。✦【理想の環境】役割分担が明確で、プロセスと安定性が正当に評価される、歴史や伝統のある秩序立った組織。",
                 books: [
                     { title: "マネジメント", author: "ドラッカー", url: `https://www.amazon.co.jp/s?k=マネジメント+ドラッカー&tag=${amazonId}`, desc: "組織の秩序と成果の出し方。管理と安定を重んじるあなたの社会的役割に、深い論理的根拠を与えてくれます。" },
                     { title: "職業としての政治", author: "マックス・ウェーバー", url: `https://www.amazon.co.jp/s?k=職業としての政治+ウェーバー&tag=${amazonId}`, desc: "責任と倫理の哲学。堅牢な秩序を維持しようとするあなたの誠実さと志に深く共鳴する一冊。"},
-                    { title: "論語", author: "孔子", url: `https://www.amazon.co.jp/s?k=論語+孔子&tag=${amazonId}`, desc: "調和して生きるためのシステムの原点。歴史に裏打ちされた知恵が、あなたの秩序形成を強力に助けます。"}
+                    { title: "論語", author: "孔子", url: `https://www.amazon.co.jp/s?k=論語+孔子&tag=${amazonId}`, desc: "調和して生きるためのシステムの原点. 歴史に裏打ちされた知恵が、あなたの秩序形成を強力に助けます。"}
                 ]
             },
             ANA: { 
                 en: "ANA", k: "アナーキスト", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA-ANA.png", 
-                celebs: ["坂本龍馬", "ピカソ", "チェ-ゲバラ", "ボブ-ディラン", "バクーニン", "マルコムX", "ディオゲネス", "シド-ヴィシャス", "ジャン-ジュネ", "バタイユ", "ブルトン", "デュシャン", "ウォーホル", "バスキア", "バンクシー", "ケルアック", "バロウズ", "ギンズバーグ", "ボブ-ディラン", "ジム-モリソン", "ボウイ", "マーキュリー", "カート-コバーン", "ジョン-ライドン", "イギー-ポップ", "ルー-リード", "パティ-スミス", "ビョーク", "レディー-ガガ"], 
+                celebs: ["坂本龍馬", "ピカソ", "チェ-ゲバラ", "ボブ-ディラン", "バクーニン", "マルコムX", "ディオゲネス", "シド-ヴィシャス", "ジャン-ジュネ", "バタイユ", "ブルトン", "デュシャン", "ウォーホル", "バスキア", "バンクシー", "ケルアック", "バロウズ", "ギンズバーグ", "ジム-モリソン", "ボウイ", "マーキュリー", "カート-コバーン", "ジョン-ライドン", "イギー-ポップ", "ルー-リード", "パティ-スミス", "ビョーク", "レディー-ガガ"], 
                 chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー・ボイル", "諸星あたる", "範馬刃牙", "折原臨也", "ラッド・ルッソ", "セルティ", "東堂葵", "トガヒミコ", "両面宿儺", "死柄木弔", "バギー", "ジェビル"], 
                 d: "【変革の性質】あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です。檻の中にいることに耐えられない、真の自由人です。【社会的役割】「破壊的イノベーター」。常識が通用しない新しい視点を持ち込み、硬直した社会に風穴を開けます。あなたが動くとき、新しい時代の幕が上がります。停滞した空気の解毒剤です。【潜在的リスク】破壊のあとに何を遺すかを考えないため、周囲に混乱を残してしまうことがあります。持続性に欠け、人生が流浪しがちです。破壊そのものが目的化しないよう自制が必要です。", 
                 dir: "✦【強みの最大化】理屈を超えた行動こそが停滞した世界の唯一の解毒剤となります。破壊を恐れず嵐を起こし続けましょう。✦【弱点の克服】『破壊の後の更地』を管理してくれるパートナーを。バトンを渡せば、あなたの変革は完遂されます。✦【理想の環境】制約が一切なく、毎日が予測不能な現場。あなたの突飛な行動が歓迎されるエネルギッシュな現場が最適です。",
                 books: [
-                    { title: "現代思想入門", author: "千葉雅也", url: `https://www.amazon.co.jp/s?k=現代思想入門+千葉雅也&tag=${amazonId}`, desc: "固定観念を脱構築（デコンストラクト）する。あなたの直感的で破壊的な思考に、最強の論理的基盤を与えます。" },
+                    { title: "現代思想入門", author: "千葉雅也", url: `https://www.amazon.co.jp/s?k=現代思想入門+千葉雅也&tag=${amazonId}`, desc: "固定観念を脱構築（デコンストラクト）する. あなたの直感的で破壊的な思考に、最強の論理的基盤を与えます。" },
                     { title: "野生の思考", author: "レヴィ＝ストロース", url: `https://www.amazon.co.jp/s?k=野生の思考+レヴィ＝ストロース&tag=${amazonId}`, desc: "文明の枠を超えた根源的な知。野生の直感で生きるあなたの価値を再発見できる一冊。"},
-                    { title: "資本論", author: "カール・マルクス", url: `https://www.amazon.co.jp/s?k=資本論+カール・マルクス&tag=${amazonId}`, desc: "既存システムの構造的矛盾を突き、混沌から再編しようとする情熱の理論。世界のルールを疑うあなたのための聖典。"}
+                    { title: "資本論", author: "カール・マルクス", url: `https://www.amazon.co.jp/s?k=資本論+カール・マルクス&tag=${amazonId}`, desc: "既存システムの構造的矛盾を突き、混沌から再編しようとする情熱の理論. 世界のルールを疑うあなたのための聖典。"}
                 ]
             },
             EPH: {
@@ -421,9 +454,9 @@
                 d: "【瞬間の性質】あなたは「未来」や「継続」といった時間的重力から解き放たれた存在です。100問の果てにある結論よりも、今この瞬間に沸き起こる「飽きた」「面白くない」という直感を何よりも尊重します。完遂を美徳とする社会において、あなたの「軽やかさ」は究極の自由を体現しています。【社会的役割】停滞した空気を一瞬で破壊し、新しい風を呼び込む「トリガー」となります。既存のレールを平然と降りるその姿は、周囲に「生き方の多様性」を無言で突きつけます。刹那の輝きで場を支配する力があります。【潜在的リスク】持続力が極めて低く、形に残る成果を築く前に次の刺激へ移ってしまうため、周囲からは「無責任」と誤解されがちです。信頼の積み上げが必要な場面で、孤立してしまうリスクを抱えています。※あなたは100問の壁を直感で飛び越えた、特別な存在です。",
                 dir: "✦【強みの最大化】一瞬で誰かを魅了する表現やアイデアにおいて、あなたは無敵の力を発揮します。爆発的な瞬発力を即興性が求められる場に注いでください。✦【弱点の克服】「飽きた後のバトンタッチ」を覚えましょう。あなたの破壊的衝動は創造的変革へと昇華されます。✦【理想の環境】毎日が違う景色で、瞬発的な判断が求められる、変化し続けるクリエイティブな現場。スタートアップの初期などが最適です。",
                 books: [
-                    { title: "オン・ザ・ロード", author: "ジャック・ケルアック", url: `https://www.amazon.co.jp/s?k=オン・ザ・ロード+ジャック・ケルアック&tag=${amazonId}`, desc: "瞬間を燃焼させるビート・ジェネレーションの聖典。あなたの刹那的な生の輝きと完璧に一致します。" },
-                    { title: "ライ麦畑でつかまえて", author: "J.D.サリンジャー", url: `https://www.amazon.co.jp/s?k=ライ麦畑でつかまえて+サリンジャー&tag=${amazonId}`, desc: "虚飾を嫌い、今この時の純粋さを守る。サンクコストに囚われないあなたの軽やかさを肯定する物語。"},
-                    { title: "車輪の下", author: "ヘルマン・ヘッセ", url: `https://www.amazon.co.jp/s?k=車輪の下+ヘルマン・ヘッセ&tag=${amazonId}`, desc: "社会的重力に押し潰されないために。未来という重圧から解放されたいあなたの心を癒やし、自由を再定義する名作。"}
+                    { title: "オン・ザ・ロード", author: "ジャック・ケルアック", url: `https://www.amazon.co.jp/s?k=オン・ザ・ロード+ジャック・ケルアック&tag=${amazonId}`, desc: "瞬間を燃焼させるビート・ジェネレーションの聖典. あなたの刹那的な生の輝きと完璧に一致します。" },
+                    { title: "ライ麦畑でつかまえて", author: "J.D.サリンジャー", url: `https://www.amazon.co.jp/s?k=ライ麦畑でつかまえて+サリンジャー&tag=${amazonId}`, desc: "虚飾を嫌い、今この時の純粋さを守る. サンクコストに囚われないあなたの軽やかさを肯定する物語。"},
+                    { title: "車輪の下", author: "ヘルマン・ヘッセ", url: `https://www.amazon.co.jp/s?k=車輪の下+ヘルマン・ヘッセ&tag=${amazonId}`, desc: "社会的重力に押し潰されないために. 未来という重圧から解放されたいあなたの心を癒やし、自由を再定義する名作。"}
                 ]
             }
         };
@@ -457,10 +490,22 @@
                 const data = resultData[key];
                 const card = document.createElement('div');
                 card.className = 'ism-card';
-                card.innerHTML = `<div class="img-slot w-12 h-12 mb-3 bg-gray-50 border-gray-100 mx-auto text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><img src="${data.img}" class="list-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none" class="w-full h-full items-center justify-center bg-gray-50 text-[8px] text-gray-300 font-black">${key}</div></div><div class="text-[10px] font-black text-gray-900 mb-0.5 text-center text-balance">${data.n}</div><div class="text-[8px] font-bold text-blue-500 mb-2 italic text-center text-balance">(${data.k})</div><div class="text-[7px] text-gray-400 leading-tight text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${data.c.replace(/「|」/g, '')}</div>`;
+                card.innerHTML = `<div class="img-slot w-12 h-12 mb-3 bg-gray-50 border-gray-100 mx-auto text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><img src="${data.img}" class="list-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none" class="w-full h-full items-center justify-center bg-gray-50 text-[8px] text-gray-300 font-black">${key}</div></div><div class="text-[10px] font-black text-gray-900 mb-0.5 text-center text-balance">${data.n}</div><div class="text-[8px] font-bold text-blue-500 mb-2 italic text-center text-balance">(${data.k})</div><div class="text-[7px] text-gray-400 leading-tight text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${data.c.replace(/「|」/g, '')}</div>`;
                 container.appendChild(card);
             });
         };
+
+        window.toggleIndexModal = (show) => {
+            const modal = document.getElementById('index-modal');
+            if(show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        };
+        window.closeIndexModal = (e) => { if(e.target.id === 'index-modal') window.toggleIndexModal(false); };
 
         window.startDiagnosis = () => { currentIdx = 0; scores = { ALT:0, EGO:0, OPT:0, NIH:0, IDE:0, REA:0, MOD:0, ANA:0 }; history = []; userAnswers = []; finalType = ''; window.showView('quiz'); showQuestion(); };
         window.answer = async (isYes) => {
@@ -520,17 +565,17 @@
             document.getElementById('result-en').innerText=data.en;
             document.getElementById('result-catch').innerText=data.c;
             
-            // Full Detailed Identity Report Restoration
+            // Full Restoration of Descriptions
             document.getElementById('result-desc').innerHTML = data.d.split('【').filter(s=>s).map(s => {
                 const parts = s.split('】');
-                return `<div class="mb-12 last:mb-0 text-left"><span class="block font-black text-blue-600 text-lg mb-4 text-balance">【${parts[0]}】</span><p class="pl-4 border-l-4 border-blue-50 text-gray-700 leading-loose text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${parts[1]}</p></div>`;
+                return `<div class="mb-12 last:mb-0 text-left"><span class="block font-black text-blue-600 text-lg mb-4 text-balance text-balance">【${parts[0]}】</span><p class="pl-4 border-l-4 border-blue-50 text-gray-700 leading-loose text-balance text-balance text-balance">${parts[1]}</p></div>`;
             }).join('');
 
-            // RECOMMENDED BOOKS with specific search links
+            // RECOMMENDED BOOKS UI
             const bookArea = document.getElementById('recommended-books');
             bookArea.innerHTML = data.books.map(b => `
                 <div onclick="window.open('${b.url}', '_blank', 'noopener,noreferrer')" class="book-card p-8 block group transition text-balance">
-                    <div class="text-[9px] font-black text-blue-500 uppercase mb-2 tracking-widest text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">Recommended Book</div>
+                    <div class="text-[9px] font-black text-blue-500 uppercase mb-2 tracking-widest text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">Recommended Book</div>
                     <div class="text-base font-bold text-gray-900 leading-snug mb-1 group-hover:text-blue-600 transition text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${b.title}</div>
                     <div class="text-[11px] text-gray-400 font-bold mb-4 text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${b.author} 著</div>
                     <p class="text-[12px] text-gray-500 leading-relaxed mb-6 text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${b.desc}</p>
@@ -542,7 +587,7 @@
             document.getElementById('result-direction').innerHTML = data.dir.split('✦').filter(s=>s).map(s => {
                 const parts = s.split('】');
                 const title = parts[0].replace('【','').trim();
-                return `<div class="mb-10 last:mb-0 text-center mx-auto max-w-lg text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><span class="block font-black text-blue-100 text-lg mb-3 text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">✦【${title}】</span><p class="text-blue-50 opacity-90 leading-relaxed text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${parts[1]}</p></div>`;
+                return `<div class="mb-10 last:mb-0 text-center mx-auto max-w-lg text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><span class="block font-black text-blue-100 text-lg mb-3 text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">✦【${title}】</span><p class="text-blue-50 opacity-90 leading-relaxed text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${parts[1]}</p></div>`;
             }).join('');
 
             const pIndex = (finalType === 'EPH' ? 77.7 : (100 + Math.random()*80)).toFixed(1);
@@ -556,7 +601,7 @@
             const createTicker = (list, isChar) => {
                 const cont = document.createElement('div'); cont.className = 'ticker-container';
                 const row = document.createElement('div'); row.className = 'ticker-row';
-                const content = list.map(item => `<span class="ticker-item ${isChar ? 'ticker-char' : ''} text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${item}</span>`).join('');
+                const content = list.map(item => `<span class="ticker-item ${isChar ? 'ticker-char' : ''} text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">${item}</span>`).join('');
                 row.innerHTML = content + content;
                 cont.appendChild(row);
                 return cont;
@@ -575,7 +620,7 @@
             const labels = [{l:"献身",r:"孤高",lk:'ALT',rk:'EGO'},{l:"渇望",r:"静観",lk:'OPT',rk:'NIH'},{l:"夢幻",r:"実利",lk:'IDE',rk:'REA'},{l:"調和",r:"変革",lk:'MOD',rk:'ANA'}];
             labels.forEach(p => {
                 const sum = (scores[p.lk]||0) + (scores[p.rk]||0), lp = sum===0?50:Math.round((scores[p.lk]/sum)*100), rp = 100-lp;
-                axisB.innerHTML += `<div class="space-y-4 text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="flex justify-between text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] px-1 italic text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><span>${p.l} ${lp}%</span><span>${rp}% ${p.r}</span></div><div class="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden text-balance"><div class="bg-blue-400 h-full progress-bar" style="width:${lp}%"></div><div class="bg-gray-800 h-full progress-bar" style="width:${rp}%"></div></div></div>`;
+                axisB.innerHTML += `<div class="space-y-4 text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="flex justify-between text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] px-1 italic text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><span>${p.l} ${lp}%</span><span>${rp}% ${p.r}</span></div><div class="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden text-balance"><div class="bg-blue-400 h-full progress-bar" style="width:${lp}%"></div><div class="bg-gray-800 h-full progress-bar" style="width:${rp}%"></div></div></div>`;
             });
         }
 
