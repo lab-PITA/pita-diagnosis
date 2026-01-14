@@ -6,11 +6,11 @@
     
     <!-- SEO Meta Tags -->
     <title>PITA診断 | あなたは何主義者として生きるのか。</title>
-    <meta name="description" content="「あなたは何主義者として生きるのか。」100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。">
+    <meta name="description" content="100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。">
     <meta name="keywords" content="性格診断, 心理テスト, 自己分析, 主義者, 大学生, PITA">
     <link rel="canonical" href="https://pita-diagnosis.com/">
 
-    <!-- OGP (Open Graph Protocol) -->
+    <!-- OGP -->
     <meta property="og:title" content="PITA診断 | あなたは何主義者として生きるのか">
     <meta property="og:description" content="100の質問であなたの深層心理を解剖。魂の形を決定づける『イズム』を特定せよ。">
     <meta property="og:image" content="https://pita-diagnosis.com/ogp-image.png">
@@ -39,8 +39,14 @@
         /* Image Control */
         .progress-bar { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .img-slot { aspect-ratio: 1 / 1; width: 100%; max-width: 320px; margin: 0 auto; border-radius: 50%; background-color: var(--bg-gray); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid #eeeeee; }
-        .img-slot img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease-in-out; }
-        .img-loaded img { opacity: 1; }
+        
+        /* 診断結果画面用 */
+        .result-img { opacity: 0; transition: opacity 0.8s ease-in-out; width: 100%; height: 100%; object-fit: cover; }
+        .img-loaded .result-img { opacity: 1; }
+        
+        /* 一覧画面用（即表示） */
+        .list-img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1; }
+
         .img-placeholder { font-weight: 900; font-size: 0.6rem; color: #cccccc; letter-spacing: 0.1em; text-transform: uppercase; }
 
         /* Tickers */
@@ -58,6 +64,9 @@
         .hidden { display: none; }
         .fade-in { animation: fadeIn 1s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* スマホ改行の最適化 */
+        .text-balance { text-wrap: balance; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-white text-left">
@@ -68,7 +77,7 @@
             <div class="text-2xl md:text-3xl font-black tracking-tighter serif text-gray-900 leading-none">PITA</div>
             <div class="text-[7px] md:text-[8px] font-bold text-gray-400 tracking-[0.15em] uppercase mt-1 leading-none">Personality Ism Type Analyzer</div>
         </div>
-        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100 text-right">Core v5.7</div>
+        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100 text-right">Core v5.8</div>
     </nav>
 
     <!-- Hidden Developer Menu -->
@@ -133,8 +142,8 @@
                     <div class="text-right"><div id="q-percent" class="text-3xl md:text-4xl font-light text-blue-600 serif leading-none">1%</div></div>
                 </div>
             </div>
-            <div class="min-h-[160px] md:min-h-[200px] flex flex-col items-center justify-center mb-12 px-2 text-center text-balance">
-                <h3 id="question-text" class="text-xl md:text-3xl font-bold leading-relaxed serif text-gray-800 text-center"></h3>
+            <div class="min-h-[160px] md:min-h-[200px] flex flex-col items-center justify-center mb-12 px-2 text-center">
+                <h3 id="question-text" class="text-xl md:text-3xl font-bold leading-relaxed serif text-gray-800 text-center text-balance"></h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto px-4 mb-8">
                 <button onclick="answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-gray-800 text-lg md:text-xl shadow-sm text-center">はい</button>
@@ -155,14 +164,14 @@
                 
                 <div id="result-art-container" class="img-slot shadow-2xl bg-white mb-12 border-none scale-100 md:scale-110 mx-auto"></div>
 
-                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto text-center">
+                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto text-center text-balance">
                     <div class="text-[8px] md:text-[9px] text-gray-400 uppercase font-black mb-1 tracking-[0.4em] text-center text-balance">Deep PITA Index</div>
                     <div class="flex items-baseline gap-2 justify-center">
                         <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900 text-center"></div>
                         <div class="text-[10px] font-bold text-gray-300 text-center">/ 200.0</div>
                     </div>
                     <button onclick="toggleScoreInfo()" class="mt-4 text-[9px] font-bold text-blue-500 border-b border-blue-200">What is this score?</button>
-                    <div id="score-info" class="hidden absolute top-full mt-4 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white p-6 rounded-2xl text-[10px] leading-loose z-50 text-left shadow-2xl">
+                    <div id="score-info" class="hidden absolute top-full mt-4 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white p-6 rounded-2xl text-[10px] leading-loose z-50 text-left shadow-2xl text-balance">
                         <button onclick="toggleScoreInfo()" class="absolute top-2 right-4 text-gray-500 hover:text-white text-base">×</button>
                         <p class="mb-2 font-bold text-blue-400 italic text-[12px]">PITA Index とは？</p>
                         あなたの主義の「純度」を示す指標。高いほど特定の価値観に特化した「妥協のない生き方」を意味します。理論上の最大値は200.0。
@@ -188,7 +197,7 @@
 
                 <section class="bg-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] mx-4 shadow-sm border border-gray-50 text-left text-gray-700">
                     <h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-center text-balance">Identity Report</h4>
-                    <div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-left"></div>
+                    <div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-left text-balance"></div>
                 </section>
 
                 <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl relative overflow-hidden mx-4 text-center">
@@ -214,22 +223,24 @@
     </footer>
 
     <script>
-        // --- 1. Content Data ---
+        // --- 1. Constants & Data ---
+        const ismPairs = [{l:"利他",lk:'ALT',r:"利己",rk:'EGO'},{l:"楽観",lk:'OPT',r:"虚無",rk:'NIH'},{l:"理想",lk:'IDE',r:"現実",rk:'REA'},{l:"秩序",lk:'MOD',r:"混沌",rk:'ANA'}];
+        
         const resultData = {
             ALT: { en: "ALT", k: "アルトルイスト", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "PITA-ALT.png", celebs: ["マザー・テレサ", "ガンジー", "シュバイツァー", "ナイチンゲール", "キング牧師", "デスモンド・ツツ", "ダイアナ妃"], chars: ["竈門炭治郎(鬼滅の刃)", "緑谷出久(僕のヒーローアカデミア)", "沢田綱吉(家庭教師ヒットマンREBORN!)", "ベル・クラネル(ダンジョンに出会いを求めるのは間違っているだろうか)", "夏目貴志(夏目友人帳)", "乙骨憂太(呪術廻戦)", "竈門禰󠄀豆子(鬼滅の刃)", "藤丸立香(Fate/Grand Order)", "アルフォンス・エルリック(鋼の錬金術師)", "潮田渚(暗殺教室)", "アレン・ウォーカー(D.Gray-man)", "花垣武道(東京卍リベンジャーズ)", "有馬かな(【推しの子】)", "黒子テツヤ(黒子のバスケ)", "澤村大地(ハイキュー!!)", "清水潔子(ハイキュー!!)", "木之本桜(カードキャプターさくら)", "本田透(フルーツバスケット)", "鹿目まどか(魔法少女まどか☆マギカ)", "赤城(艦隊これくしょん -艦これ-)", "ウェンティ(原神)", "ナウシカ(風の谷のナウシカ)", "エミリア(Re:ゼロから始める異世界生活)", "レム(Re:ゼロから始める異世界生活)", "ジョナサン・ジョースター(ジョジョの奇妙な冒険)", "ファルコ・グライス(進撃の巨人)", "日向ヒナタ(NARUTO -ナルト-)", "井上織姫(BLEACH)", "ヨル・フォージャー(SPY×FAMILY)", "通形ミリオ(僕のヒーローアカデミア)"], d: "【慈愛の性質】あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、枯渇した現代社会における唯一の良心と言えるでしょう。周囲の感情に極めて敏感で、痛みを感じている者を見捨てることができません。【社会的役割】調和と癒やしの中心として機能します。あなたが輪の中にいるだけで、トゲのある空気が和らぎ、人々は本来の優しさを取り戻します。コミュニティの守護者であり、潤滑油でもあります。【潜在的リスク】他人の問題を自分のことのように抱え込みすぎ、自己を摩耗させる危険があります。自分を後回しにすることが習慣化すると、いつの間にか魂が空っぽになってしまうかもしれません。", dir: "✦【強みの最大化】あなたの『共感力』を、単なる同情ではなく、世界を変える具体的なアクションへ昇華させてください。✦【弱点の克服】『断る勇気』を習得しましょう。他人にNOと言うことは、自分を大切にするという重要な意思表示です。✦【理想の環境】互いに支え合う文化があり、あなたの献身が「当たり前」とされず、感謝として還元される温かな居場所が最適です。" },
             EGO: { en: "EGO", k: "エゴイスト", n: "利己主義者", c: "「自己を統治する気高き孤高の王」", img: "PITA-EGO.png", celebs: ["ナポレオン", "スティーブ・ジョブズ", "織田信長", "ユリウス・カエサル", "アレクサンダー大王", "ハワード・ヒューズ", "ダリ", "マキアヴェッリ"], chars: ["ギルガメッシュ(Fate/stay night)", "海馬瀬人(遊戯王)", "ルルーシュ・ランペルージ(コードギアス 反逆のルルーシュ)", "夜神月(DEATH NOTE)", "ベジータ(ドラゴンボール)", "フリーザ(ドラゴンボール)", "爆豪勝己(僕のヒーローアカデミア)", "志々雄真実(るろうに剣心 -明治剣客浪漫譚-)", "クロロ＝ルシルフル(HUNTER×HUNTER)", "エレン・イェーガー(進撃の巨人)", "ドンキホーテ・ドフラミンゴ(ONE PIECE)", "サー・クロコダイル(ONE PIECE)", "藍染惣右介(BLEACH)", "DIO(ジョジョの奇妙な冒険)", "赤司征十郎(黒子のバスケ)", "跡部景吾(テニスの王子様)", "殺生丸(犬夜叉)", "飛影(幽☆遊☆白書)", "綾小路清隆(ようこそ実力至上主義の教室へ)", "司波達也(魔法科高校の劣等生)", "五条悟(呪術廻戦)", "両面宿儺(呪術廻戦)", "馬狼照英(ブルーロック)", "糸師凛(ブルーロック)", "高杉晋助(銀魂)", "範馬勇次郎(グラップラー刃牙)", "言峰綺礼(Fate/stay night)", "シャルル・ジ-ブリタニア(コードギアス 反逆のルルーシュ)", "エンデヴァー(僕のヒーローアカデミア)", "ボア-ハンコック(ONE PIECE)"], d: "【独立の性質】あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。他人の評価に左右されず、自分の価値基準のみで世界を裁定します。【社会的役割】停滞した状況を打破する「開拓者」や「カリスマ」として君臨します。あなたの揺るぎない自信は、迷える大衆を惹きつけ、新しい時代を創造する強力なエンジンとなります。【潜在的リスク】他者を自分の目的の「道具」として見なしやすく、孤独を招くことがあります。また、自分の弱さを認めることが難しく、限界に達しても周囲を頼れない強情さが仇となることもあるでしょう。", dir: "✦【強みの最大化】その圧倒的な自己愛を、世界を動かす『ビジョン』へと昇華させてください。あなたが望むものは、結果として多くの人を幸せにする可能性があります。✦【弱点の克服】自分以外の『独立した才能』を認める度量を持ちましょう。他者の卓越さを愛でる余裕が、王としての風格を完成させます。✦【理想の環境】実力がすべてを語り、忖度や妥協の必要がない、トップスピードで走り続けられる競争環境がふさわしいでしょう。" },
             OPT: { en: "OPT", k: "オプティミスト", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA-OPT.png", celebs: ["ウォルト・ディズニー", "トーマス・エジソン", "坂本九", "アンネ・フランク", "ヘレン・ケラー", "チャーリー・チャップリン", "松下幸之助"], chars: ["孫悟空(ドラゴンボール)", "うずまきナルト(NARUTO -ナルト-)", "サトシ(ポケットモンスター)", "ゴン＝フリークス(HUNTER×HUNTER)", "月野うさぎ(美少女戦士セーラームーン)", "両津勘吉(こちら葛飾区亀有公園前派出所)", "アーニャ・フォージャー(SPY×FAMILY)", "星野アイ(【推しの子】)", "虎杖悠仁(呪術廻戦)", "野原しんのすけ(クレヨンしんちゃん)", "佐藤和真(この素晴らしい世界に祝福を！)", "アクア(この素晴らしい世界に祝福を！)", "ナツ・ドラグニル(FAIRY TAIL)", "アスタ(ブラッククローバー)", "江戸川コナン(名探偵コナン)", "ドラえもん(ドラえもん)", "星馬烈(爆走兄弟レッツ&ゴー!!)", "喜多郁代(ぼっち・ざ・ろっく！)", "日向翔陽(ハイキュー!!)", "切島鋭児郎(僕のヒーローアカデミア)", "パック(Re:ゼロから始める異世界生活)", "ベアトリス(Re:ゼロから始める異世界生活)", "フェルト(Re:ゼロから始める異世界生活)", "ラインハルト・ヴァン・アストレア(Re:ゼロから始める異世界生活)", "諸星あたる(うる星やつら)", "ポプ子(ポプテピピック)", "ピピ美(ポプテピピック)", "高坂穂乃果(ラブライブ！)", "湊あくあ(ホロライブ)", "神楽(銀魂)"], d: "【希望の性質】あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための最も純粋な動力源です。失敗を単なる『成功へのプロセス』と心から信じています。【社会的役割】沈みかけたチームの士気を一瞬で引き上げる「ムードメーカー」であり、不可能な挑戦に火をつける「点火者」です。あなたの『きっと大丈夫』という一言は、時に物理的な限界を超えさせます。【潜在的リスク】現実的なリスクや警告を軽視しがちで、無謀な行動に出てしまうことがあります。また、周囲の悲しみに対しても明るさを強要してしまい、逆効果になるデリカシーの欠如には注意が必要です。", dir: "✦【強みの最大化】その根拠のない自信を、誰にも負けない『継続力』へ繋げてください。挑戦し続ける限り、あなたの楽観は予言となります。✦【弱点の克服】冷徹な『現実主義者』のアドバイスに耳を傾ける耳を持ちましょう。彼らの警告は、あなたの翼をより高く飛ばすための重りとなります。✦【理想の環境】新しい試みが常に歓迎され、失敗を笑い飛ばせる、ポジティブなエネルギーに満ちたクリエイティブな場所が最適です。" },
             NIH: { en: "NIH", k: "ニヒリスト", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA-NIH.png", celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫"], chars: ["ウルキオラ・シファー(BLEACH)", "L(DEATH NOTE)", "綾波レイ(新世紀エヴァンゲリオン)", "槙島聖護(PSYCHO-PASS)", "夏油傑(呪術廻戦)", "金木研(東京喰種トーキョーグール)", "碇シンジ(新世紀エヴァンゲリオン)", "渚カヲル(新世紀エヴァンゲリオン)", "伏黒甚爾(呪術廻戦)", "ディアボロ(ジョジョの奇妙な冒険)", "鬼舞辻無惨(鬼滅の刃)", "ガッツ(ベルセルク)", "暁美ほむら(魔法少女まどか☆マギカ)", "メルエム(HUNTER×HUNTER)", "フェイタン＝ポートオ(HUNTER×HUNTER)", "九条玲那(リコリス・リコイル)", "忍野メメ(〈物語〉シリーズ)", "サイタマ(ワンパンマン)", "阿良々木暦(〈物語〉シリーズ)", "不死川実弥(鬼滅の刃)", "童磨(鬼滅の刃)", "芥川龍之介(文豪ストレイドッグス)", "ジン(名探偵コナン)", "スカー(鋼の錬金術師)", "うちはオビト(NARUTO -ナルト-)", "うちはマダラ(NARUTO -ナルト-)", "虚(銀魂)", "貝木泥舟(〈物語〉シリーズ)", "キルア＝ゾルディック(HUNTER×HUNTER)", "セバスチャン・ミカエリス(黒執事)"], d: "【空の性質】あなたは世界の『無』を見抜いた賢者です。虚飾に満ちた社会の価値観から脱却し、何物にも執着しないその静かなる視点は、あらゆる苦悩を超越した究極の自由を象徴しています。虚無の果てに立つあなたの姿は、気高く美しい。周囲の些末な騒動は、あなたにはただのノイズです。【社会的役割】熱狂や混乱に呑まれない「観察者」として機能します。多くの人が幻想を追って迷走する中、あなたは冷徹に本質を見抜き、無駄なエネルギー消費を止める『ブレーキ』の役割を果たします。【潜在的リスク】『どうせ意味がない』という考えに支配され、必要な行動まで放棄してしまう可能性があります。無気力が長期化すると、自分自身の生命感さえも希薄になり、他者との接続を完全に断ってしまう危険があります。", dir: "✦【強みの最大化】『意味がないからこそ、何をやっても自由だ』という究極の開き直りを楽しんでください。何物にも依存しないあなたの視点は、真の自由な表現を生みます。✦【弱点の克服】一過性の『感覚の快楽』や『小さな面白さ』を大切にしましょう。壮大な意味はなくとも、今この瞬間の心地よさは事実です。✦【理想の環境】過度な期待や情熱を押し付けられず、一人の時間が確保された、静かで知的な思索に耽ることができる環境がベストです。" },
             IDE: { en: "IDE", k: "イデアリスト", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA-IDE.png", celebs: ["ジョン・レノン", "宮沢賢治", "サン=テグジュペリ", "ファン・ゴッホ", "オスカー・ワイルド", "プラトン"], chars: ["衛宮士郎(Fate/stay night)", "アルトリア・ペンドラゴン(Fate/stay night)", "ジャンヌ・ダルク(Fate/Apocrypha)", "ハンジ・ゾエ(進撃の巨人)", "ロイ・マスタング(鋼の錬金術師)", "及川徹(ハイキュー!!)", "宮園かをり(四月は君の嘘)", "千反田える(氷菓)", "エルヴィン・スミス(進撃の巨人)", "グリフィス(ベルセルク)", "シャル・ド・ゴール(史実)", "アーサー・ペンドラゴン(Fate/Prototype)", "本田菊(ヘタリア Axis Powers)", "雲雀恭弥(家庭教師ヒットマンREBORN!)", "六道骸(家庭教師ヒットマンREBORN!)", "獄寺隼人(家庭教師ヒットマンREBORN!)", "山本武(家庭教師ヒットマンREBORN!)", "雨宮蓮(ペルソナ5)", "鳳凰院凶真(STEINS;GATE)", "枢木スザク(コードギアス 反逆のルルーシュ)", "ユーフェミア・リ・ブリタニア(コードギアス 反逆のルルーシュ)", "アルミンの巨匠(進撃の巨人)", "エドワード・エルリック(鋼の錬金術師)", "ニコ・ロビン(ONE PIECE)", "星海光来(ハイキュー!!)", "宮侑(ハイキュー!!)", "宮治(ハイキュー!!)", "北信介(ハイキュー!!)", "中島敦(文豪ストレイドッグス)", "太宰治(文豪ストレイドッグス)"], d: "【イデアの性質】あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、人類を更なる高みへと押し上げる崇高な意志です。泥の中でも空を見上げ、星を数え続けることができる人です。【社会的役割】人々に「夢」や「崇高な目的」を指し示す「導師」や「予言者」となります。凡庸な現実に飽き足らない人々を鼓舞し、不可能と思われたイノベーションを成し遂げる原動力となります。【潜在的リスク】理想への純粋さが強すぎるあまり、不完全な現実や他人の欠点を激しく拒絶してしまう『潔癖さ』があります。理想と現実のギャップに絶望し、世捨て人のようになってしまう脆さも持ち合わせています。", dir: "✦【強みの最大化】脳内の完璧な世界を、一歩ずつ現実の言葉や形へ翻訳し続けてください。その翻訳作業こそが、あなたの人生の芸術作品となります。✦【弱点の克服】不完全さの中にある『美しさ』を見出す訓練をしましょう。完璧ではないからこそ愛おしいという感覚が、あなたの世界観をより豊かにします。✦【理想の環境】あなたの高い理想を嘲笑せず、その価値を理解し、実現に向けて協力してくれる志の高い仲間がいる場所が最適です。" },
-            REA: { en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png", celebs: ["福沢諭吉", "徳川家康", "フランクリン", "チャーチル", "鄧小平", "ビスマルク", "ロックフェラー"], chars: ["奈良シカマル(NARUTO -ナルト-)", "比企谷八幡(やはり俺の青春ラブコメはまちがっている。)", "リヴァイ・アッカーマン(進撃ের巨人)", "サンジ(ONE PIECE)", "トラファルガー・ロー(ONE PIECE)", "狡噛慎也(PSYCHO-PASS)", "加藤恵(さええない彼女の育てかた)", "雪ノ下雪乃(やはり俺の青春ラブコメはまちがっている。)", "堀北鈴音(ようこそ実力至上主義の教室へ)", "龍園翔(ようこそ実力至上主義の教室へ)", "坂柳有栖(ようこそ実力至上主義の教室へ)", "加持リョウジ(新世紀エヴァンゲリオン)", "葛城ミサト(新世紀エヴァンゲリオン)", "赤木リツコ(新世紀エヴァンゲリオン)", "岩泉一(ハイキュー!!)", "角名倫太郎(ハイキュー!!)", "佐久早聖臣(ハイキュー!!)", "昼神幸郎(ハイキュー!!)", "岸辺(チェンソーマン)", "天沢一夏(ようこそ実力至上主義の教室へ)", "堀北学(ようこそ実力至上主義の教室へ)", "灰崎祥吾(黒子のバスケ)", "花宮真(黒子のバスケ)", "吉良吉影(ジョジョの奇妙な冒険)", "高坂麗奈(響け！ユーフォニアム)", "黄前久美子(響け！ユーフォニアム)", "鎧塚みぞれ(響け！ユーフォニアム)", "比企谷小町(やはり俺の青春ラブコメはまちがっている。)", "一条将輝(魔法科高校の劣等生)", "折木奉太郎(氷菓)"], d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。曖昧な幻想を排除し、事実と論理で世界を読み解く知性は、現代を生き抜く最も強力な武器です。生存確率を計算し、確実に勝機を掴むその手腕は、芸術的ですらあります。【社会的役割】組織の「頭脳」や「土台」を担います。熱狂に流されず冷静に数値を分析し、リスクを管理するあなたの存在は、プロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーです。【潜在的リスク】目に見えない『人の感情』や『直感』を軽視しがちで、マシーンのような冷酷な印象を周囲に与えることがあります。また、計算できないサプライズやイレギュラーに直面すると、必要以上に混乱することもあります。", dir: "✦【強みの最大化】その論理的思考に『心理学』の知見を加えてください。人間の非合理ささえも計算式に入れれば、あなたの現実把握は無敵となります。✦【弱点の克服】たまには『無駄なこと』をあえて実行してみましょう。非効率な体験の中に、論理だけでは導き出せなかった新しい発見が眠っています。✦【理想の環境】成果が数値化され、合理的な判断が正当に評価される、無駄な感情論の少ないプロフェッショナルな職場が最適です。" },
+            REA: { en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png", celebs: ["福沢諭吉", "徳川家康", "フランクリン", "チャーチル", "鄧小平", "ビスマルク", "ロックフェラー"], chars: ["奈良シカマル(NARUTO -ナルト-)", "比企谷八幡(やはり俺の青春ラブコメはまちがっている。)", "リヴァイ・アッカーマン(進撃の巨人)", "サンジ(ONE PIECE)", "トラファルガー・ロー(ONE PIECE)", "狡噛慎也(PSYCHO-PASS)", "加藤恵(さええない彼女の育てかた)", "雪ノ下雪乃(やはり俺の青春ラブコメはまちがっている。)", "堀北鈴音(ようこそ実力至上主義の教室へ)", "龍園翔(ようこそ実力至上主義の教室へ)", "坂柳有栖(ようこそ実力至上主義の教室へ)", "加持リョウジ(新世紀エヴァンゲリオン)", "葛城ミサト(新世紀エヴァンゲリオン)", "赤木リツコ(新世紀エヴァンゲリオン)", "岩泉一(ハイキュー!!)", "角名倫太郎(ハイキュー!!)", "佐久早聖臣(ハイキュー!!)", "昼神幸郎(ハイキュー!!)", "岸辺(チェンソーマン)", "天沢一夏(ようこそ実力至上主義の教室へ)", "堀北学(ようこそ実力至上主義の教室へ)", "灰崎祥吾(黒子のバスケ)", "花宮真(黒子のバスケ)", "吉良吉影(ジョジョ의奇妙な冒険)", "高坂麗奈(響け！ユーフォニアム)", "黄前久美子(響け！ユーフォニアム)", "鎧塚みぞれ(響け！ユーフォニアム)", "比企谷小町(やはり俺の青春ラブコメはまちがっている。)", "一条将輝(魔法科高校の劣等生)", "折木奉太郎(氷菓)"], d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。曖昧な幻想を排除し、事実と論理で世界を読み解く知性は、現代を生き抜く最も強力な武器です。生存確率を計算し、確実に勝機を掴むその手腕は、芸術的ですらあります。【社会的役割】組織の「頭脳」や「土台」を担います。熱狂に流されず冷静に数値を分析し、リスクを管理するあなたの存在は、プロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーです。【潜在的リスク】目に見えない『人の感情』や『直感』を軽視しがちで、マシーンのような冷酷な印象を周囲に与えることがあります。また、計算できないサプライズやイレギュラーに直面すると、必要以上に混乱することもあります。", dir: "✦【強みの最大化】その論理的思考に『心理学』の知見を加えてください。人間の非合理ささえも計算式に入れれば、あなたの現実把握は無敵となります。✦【弱点の克服】たまには『無駄なこと』をあえて実行してみましょう。非効率な体験の中に、論理だけでは導き出せなかった新しい発見が眠っています。✦【理想の環境】成果が数値化され、合理的な判断が正当に評価される、無駄な感情論の少ないプロフェッショナルな職場が最適です。" },
             MOD: { en: "MOD", k: "モダニスト", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA-MOD.png", celebs: ["カント", "リンカーン", "ワシントン", "孔子", "マックス-ウェーバー", "ドラッカー", "ミル", "ハミルトン"], chars: ["飯田天哉(僕のヒーローアカデミア)", "国木田独歩(文豪ストレイドッグス)", "手塚国光(テニスの王子様)", "真田弦一郎(テニスの王子様)", "影山飛雄(ハイキュー!!)", "常守朱(PSYCHO-PASS)", "宜野座伸元(PSYCHO-PASS)", "銭形警部(ルパン三世)", "目暮十三(名探偵コナン)", "佐藤美和子(名探偵コナン)", "安室透(名探偵コナン)", "赤井秀一(名探偵コナン)", "ターニャ-デグレチャフ(幼女戦記)", "ラインハルト-フォン-ローエングラム(銀河英雄伝説)", "ヤン・ウェンリー(銀河英雄伝説)", "オーベルシュタイン(銀河英雄伝説)", "ロイ・マスタング(鋼の錬金術師)", "三雲修(ワールドトリガー)", "七海建人(呪術廻戦)", "朽木白哉(BLEACH)", "山口忠(ハイキュー!!)", "縁下力(ハイキュー!!)", "近藤勲(銀魂)", "土方十四郎(銀魂)", "ミッターマイヤー(銀河英雄伝説)", "ロイエンタール(銀河英雄伝説)", "夜久衛輔(ハイキュー!!)", "二階堂永亮(ツルネ -風舞高校弓道部-)", "白鳥任三郎(名探偵コナン)", "鏑木・T・虎徹(TIGER & BUNNY)"], d: "【規律の性質】あなたは文明の根幹を支える守護神です。規律を重んじ、美しい秩序を構築・維持する誠実さは、社会が崩壊することなく存続するための要石です。あなたがルーチンを守る時、世界は初めて安心して自転を続けることができます。【社会的役割】「管理」「統制」「教育」の分野で無類の強さを発揮します。ルールを形にし、公平に運用することで、組織に公正さと安定感をもたらします。人々が安心して能力を発揮できる場を創る人です。【潜在的リスク】固定観念に縛られやすく、急激な変化や既存ルールの破壊に対して強い拒絶反応を示します。マニュアルがない状況では判断が鈍り、柔軟性を欠いた対応で自らも周囲も息苦しくさせてしまうことがあります。", dir: "✦【強みの最大化】ルールを守る側から、時代に即した『ルールを創る側』へ回りましょう。あなたの公平さは、より多くの人を救うシステム構築に活かされます。✦【弱点の克服】『適当さ』や『遊び』の価値を認めましょう。完璧な秩序よりも、多少の揺らぎがあるほうが、システムとしての強度は高まる場合もあります。✦【理想の環境】歴史と伝統があり、役割分担が明確で、誠実な働きが長期的に報われる安定した組織が、あなたの能力を最大限に引き出します。" },
             ANA: { en: "ANA", k: "アナーキスト", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA-ANA.png", celebs: ["坂本龍馬", "パブロ・ピカソ", "チェ・ゲバラ", "バクーニン", "マルコムX", "ディオゲネス", "シド・ヴィシャス"], chars: ["ヒソカ＝モロウ(HUNTER×HUNTER)", "ジョーカー(DCコミックス)", "坂田銀時(銀魂)", "デンジ(チェンソーマン)", "パワー(チェンソーマン)", "我妻由乃(未来日記)", "雨流みねね(未来日記)", "モンキー・D・ルフィ(ONE PIECE)", "ユースタス・キッド(ONE PIECE)", "空条承太郎(ジョジョの奇妙な冒険)", "空条徐倫(ジョジョの奇妙な冒険)", "東方仗助(ジョジョの奇妙な冒険)", "ジャイロ・ツェペリ(ジョジョの奇妙な冒険)", "リゾット-ネエロ(ジョジョの奇妙な冒険)", "プロシュート(ジョジョの奇妙な冒険)", "レヴィ(BLACK LAGOON)", "纏流子(キルラキル)", "エスデス(アカメが斬る！)", "アーサー-ボイル(炎炎ノ消防隊)", "諸星あたる(うる星やつら)", "範馬刃牙(グラップラー刃牙)", "折原臨也(デュラララ!!)", "ラッド・ルッソ(BACCANO!)", "セルティ・ストゥルルソン(デュラララ!!)", "東堂葵(呪術廻戦)", "トガヒミコ(僕のヒーローアカデミア)", "両面宿儺(呪術廻戦)", "死柄木弔(僕のヒーローアカデミア)", "バギー(ONE PIECE)", "ジェビル(DELTARUNE)"], d: "【変革の性質】あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です。檻の中にいることに耐えられない、真の自由人です。【社会的役割】「破壊的イノベーター」や「革命児」としての役割を担います。常識が通用しない新しい視点を持ち込み、硬直した社会に風穴を開けます。あなたが動くとき、新しい時代の幕が上がります。【潜在的リスク】破壊のあとに何を遺すかを考えないため、周囲に多大な混乱や傷跡を残してしまうことがあります。また、持続性に欠け、一つの場所にとどまって何かを育むことが極めて困難であるため、人生が流浪しがちです。", dir: "✦【強みの最大化】その『野性的な直感』を信じ抜いてください。理屈を超えたあなたの行動こそが、停滞した世界の唯一の解毒剤となります。✦【弱点の克服】『破壊の後の更地』を管理してくれるパートナーを見つけましょう。自分一人ですべてを壊し尽くすのではなく、バトンを渡すことを覚えれば、あなたの変革は完結します。✦【理想の環境】制約が一切なく、毎日が予測不能で、あなたの突飛な行動が「個性」として歓迎される、カオスでエネルギッシュな現場が最適です。" }
         };
 
-        const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信じろ。","常識を捨てろ。","君の核に触れる。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。","ここでやめたら一生自分は謎のままだ。","素晴らしい、その迷いこそが人間だ。","この1問が君を定義する。","順調だ、深淵まで潜れ。","君の『イズム』が悲鳴を上げている。","常識の檻を壊せ。","自分への嘘を暴け。","面白い、君はそんな風に考えるのか。","半分まで来たな、魂は無事か？","加速する思考、止まるな。","今の回答、少し震えなかったか？","君の本性が剥き出しになっていく。","理論を超えろ、直感に従え。","いいね、その潔さ。","真実へのカウントダウンだ。","思考の霧が晴れていく。","君という物語のクライマックスへ。","全神経をこの1問に注げ。","素晴らしい集中力だ。","魂の純度が高まっていく。","迷獄の出口は近い。","自分を騙すのはもうやめだ。","深層心理の鍵が開く音がする。","いいぞ、その調和。","混沌を恐れるな。","現実を見据える目は鋭いか？","理想の旗を掲げ続けろ。","利己的な自分を愛せるか？","利彼の精神を忘れるな。","楽観は知恵だ。", "虚無こそが真の自由だ。", "秩序を守る盾となれ。", "混沌を巻き起こす嵐となれ。", "君の答えを世界が待っている。", "その一手が運命を変える。", "鼓動を感じるか？", "自分を疑うな。", "君の真実にそこにある。", "未来は君の手の中に。", "歴史はこうして作られる。"];
+        const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信じろ。","常識を捨てろ。","君の核に触れる。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。","ここでやめたら一生自分は謎のままだ。","素晴らしい、その迷いこそが人間だ。","この1問が君を定義する。","順調だ、深淵まで潜れ。","君の『イズム』が悲鳴を上げている。","常識の檻を壊せ。","自分への嘘を暴け。","面白い、君はそんな風に考えるのか。","半分まで来たな、魂は無事か？","加速する思考、止まるな。","今の回答、少し震えなかったか？","君の本性が剥き出しになっていく.","理論を超えろ、直感に従え。","いいね、その潔さ。","真実へのカウントダウンだ。","思考の霧が晴れていく。","君という物語のクライマックスへ。","全神経をこの1問に注げ。","素晴らしい集中力だ。","魂の純度が高まっていく。","迷獄の出口は近い。","自分を騙すのはもうやめだ。","深層心理の鍵が開く音がする。","いいぞ、その調和。","混沌を恐れるな。","現実を見据える目は鋭いか？","理想の旗を掲げ続けろ。","利己的な自分を愛せるか？","利彼の精神を忘れるな。","楽観は知恵だ。", "虚無こそが真の自由だ。", "秩序を守る盾となれ。", "混沌を巻き起こす嵐となれ。", "君の答えを世界が待っている。", "その一手が運命を変える。", "鼓動を感じるか？", "自分を疑うな。", "君の真実はそこにある。", "未来は君の手の中に。", "歴史はこうして作られる。"];
 
         const questions = [
-            { t: "レジの会計。後ろに人が並んでいるとき、小銭で支払いたくても、お札やカードなど時間のかからない方法で支払う。", a: "ALT", w: 1 },
+            { t: "レジの会計。後ろに人が並んでいるとき、小銭で支払いたくても、お札やカードなど時間のかからない方法を選んでしまう。", a: "ALT", w: 1 },
             { t: "他人の失敗談を聞くと、口では同情しながらどこか「安心」を感じるほうだ。", a: "EGO", w: 2 },
             { t: "グループの空気が悪いとき、自分がピエロになってでも場を和ませる努力をする。", a: "ALT", w: 2 },
             { t: "自分を犠牲にしてまで守るべきものを長時間考えても、ひとつも思いつかない。", a: "EGO", w: 3 },
@@ -242,7 +253,7 @@
             { t: "自分が損をしても、周囲が幸せならそれでいい。", a: "ALT", w: 3 },
             { t: "嫌いな相手が苦境に立たされているのを知ると、密かに喜びを感じる。", a: "EGO", w: 2 },
             { t: "対立を避けるためなら、自分の本当の意見を飲み込む選択をする。", a: "ALT", w: 2 },
-            { t: "飲み会で他人の話を聞くくらいなら、家で一人でご飯を食べる方が有意義だ。", a: "EGO", w: 3 },
+            { t: "飲み会で他人の話しを聞くくらいなら、家で一人でご飯を食べる方が有意義だ。", a: "EGO", w: 3 },
             { t: "誰かに必要とされているということが分かると本当に嬉しい。", a: "ALT", w: 3 },
             { t: "匿名掲示板やSNSで、誰かの落ち度を厳しく指摘した経験がある。", a: "EGO", w: 2 },
             { t: "相手が喜ぶ姿を想像しながら、お土産を真剣に選ぶことが好きだ。", a: "ALT", w: 1 },
@@ -252,7 +263,7 @@
             { t: "自分のミスを他人のせいにできる状況なら、そうする。", a: "EGO", w: 2 },
             { t: "SNSの「いいね」の数は、自分の価値を証明する尺度だ。", a: "EGO", w: 1 },
             { t: "少し前を歩いている人がハンカチを落としたら、急いで拾って追いかける。", a: "ALT", w: 1 },
-            { t: "欲しい商品が最後の一個だった時、周囲に他のお客さんがいないか確認せずに即座に手に取る。", a: "EGO", w: 2 },
+            { t: "限定商品の最後の一個を見つけた時、周囲に他のお客さんがいないか確認せずに即座に手に取る。", a: "EGO", w: 2 },
             { t: "他人の顔色を伺って、自分の発言を微調整することが日常的だ。", a: "ALT", w: 1 },
             { t: "寝る前、明日の予定を考えるとワクワクして眠れないことがある。", a: "OPT", w: 1 },
             { t: "成功者の体験談を読むと、成功は単なる運だと思う。", a: "NIH", w: 2 },
@@ -332,7 +343,6 @@
         ];
 
         // --- 3. Logic & State Management ---
-        const ismPairs = [{l:"利他",lk:'ALT',r:"利己",rk:'EGO'},{l:"楽観",lk:'OPT',r:"虚無",rk:'NIH'},{l:"理想",lk:'IDE',r:"現実",rk:'REA'},{l:"秩序",lk:'MOD',r:"混沌",rk:'ANA'}];
         let currentIdx = 0, scores = { ALT:0, EGO:0, OPT:0, NIH:0, IDE:0, REA:0, MOD:0, ANA:0 }, history = [], devClickCount = 0, finalType = 'ALT';
 
         window.onload = () => {
@@ -351,18 +361,39 @@
                 card.className = 'ism-card';
                 card.style.cursor = 'default';
                 
-                // HTML生成
-                card.innerHTML = `
-                    <div class="img-slot w-12 h-12 mb-3 bg-gray-50 border-gray-100 mx-auto">
-                        <img src="${data.img}" class="w-full h-full object-cover opacity-100" 
-                             onload="this.closest('.img-slot').classList.add('img-loaded')"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="hidden w-full h-full items-center justify-center bg-gray-50 text-[8px] text-gray-300 font-black">${key}</div>
-                    </div>
-                    <div class="text-[10px] font-black text-gray-900 mb-0.5">${data.n}</div>
-                    <div class="text-[8px] font-bold text-blue-500 mb-2 italic">(${data.k})</div>
-                    <div class="text-[7px] text-gray-400 leading-tight">${data.c.replace(/「|」/g, '')}</div>
-                `;
+                const imgSlot = document.createElement('div');
+                imgSlot.className = "img-slot w-12 h-12 mb-3 bg-gray-50 border-gray-100 mx-auto";
+                
+                const img = document.createElement('img');
+                img.src = data.img;
+                img.className = "list-img";
+                // onerrorなどで制御せず、常に opacity 1 のクラスを維持
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = "hidden w-full h-full items-center justify-center bg-gray-50 text-[8px] text-gray-300 font-black text-balance";
+                placeholder.innerText = key;
+                
+                img.onerror = () => { img.style.display = 'none'; placeholder.style.display = 'flex'; };
+                
+                imgSlot.appendChild(img);
+                imgSlot.appendChild(placeholder);
+                card.appendChild(imgSlot);
+                
+                const name = document.createElement('div');
+                name.className = "text-[10px] font-black text-gray-900 mb-0.5 text-balance";
+                name.innerText = data.n;
+                card.appendChild(name);
+                
+                const kana = document.createElement('div');
+                kana.className = "text-[8px] font-bold text-blue-500 mb-2 italic text-balance";
+                kana.innerText = `(${data.k})`;
+                card.appendChild(kana);
+                
+                const cp = document.createElement('div');
+                cp.className = "text-[7px] text-gray-400 leading-tight text-balance";
+                cp.innerText = data.c.replace(/「|」/g, '');
+                card.appendChild(cp);
+                
                 container.appendChild(card);
             });
         }
@@ -410,9 +441,9 @@
             // Identity Report: 項目の改行と余白を改善
             const reportHTML = data.d.split('【').filter(s=>s).map(s => {
                 const parts = s.split('】');
-                return `<div class="mb-12 last:mb-0">
-                    <span class="block font-black text-blue-600 text-lg mb-4">【${parts[0]}】</span>
-                    <p class="pl-4 border-l-4 border-blue-50 text-gray-700 leading-loose">${parts[1]}</p>
+                return `<div class="mb-12 last:mb-0 text-balance">
+                    <span class="block font-black text-blue-600 text-lg mb-4 text-balance">【${parts[0]}】</span>
+                    <p class="pl-4 border-l-4 border-blue-50 text-gray-700 leading-loose text-balance">${parts[1]}</p>
                 </div>`;
             }).join('');
             document.getElementById('result-desc').innerHTML = reportHTML;
@@ -420,9 +451,9 @@
             // Future Guidance: 項目の改行と余白を改善
             const guidanceHTML = data.dir.split('✦').filter(s=>s).map(s => {
                 const parts = s.split('】');
-                return `<div class="mb-10 last:mb-0">
-                    <span class="block font-black text-blue-100 text-lg mb-3">✦ ${parts[0].replace('【','')}】</span>
-                    <p class="text-blue-50 opacity-90 leading-relaxed">${parts[1]}</p>
+                return `<div class="mb-10 last:mb-0 text-balance">
+                    <span class="block font-black text-blue-100 text-lg mb-3 text-balance">✦ ${parts[0].replace('【','')}】</span>
+                    <p class="text-blue-50 opacity-90 leading-relaxed text-balance">${parts[1]}</p>
                 </div>`;
             }).join('');
             document.getElementById('result-direction').innerHTML = guidanceHTML;
@@ -434,14 +465,15 @@
             artSlot.classList.remove('img-loaded');
             const imgEl = document.createElement('img');
             imgEl.src = data.img; 
+            imgEl.className = "result-img";
             imgEl.onload = () => artSlot.classList.add('img-loaded');
             imgEl.onerror = () => { artSlot.innerHTML = `<span class="img-placeholder text-[8px] text-gray-300 font-black">${finalType}</span>`; };
             artSlot.innerHTML = ''; artSlot.appendChild(imgEl);
 
             const tC = document.getElementById('ticker-content'); tC.innerHTML='';
-            [...data.celebs,...data.celebs].forEach(c=>{ tC.innerHTML+=`<span class="ticker-item">${c}</span>`; });
+            [...data.celebs,...data.celebs].forEach(c=>{ tC.innerHTML+=`<span class="ticker-item text-balance">${c}</span>`; });
             const chT = document.getElementById('ticker-char-content'); chT.innerHTML='';
-            [...data.chars,...data.chars].forEach(c=>{ chT.innerHTML+=`<span class="ticker-item ticker-char">${c}</span>`; });
+            [...data.chars,...data.chars].forEach(c=>{ chT.innerHTML+=`<span class="ticker-item ticker-char text-balance">${c}</span>`; });
 
             const axisB = document.getElementById('axis-details'); axisB.innerHTML='';
             const labels = [{l:"献身",r:"孤高",lk:'ALT',rk:'EGO'},{l:"渇望",r:"静観",lk:'OPT',rk:'NIH'},{l:"夢幻",r:"実利",lk:'IDE',rk:'REA'},{l:"調和",r:"変革",lk:'MOD',rk:'ANA'}];
