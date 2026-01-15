@@ -10,16 +10,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PITA診断 | あなたは何主義者として生きるのか。</title>
-    <meta name="description" content="100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。(Core v10.9)">
+    <meta name="description" content="100の質問があなたの魂の形を決定づける。深層に潜む『イズム』を解剖する精密診断システム。(Core v11.0)">
     
-    <!-- OGP Settings - Cache Buster v10.9 -->
+    <!-- OGP Settings - Cache Buster v11.0 -->
     <meta property="og:title" content="PITA診断 | あなたは何主義者として生きるのか">
-    <meta property="og:description" content="100の質問であなたの深層心理を解剖。魂の形を特定せよ。(Core v10.9)">
-    <meta property="og:image" content="https://pita-diagnosis.com/ogp-image.png?v=10.9">
+    <meta property="og:description" content="100の質問であなたの深層心理を解剖。魂の形を特定せよ。(Core v11.0)">
+    <meta property="og:image" content="https://pita-diagnosis.com/ogp-image.png?v=11.0">
     <meta property="og:url" content="https://pita-diagnosis.com/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://pita-diagnosis.com/ogp-image.png?v=10.9">
+    <meta name="twitter:image" content="https://pita-diagnosis.com/ogp-image.png?v=11.0">
     <link rel="canonical" href="https://pita-diagnosis.com/">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -51,7 +51,7 @@
         .modal-content { background: white; width: 100%; max-width: 500px; border-radius: 2.5rem; position: relative; padding: 2.5rem; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
         .hidden { display: none; }
         .ism-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
-        .ism-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 1.5rem; padding: 1.5rem 1rem; transition: all 0.3s; text-align: center; }
+        .ism-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 1.5rem; padding: 1.5rem 1rem; transition: all 0.3s; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .ism-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     </style>
 </head>
@@ -62,12 +62,12 @@
             <div class="text-2xl md:text-3xl font-black tracking-tighter serif leading-none">PITA</div>
             <div class="text-[7px] md:text-[8px] font-bold text-gray-400 tracking-[0.15em] uppercase mt-1">Personality Ism Type Analyzer</div>
         </div>
-        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100">Core v10.9</div>
+        <div class="text-[9px] font-bold text-blue-600 tracking-widest uppercase italic border-l pl-4 border-gray-100">Core v11.0</div>
     </nav>
 
     <!-- Developer Menu -->
     <div id="dev-menu" class="hidden fixed top-[10%] left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-black p-8 rounded-3xl z-[1000] text-white text-center">
-        <p class="mb-4 font-bold border-b border-gray-700 pb-2 text-blue-400 uppercase text-xs text-center">Debug Preview</p>
+        <p class="mb-4 font-bold border-b border-gray-700 pb-2 text-blue-400 uppercase text-xs">Debug Preview</p>
         <div class="grid grid-cols-2 gap-2 text-center text-xs">
             <button onclick="window.jumpToResult('ALT')" class="p-2 bg-gray-800 rounded">利他</button><button onclick="window.jumpToResult('EGO')" class="p-2 bg-gray-800 rounded">利己</button>
             <button onclick="window.jumpToResult('OPT')" class="p-2 bg-gray-800 rounded">楽観</button><button onclick="window.jumpToResult('NIH')" class="p-2 bg-gray-800 rounded">虚無</button>
@@ -118,11 +118,11 @@
             <button onclick="window.showView('intro')" class="mb-8 text-gray-400 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 transition text-balance">← BACK</button>
             <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-gray-50 text-left">
                 <h2 class="text-2xl md:text-4xl font-bold mb-10 serif border-b pb-6 text-center">初めての方へ：PITAの楽しみ方</h2>
-                <section class="mb-12 text-gray-600 space-y-4 text-sm leading-relaxed">
+                <section class="mb-12 text-gray-600 space-y-4 text-sm leading-relaxed text-balance">
                     <p>・<strong>直感に従う：</strong> 100の質問に対し、深く考えすぎず、直感でパッと答えてください。その迷いこそがあなたの深層心理を映し出す鍵となります。</p>
                     <p>・<strong>自分の「イズム」を知る：</strong> 結果画面では、あなたの価値観のバランスを可視化し、あなたに最適な主義（イズム）を解剖します。</p>
                 </section>
-                <section class="mb-12 p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                <section class="mb-12 p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center text-balance">
                     <p class="text-xs text-gray-500 mb-4 font-bold tracking-tight">診断を開始する前に、プライバシーポリシーもお読みください。</p>
                     <a href="privacy.html" class="text-xs font-bold text-blue-600 border-b border-blue-200 pb-0.5 hover:text-blue-800 transition uppercase tracking-widest">Privacy Policy</a>
                 </section>
@@ -137,7 +137,7 @@
                 <div class="flex justify-between items-end">
                     <div class="flex flex-col">
                         <span id="q-hint" class="text-[10px] font-bold text-blue-500 italic mb-1 h-4 select-none">...</span>
-                        <span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase">Question 01</span>
+                        <span id="q-count" class="text-[9px] font-black text-gray-400 tracking-widest uppercase text-left">Question 01</span>
                     </div>
                     <div id="q-percent" class="text-3xl md:text-4xl font-light text-blue-600 serif leading-none">1%</div>
                 </div>
@@ -146,8 +146,8 @@
                 <h3 id="question-text" class="text-xl md:text-3xl font-bold leading-relaxed serif text-gray-800"></h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto mb-8 px-4">
-                <button onclick="window.answer(true)" class="btn-choice py-6 md:py-8 rounded-2xl font-bold text-lg text-gray-800">はい</button>
-                <button onclick="window.answer(false)" class="btn-choice py-6 md:py-8 rounded-2xl font-bold text-lg text-gray-800">いいえ</button>
+                <button onclick="window.answer(true)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-lg text-gray-800">はい</button>
+                <button onclick="window.answer(false)" class="btn-choice py-6 md:py-8 px-6 rounded-2xl font-bold text-lg text-gray-800">いいえ</button>
             </div>
             <div class="flex flex-col items-center gap-6 mt-4">
                 <button id="btn-back" onclick="window.goBack()" class="hidden text-[10px] font-bold uppercase tracking-widest text-gray-400 transition hover:text-black text-center">← 一つ前に戻る</button>
@@ -163,13 +163,13 @@
                 <p id="result-en" class="text-[12px] font-black text-gray-300 uppercase tracking-[0.4em] mb-6 italic text-center"></p>
                 <p id="result-catch" class="text-lg md:text-2xl text-gray-400 font-medium italic serif mb-10 text-center"></p>
                 <div id="result-art-container" class="img-slot shadow-2xl bg-white mb-12 border-none scale-105"></div>
-                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto text-center">
+                <div class="inline-flex flex-col items-center bg-white px-8 py-6 rounded-[2rem] border border-gray-100 shadow-sm relative mx-auto text-center text-balance">
                     <div class="flex items-center gap-2 mb-1">
                         <div class="text-[8px] md:text-[9px] text-gray-400 uppercase font-black tracking-[0.4em]">Deep PITA Index</div>
-                        <button onclick="window.toggleIndexModal(true)" class="w-4 h-4 rounded-full bg-gray-100 text-[8px] text-gray-400">?</button>
+                        <button onclick="window.toggleIndexModal(true)" class="w-4 h-4 rounded-full bg-gray-100 text-[8px] text-gray-400 flex items-center justify-center hover:bg-blue-500 hover:text-white transition">?</button>
                     </div>
                     <div class="flex items-baseline gap-2 justify-center">
-                        <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900"></div>
+                        <div id="stat-1" class="text-4xl md:text-6xl font-black italic tracking-tighter text-blue-900 text-center"></div>
                         <div class="text-[10px] font-bold text-gray-300">/ 200.0</div>
                     </div>
                     <button onclick="window.toggleIndexModal(true)" class="mt-4 text-[8px] font-black text-blue-500 uppercase tracking-widest border-b border-blue-100 pb-0.5 hover:text-blue-800 transition">PITA Indexとは何か？ →</button>
@@ -177,23 +177,23 @@
             </div>
 
             <div class="space-y-24 text-balance">
-                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest">この下に続き（指標バランス）があります</p></div>
+                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest text-balance">この下に続き（指標バランス）があります</p></div>
                 <section class="max-w-2xl mx-auto px-6 text-center"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] italic text-center">Spectrum Balance</h4><div id="axis-details" class="space-y-10"></div></section>
-                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest">この下に続き（類似した魂）があります</p></div>
+                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest text-balance">この下に続き（類似した魂）があります</p></div>
                 <section class="border-t border-gray-100 pt-20 overflow-hidden text-center"><h4 class="text-[9px] font-bold text-gray-400 mb-8 uppercase tracking-[0.5em] italic text-center">Parallel Souls (Historical)</h4><div id="historical-ticker-area"></div></section>
                 <section class="border-t border-gray-100 pt-16 overflow-hidden text-center"><h4 class="text-[9px] font-bold text-blue-400 mb-8 uppercase tracking-[0.5em] italic text-center">Modern Icons (Characters)</h4><div id="modern-ticker-area"></div></section>
-                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest">この下に続き（深層心理の解剖）があります</p></div>
-                <section class="bg-white p-8 md:p-24 rounded-[3rem] shadow-sm border border-gray-50 text-left"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">Identity Report</h4><div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-gray-700"></div></section>
-                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest">この下に続き（書籍紹介）があります</p></div>
-                <section class="max-w-5xl mx-auto px-6"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">RECOMMENDED BOOKS</h4><div id="recommended-books" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left"></div></section>
-                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest">この下に続き（今後の指針）があります</p></div>
-                <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] shadow-2xl relative overflow-hidden"><h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center">Future Guidance</h4><div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 mb-12"></div><div class="relative z-10"><a href="https://buy.stripe.com/test_placeholder" target="_blank" class="btn-stripe inline-flex flex-col items-center px-12 py-6 rounded-2xl font-bold shadow-2xl transition hover:scale-105"><span class="text-lg">レポート（PDF版）を購入</span><span class="text-xs opacity-70 mt-1">Stripeで安全に決済 ¥300</span></a></div></section>
-                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm">
-                    <div class="flex gap-3 text-balance"><button onclick="window.shareOnX()" class="flex-1 bg-[#1DA1F2] text-white py-4 rounded-full font-bold shadow-xl">Xでシェア</button><button onclick="window.shareOnLINE()" class="flex-1 btn-line py-4 rounded-full font-bold shadow-xl">LINEで送る</button></div>
-                    <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center flex items-center justify-center">フィードバックを送る</a>
-                    <button onclick="location.reload()" class="bg-[#111111] text-white py-5 px-10 rounded-full font-bold text-lg shadow-md hover:bg-black transition">もう一度診断する</button>
+                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest text-balance">この下に続き（深層心理の解剖）があります</p></div>
+                <section class="bg-white p-8 md:p-24 rounded-[3rem] shadow-sm border border-gray-50 text-left text-balance text-balance text-balance"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">Identity Report</h4><div id="result-desc" class="leading-relaxed md:leading-[2.8] text-base md:text-xl space-y-12 serif text-gray-700 text-balance"></div></section>
+                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest text-balance">この下に続き（書籍紹介）があります</p></div>
+                <section class="max-w-5xl mx-auto px-6 text-balance text-balance text-balance"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic">RECOMMENDED BOOKS</h4><div id="recommended-books" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div></section>
+                <div class="animate-bounce"><div class="text-blue-400 text-2xl">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest text-balance">この下に続き（今後の指針）があります</p></div>
+                <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] shadow-2xl relative overflow-hidden text-balance text-balance text-balance"><h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center">Future Guidance</h4><div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 mb-12 text-balance"></div><div class="relative z-10"><a href="https://buy.stripe.com/test_placeholder" target="_blank" class="btn-stripe inline-flex flex-col items-center px-12 py-6 rounded-2xl font-bold shadow-2xl transition hover:scale-105"><span class="text-lg">回答履歴＆詳細分析レポート（PDF版）を購入</span><span class="text-xs opacity-70 mt-1">Stripeで安全に決済 ¥300</span></a></div></section>
+                <div class="flex flex-col gap-6 pt-12 text-center pb-24 px-6 mx-auto max-w-sm text-balance">
+                    <div class="flex gap-3 text-balance"><button onclick="window.shareOnX()" class="flex-1 bg-[#1DA1F2] text-white py-4 rounded-full font-bold shadow-xl">Xでシェア</button><button onclick="window.shareOnLINE()" class="flex-1 btn-line py-4 rounded-full font-bold shadow-xl text-balance">LINEで送る</button></div>
+                    <a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank" class="btn-secondary text-gray-700 py-5 px-10 rounded-full font-bold text-lg text-center flex items-center justify-center text-balance">フィードバックを送る</a>
+                    <button onclick="location.reload()" class="bg-[#111111] text-white py-5 px-10 rounded-full font-bold text-lg shadow-md hover:bg-black transition text-balance">もう一度診断する</button>
                 </div>
-                <section class="max-w-xl mx-auto px-6 py-12 text-[9px] text-gray-400 text-center leading-relaxed text-balance">
+                <section class="max-w-xl mx-auto px-6 py-12 text-[9px] text-gray-400 text-center leading-relaxed text-balance text-balance">
                     <p class="font-bold mb-2 uppercase tracking-widest text-gray-500">特定商取引法に基づく表記</p>
                     <p>販売業者：藤井 慶一朗 / 所在地：京都府京都市西京区嵐山薬師下町3-3 嵐山ファミリオ303号室 / お問い合わせ：saisakukais22340@gmail.com / 販売価格：300円（税込）/ 支払方法：クレジットカード（Stripe経由）/ 引き渡し時期：決済完了後直ちに / 返品：デジタルコンテンツの性質上不可</p>
                 </section>
@@ -205,8 +205,8 @@
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
             <button onclick="window.showView('guide')">GUIDE</button><a href="https://forms.gle/d6nJr3NhzWkyTiQFA" target="_blank">CONTACT</a><a href="privacy.html">PRIVACY POLICY</a>
         </div>
-        <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] font-bold italic text-balance text-center">PITA / Personality Ism Type Analyzer</div>
-        <div class="text-[7px] text-gray-200 mt-4 text-center">&copy; 2026 pita-diagnosis.com. All rights reserved.</div>
+        <div class="text-[9px] text-gray-300 uppercase tracking-[0.4em] font-bold italic text-balance text-center text-balance">PITA / Personality Ism Type Analyzer</div>
+        <div class="text-[7px] text-gray-200 mt-4 text-center text-balance">&copy; 2026 pita-diagnosis.com. All rights reserved.</div>
     </footer>
 
     <script type="module">
@@ -215,13 +215,13 @@
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyD0udBkcLXL7R2UrToqXJL9O12mpoQzf6E",
-            authDomain: "pita-diagnosis.firebaseapp.com",
-            projectId: "pita-diagnosis",
-            storageBucket: "pita-diagnosis.firebasestorage.app",
-            messagingSenderId: "209455556506",
-            appId: "1:209455556506:web:2f2ca38ef8a34f1f76fc23",
-            measurementId: "G-C9589BVH5M"
+          apiKey: "AIzaSyD0udBkcLXL7R2UrToqXJL9O12mpoQzf6E",
+          authDomain: "pita-diagnosis.firebaseapp.com",
+          projectId: "pita-diagnosis",
+          storageBucket: "pita-diagnosis.firebasestorage.app",
+          messagingSenderId: "209455556506",
+          appId: "1:209455556506:web:2f2ca38ef8a34f1f76fc23",
+          measurementId: "G-C9589BVH5M"
         };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -231,19 +231,216 @@
         const hintPool = ["いい選択だ。","深層が揺れている。","迷いも答えだ。","本質に近づいている。","魂に嘘はないか？","思考の解像度が上がる。","その決断が君だ。","加速しよう。","真実まであと少し。","理性か本能か。","君の輪郭が見えた。","深い、もっと深く。","直感を信しろ。","常識を捨てろ。","君の核に触める。","面白い回答だ。","本当の君は誰だ？","世界のノイズを消せ。","覚悟はいいか。","素晴らしい、その迷いこそが人間だ。","この1問が君を定義する。","順調だ、深淵まで潜れ。","君の『イズム』が悲鳴を上げている。","常識の檻を壊せ。","自分への嘘を暴け。","面白い、君はそんな風に考えるのか。","半分まで来たな、魂は無事か？","加速する思考、止まるな。","今の回答、少し震えなかったか？","君の本性が剥き出しになっていく。","理論を超えろ、直感に従え。","いいね、その潔さ。","真実へのカウントダウンだ。","思考の霧が晴れていく。","君という物語のクライマックスへ。","全神経をこの1問に注げ。","素晴らしい集中力だ。","魂の純度が高まっていく。","自分を騙すのはもうやめだ。","深層心理の鍵が開く音がする。","いいぞ、その調和。","混沌を恐めるな。","現実を見據える目は鋭いか？","理想の旗を掲げ続けろ。","利己的な自分を愛せるか？","利彼の精神を忘れるな。","楽観は知恵だ。", "虚無こそが真の自由だ。", "秩序を守る盾となれ。", "混沌を巻き起こす嵐となれ。", "君の答えを世界が待っている。", "その一手が運命を変える。", "鼓動を感じるか？", "自分を疑うな。", "君の真実はそこにある。", "未来は君の手の中に。", "歴史はこうして作られる。"];
 
         const resultData = {
-            ALT: { en: "ALT", k: "アルトルイスト", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "PITA-ALT.png",celebs: ["マザー-テレサ", "ガンジー", "シュバイツァー", "ナイチンゲール", "キング牧師", "デスモンド-ツツ", "ダイアナ妃", "ヘレン-ケラー", "杉原千畝", "新渡戸稲造", "孔子", "ソクラテス", "アリストテレス", "プラトン", "リンカーン", "聖徳太子", "宮沢賢治", "ジャンヌ-ダルク", "アンネ-フランク", "ヘンリー-デュナン", "緒方貞子", "ペスタロッチ", "渋沢栄一", "ジョン-ラスキン", "トマ-ピケティ", "カント", "ヘーゲル", "ハイデガー", "アインシュタイン", "チャップリン"],chars: ["竈門炭治郎", "緑谷出久", "沢田綱吉", "ベル・クラネル", "夏目貴志", "乙骨憂太", "竈門禰󠄀豆子", "藤丸立香", "アルフォンス", "潮田渚", "アレン・ウォーカー", "花垣武道", "有馬かな", "黒子テツヤ", "澤村大地", "清水潔子", "木之本桜", "本田透", "鹿目まどか", "赤城", "ウェンティ", "ナウシカ", "エミリア", "レム", "ジョナサン", "ファルコ", "日向ヒナタ", "井上織姫", "ヨル・フォージャー", "通形ミリオ"],d: "【慈愛の性質】あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、枯渇した現代社会における唯一の良心と言えるでしょう。周囲の感情に極めて敏感で、痛みを感じている者を見捨てることができません。【社会的役割】調和と癒やしの中心として機能します。あなたが輪の中にいるだけで、トゲのある空気が和らぎ、人々は本来の優しさを取り戻します。コミュニティの守護者であり、潤滑油でもあります。【潜在的リスク】他人の問題を自分のことのように抱え込みすぎ、自己を摩耗させる危険があります。自分を後回しにすることが習慣化すると、いつの間にか魂が空っぽになってしまうかもしれません。",dir: "✦【強みの最大化】あなたの類まれなる『共感力』を、社会的な連帯やチームの心理的安全性を構築するアーキテクトとしての側面を自覚しましょう。具体的なアクションへ昇華させることで、世界を救う実利的な力となります。✦【弱点の克服】『自己犠牲の閾値』を明確に設定することを学びましょう。自分が満たされた状態で溢れ出た愛を配分する循環モデルを意識してください。NOと言うことは冷酷さではなく、長期的な支援を続けるための賢明な判断です。✦【理想の環境】互いに支え合う文化が根付いており、あなたの献身が「当たり前」と搾取されず、正当な感謝として還元される温かな組織や居場所が最適です。",books: [{title: "ギブ・アンド・テイク", author: "アダム・グラント", desc: "「与える人」が最も成功することを証明した一冊。利他性が持つ実利的な力を再定義し、あなたの生き方に戦略的慈愛を与えます。"},{title: "夜と霧", author: "ヴィクトール・フランクル", desc: "極限状態での慈愛と精神の尊厳。あなたの献身的な姿勢の根底にある「意味」を深め、揺るぎない魂の土台を築きます。"},{title: "置かれた場所で咲きなさい", author: "渡辺和子", desc: "日常の献身と癒やしの知恵。周囲を照らすあなたの性質に寄り添う温かな言葉が、自己摩耗を防ぐ処方箋となります。"}]},
-            EGO: { en: "EGO", k: "エゴイスト", n: "利己主義者", c: "「自己を統治する気高き孤高の王」", img: "PITA-EGO.png",celebs: ["ナポレオン", "スティーブ-ジョブズ", "織田信長", "カエサル", "アレクサンダー大王", "ハワード-ヒューズ", "ダリ", "マキアヴェッリ", "フリードリヒ2世", "エリザベス1世", "ルイ14世", "チンギス-ハン", "ピョートル大帝", "ビスマルク", "ロックフェラー", "カーネギー", "シャネル", "ピカソ", "ミケランジェロ", "ベートーヴェン", "ワーグナー", "ニーチェ", "三島由紀夫", "本田宗一郎", "堀江貴文", "トランプ", "マスク", "ベゾス", "ゲイツ", "ザッカーバーグ"],chars: ["ギルガメッシュ", "海馬瀬人", "ルルーシュ", "夜神月", "ベジータ", "フリーザ", "爆豪勝己", "志々雄真実", "クロロ", "エレン", "藍染惣右介", "DIO", "赤司征同郎", "跡部景吾", "殺生丸", "飛影", "綾小路清隆", "司波達也", "五条悟", "両面宿儺", "馬狼照英", "糸師凛", "高杉晋助", "範馬勇次郎", "言峰綺礼", "シャルル", "エンデヴァー", "ボア-ハンコック"],d: "【独立の性質】あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。他人の評価に左右されず、自分の価値基準のみで世界を裁定します。【社会的役割】停滞した状況を打破する「開拓者」や「カリスマ」として君臨します。あなたの揺るぎない自信は、迷える大衆を惹きつけ、新しい時代を創造する強力なエンジンとなります。【潜在的リスク】他者を自分の目的の「道具」として見なしやすく、孤独を招くことがあります。また、自分の弱さを認めることが難しく、限界に達しても周囲を頼れない強情さが仇となることもあるでしょう。",dir: "✦【強みの最大化】その圧倒的な自己愛を、世界を動かす『ビジョン』へと昇華させてください。あなたが自己の欲望を極限まで追求した結果、それが新しいスタンダードとなり、結果として多くの人を幸せにする可能性があります。✦【弱点の克服】自分以外の『独立した才能』を認める度量を持ちましょう。他者の卓越さを敵視するのではなく、王としての風格を完成させ、真の協力者が集まるようになります。✦【理想の環境】実力がすべてを語り、あなたが絶対的なリーダーシップを発揮できる舞台がふさわしいでしょう。",books: [{title: "利己的な遺伝子", author: "リチャード・ドーキンス", desc: "生命の本質は「自己複製」にある。徹底した個の追求を生物学的視点から肯定し、王としての生存戦略を裏付けます。"},{title: "君主論", author: "マキアヴェッリ", desc: "目的達成のための冷徹なリアリズム。カリスマとして周囲を動かすための知恵を磨くための必読書です。"},{title: "水源", author: "アイン・ランド", desc: "妥協しない個人の意志。周囲に媚びないあなたの気高さと一致する個人主義の聖典であり、孤独に誇りを与えます。"}]},
-            OPT: { en: "OPT", k: "オプティミスト", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA-OPT.png",celebs: ["ディズニー", "エディソン", "松下幸之助", "本田宗一郎", "大谷翔平", "孫正義", "モーツァルト", "リチャード-ブランソン", "ジム-キャリー", "オプラ-ウィンフリー", "ジョン-レノン", "シェイクスピア", "ゲーテ", "シュリーマン", "ダーウィン", "ファーブル", "牧野富太郎", "手塚治虫", "藤子-F-不二雄", "宮崎駿", "黒澤明", "北野武", "イチロー", "孫正義", "ルーベン-フェイン", "ダ-ヴィンチ", "坂本九", "アンネ-フランク", "ヘンリー-デュナン", "ダイアナ妃"],chars: ["孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "喜多郁代", "日向翔陽", "切島鋭児郎", "パック", "ベアトリス", "フェルト", "ラインハルト", "諸星あたる", "ポプ子", "ピピ美", "高坂穂乃果", "湊あくあ", "神楽"],d: "【希望の性質】あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための動力源です。失敗を単なるプロセスと信じ、常に前を向く姿勢は他者に勇気を与えます。【社会的役割】ムードメーカー。沈みかけたチームの士気を一瞬で引き上げ、不可能な挑戦に火をつける点火者。あなたの「きっと大丈夫」という言葉は、時に物理的な限界を超えさせる魔法の力となります。【潜在的リスク】現実的なリスクを軽視しがちで、無謀な行動に出てしまうことがあります。周囲の悲しみに対しても明るさを強要してしまい、デリカシーの欠如による反発を招く可能性がある点は注意が必要です。",dir: "✦【強みの最大化】その根拠のない自信を『継続力』へ繋げてください。挑戦し続ける限り、あなたの楽観は必然の予言となります。✦【弱点の克服】冷徹な『現実主義者』の視点を安全装置として借りましょう。彼らの警告はあなたの翼をより高く飛ばすための重りです。✦【理想の環境】新しい試みが常に歓迎され、ポジティブなエネルギーに満ちたクリエイティブな場所が最適です。",books: [{title: "道は開ける", author: "デール・カーネギー", desc: "不安を克服し、行動へと変える。あなたの不滅の希望を具体的な人生の指針へと変える、楽観主義者のためのバイブル。"},{title: "幸福論", author: "アラン", desc: "幸福は意志である。あなたの「大丈夫」という直感的感覚を、哲学的な強靭さへと昇華させ、意志としての幸福を確立します。"},{title: "楽観主義者の未来予測", author: "ピーター・ディアマンディス", desc: "テクノロジーが人類を豊かにする。未来を信じるあなたの性質と深く共鳴する、エビデンスに基づいた希望の展望。"}]},
-            NIH: { en: "NIH", k: "ニヒリスト", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA-NIH.png",celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫", "中原中也", "芥川龍之介", "江戸川乱歩", "萩原朔太郎", "ボードレール", "ランボー", "ポオ", "ドストエフスキー", "トルストイ", "サルトル", "ボーヴォワール", "アラン", "パスカル", "モンテーニュ", "スピノザ", "ライプニッツ", "ウィトゲンシュタイン", "フーコー", "デリダ", "ドゥルーズ", "バタイユ", "チョムスキー", "ジジェク"],chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "フェイタン", "九条玲那", "忍野メメ", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "芥川龍之介", "ジン", "スカー", "オビト", "マダラ", "虚", "貝木泥舟", "キルア", "セバスチャン"],d: "【空の性質】あなたは世界の『無』を見抜いた賢者です。虚飾から脱却し、何物にも執着しない視点は、あらゆる苦悩を超越した自由を象徴しています。虚無の果てに立つあなたの姿は、気高く美しい。【社会的役割】観察者。熱狂や混乱に呑まれず、無駄なエネルギー消費を止める『ブレーキ』の役割を果たします. 冷徹に本質を見抜く目は、組織が幻想に踊らされるのを防ぎます。【潜在性リスク】『どうせ意味がない』という考えに支配され、必要な行動まで放棄してしまう可能性があります。無気力が長期化すると、生命感さえも希薄になり、他者との接続を断ってしまう危険があります。",dir: "✦【強みの最大化】『意味がないからこそ、何をやっても自由だ』という能動的な虚無主義を楽しんで。独創的な表現を生み出しましょう。✦【弱点の克服】一過性の『感覚の快楽』を否定せずに受け入れましょう。今飲む茶の美味しさは事実です。✦【理想の環境】知的な思索に耽ることができる静かな環境。一人での時間が確保された場所がベストです。",books: [{title: "異邦人", author: "アルベール-カミュ", desc: "世界の不条理と虚無を直視する。意味のなさを肯定するあなたの静かな自由を代弁し、魂を救済する物語。"},{title: "ツァラトゥストラはこう言った", author: "ニーチェ", desc: "虚無を越え、超人へ。あなたの観察眼を、生を肯定するための力へ変革させる哲学の頂点。"},{title: "死にいたる病", author: "キェルケゴール", desc: "絶望と向き合い真の自己を見つめる. 深淵まで潜るあなたの思考に、より深い実存的洞察を与えます。"}]},
-            IDE: { en: "IDE", k: "イデアリスト", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA-IDE.png",celebs: ["レノン", "宮沢賢治", "サン=テグジュペリ", "ゴッホ", "ワイルド", "プラトン", "ソクラテス", "ルソー", "ゲーテ", "シラー", "カント", "フィヒテ", "シェリング", "ヘーゲル", "夏目漱石", "島崎藤村", "泉鏡花", "谷崎潤一郎", "川端康成", "三島由紀夫", "村上春樹", "手塚治虫", "宮崎駿", "高畑勲", "庵野秀明", "新海誠", "細田守", "湯浅政明", "押井守", "大友克洋"],chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "ド-ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "獄寺隼人", "山本武", "雨宮蓮", "鳳凰院凶真", "枢木スザク", "ユーフェミア", "アルミン", "エドワード", "ニコ・ロビン", "星海光来", "宮侑", "宮治", "北信介", "中島敦", "太宰治"],d: "【イデアの性質】あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、崇高な意志です。泥の中でも空を見上げ続けられる人です。【社会的役割】導師や予言者。凡庸な現実に飽き足らない人々を鼓舞し、不可能と思われたイノベーションを成し遂げる原動力となります。あなたのビジョンは未来の道標です。【潜在的リスク】不完全な現実を激しく拒絶してしまう潔癖さがあります。理想と現実のギャップに絶望し、世捨て人のようになってしまう脆さも持ち合わせています。完璧主義による過度な自己批判には注意が必要です。",dir: "✦【強みの最大化】脳内の完璧な世界を『具体化の力』で現実に翻訳してください。あなたの理想が共有されたとき、それは世界を変える巨大な力となります。✦【弱点の克服】不完全さの中にある『美しさ』を見出す訓練を。完璧ではないからこそ愛おしいという感覚があなたを救います。✦【理想の環境】高い志を嘲笑せず、理念が重んじられる価値観主導のコミュニティが最適です。",books: [{title: "ソクラテスの弁明", author: "プラトン", desc: "真の正義とイデア。揺るぎない確信を持つあなたの魂を支える、西洋思想の原点にして至高の書。"},{title: "アルケミスト", author: "パウロ・コエーリョ", desc: "不完全な現実の中で理想を信じるあなたの旅を肯定。夢を追う勇気と世界との調和を説く物語。"},{title: "銀河鉄道の夜", author: "宮沢賢治", desc: "「本当の幸い」を求めて。美しい空想世界と崇高な自己犠牲が描かれた、あなたのための文学。"}]},
-            REA: { en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png",celebs: ["福沢諭吉", "徳川家康", "ビスマルク", "ロックフェラー", "フランクリン", "チャーチル", "鄧小平", "カエサル", "アウグストゥス", "トラヤヌス", "ハドリアヌス", "アウレリウス", "コンスタンティヌス", "ユスティニアヌス", "カール大帝", "オットー1世", "バルバロッサ", "フィリップ2世", "エドワード1世", "アンリ4世", "リシュリュー", "マザラン", "コルベール", "タルレーラン", "メッテルニヒ", "キャニング", "パーマストン", "ディズレーリ", "グラッドストン"],chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "堀北学", "灰崎祥吾", "花宮真", "吉良吉影", "高坂麗奈", "黄前久美子", "鎧塚みぞれ", "比企谷小町", "一条将輝", "折木奉太郎"],d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。幻想を排除し、事実と論理で世界を読み解く知性は現代を生き抜く強力な武器です。生存確率を計算し勝機を掴む手腕は芸術的ですらあります。【社会的役割】組織の頭脳や土台. 熱狂に流されず冷静に数値を分析し、リスクを管理するあなたの存在はプロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーであり実務家です。【潜在的リスク】人の感情や直感を軽視しがちで、冷酷な印象を与えることがあります。計算できないイレギュラーに直面すると混乱することも。論理の檻に閉じ込められないよう自制してください。",dir: "✦【強みの最大化】その圧倒的な論理に『心理学』の知見を加えてください。人間の非合理さも計算式に入れれば、あなたの現実は無敵となります。✦【弱点の克服】たまには『意図的な無駄』を。非効率な体験の中に、論理では導き出せなかった新しい発見が眠っています。✦【理想の環境】成果が数値化され、合理的な判断が評価される、プロフェッショナルな自立が求められる職場。",books: [{title: "FACTFULNESS", author: "ハンス-ロスリング", desc: "事実に基づいて世界を正しく見る。あなたの冷静な分析眼をさらに研ぎ澄ます現代の必読書。"},{title: "影響力の武器", author: "ロバート-チャルディーニ", desc: "人の行動を支配する心理学的原理. 実利を追求するあなたのための、社会という戦場を生き抜く強力な武器。"},{title: "完訳 7つの習慣", author: "スティーブン-R-コヴィー", desc: "長期的な成功への原理原則。感情ではなく「効果性」を重視するあなたの性質に完璧にフィットします。"}]},
-            MOD: { en: "MOD", k: "モダニスト", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA-MOD.png",celebs: ["カント", "リンカーン", "聖徳太子", "ドラッカー", "ワシントン", "孔子", "ウェーバー", "ミル", "ハミルトン", "北条泰時", "北条時宗", "徳川吉宗", "松平定信", "水野忠邦", "井伊直弼", "岩倉具視", "大久保利通", "伊藤博文", "山県有朋", "松方正義", "西園寺公望", "原敬", "高橋是清", "犬養毅", "広田弘毅", "吉田茂", "池田勇人", "佐藤栄作", "中曽根弘", "小泉純一郎"],chars: ["飯田天哉", "影山飛雄", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "安室透", "赤井秀一", "ターニャ", "ラインハルト", "ヤン", "オーベルシュタイン", "ロイ", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂永亮", "白鳥任三郎", "鏑木虎徹"],d: "【規律の性質】あなたは文明の根幹を支える守護神です. 誠実に秩序を維持する姿勢は、社会が崩壊することなく存続するための要石です。あなたがルーチンを守る時、世界は初めて安心して自転を続けることができます。【社会的役割】管理、教育。ルールを公平に運用することで組織に安定感をもたらします。人々が安心して能力を発揮できる場を創る人です。あなたの誠実さがチームの土台となります。【潜在的リスク】固定観念に縛られやすく、既存ルールの破壊に対して強い拒絶反応を示します。柔軟性を欠いた対応で、周囲を息苦しくさせてしまうことがある点は改善の余地があります。",dir: "✦【強みの最大化】ルールを守る側から『創る側』へ。あなたの公平な視点は、堅牢なシステム構築にこそ活かされます。✦【弱点の克服】完璧な秩序よりも『ゆらぎ』の価値を認めましょう。多少の遊びがある方が、システム強度は高まります。✦【理想の環境】役割分担が明確で、プロセスと安定性が正当に評価される組織。",books: [{title: "マネジメント", author: "ドラッカー", desc: "組織の秩序と成果の出し方。管理と安定を重んじるあなたの社会的役割に、深い論理的根拠を与えてくれます。"},{title: "職業としての政治", author: "ウェーバー", desc: "責任と倫理の哲学。堅牢な秩序を維持しようとするあなたの誠実さと志に深く共鳴する一冊。"},{title: "論語", author: "孔子", desc: "調和して生きるためのシステムの原点. 歴史に裏打ちされた知恵が、あなたの秩序形成を強力に助けます。"}]},
-            ANA: { en: "ANA", k: "アナーキスト", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA-ANA.png",celebs: ["坂本龍馬", "ピカソ", "チェ-ゲバラ", "ボブ-ディラン", "バクーニン", "マルコムX", "ディオゲネス", "シド-ヴィシャス", "ジャン-ジュネ", "バタイユ", "ブルトン", "デュシャン", "ウォーホル", "バスキア", "バンクシー", "ケルアック", "バロウズ", "ギンズバーグ", "ボブ-ディラン", "ジム-モリソン", "ボウイ", "マーキュリー", "カート-コバーン", "ジョン-ライドン", "イギー-ポップ", "ルー-リード", "パティ-スミス", "ビョーク", "レディー-ガガ"],chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー・ボイル", "諸星あたる", "範馬刃牙", "折原臨也", "ラッド・ルッソ", "セルティ", "東堂葵", "トガヒミコ", "両面宿儺", "死柄木弔", "バギー", "ジェビル"],d: "【変革の性質】あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です. 檻の中にいることに耐えられない、真の自由人です。【社会的役割】「破壊的イノベーター」。常識が通用しない新しい視点を持ち込み、硬直した社会に風穴を開けます。あなたが動くとき、新しい時代の幕が上がります。停滞した空気の解毒剤です。【潜在的リスク】破壊のあとに何を遺すかを考えないため、周囲に混乱を残してしまうことがあります。持続性に欠け、人生が流浪しがちです. 破壊そのものが目的化しないよう自制が必要です。",dir: "✦【強みの最大化】理屈を超えた行動こそが停滞した世界の唯一の解毒剤となります。破壊を恐れず嵐を起こし続けましょう。✦【弱点の克服】『破壊の後の更地』を管理してくれるパートナーを。バトンを渡せば、あなたの変革は完遂されます。✦【理想の環境】制約が一切なく、毎日が予測不能な現場. あなたの突飛な行動が歓迎されるエネルギッシュな現場が最適です。",books: [{title: "現代思想入門", author: "千葉雅也", desc: "固定観念を脱構築（デコンストラクト）する. あなたの直感的で破壊的な思考に、最強の論理的基盤を与えます。"},{title: "野生の思考", author: "レヴィ＝ストロース", desc: "文明の枠を超えた根源的な知。野生の直感で生きるあなたの価値を再発見できる一冊。"},{title: "資本論", author: "マルクス", desc: "既存システムの構造的矛盾を突き、混沌から再編しようとする情熱の理論. 世界のルールを疑うあなたに。"}]},
-            EPH: { en: "EPH", k: "エフェメラリスト", n: "刹那主義者", c: "「今この瞬間に全てを懸ける閃光の自由人」", img: "PITA-EPH.png",celebs: [],chars: [],d: "【瞬間の性質】あなたは「未来」や「継続」といった時間的重力から解き放たれた存在です。100問の果てにある結論よりも、今この瞬間に沸き起こる「飽きた」「面白くない」という直感を何よりも尊重します. 完遂を美徳とする社会において、あなたの「軽やかさ」は究極の自由を体現しています。【社会的役割】停滞した空気を一瞬で破壊し、新しい風を呼び込む「トリガー」となります。既存のレールを平然と降りるその姿は、周囲に「生き方の多様性」を無言で突きつけます。刹那の輝きで場を支配する力があります。【潜在性リスク】持続力が極めて低く、形に残る成果を築く前に次の刺激へ移ってしまうため、周囲からは「無責任」と誤解されがちです。信頼の積み上げが必要な場面で、孤立してしまうリスクを抱えています。※あなたは100問の壁を直感で飛び越えた、特別な存在です。",dir: "✦【強みの最大化】一瞬で誰かを魅了する表現やアイデアにおいて、あなたは無敵の力を発揮します。爆発的な瞬発力を即興性が求められる場に注いでください。✦【弱点の克服】「飽きた後のバトンタッチ」を覚えましょう。あなたの破壊的衝動は創造的変革へと昇華されます。✦【理想の環境】変化し続けるクリエイティブな現場。スタートアップの初期などが最適です。",books: [{title: "オン・ザ-ロード", author: "ジャック-ケルアック", desc: "瞬間を燃焼させるビート・ジェネレーションの聖典. あなたの刹那的な生の輝きと完璧に一致します。"},{title: "ライ麦畑でつかまえて", author: "サリンジャー", desc: "虚飾を嫌い、今を守る物語。サンクコストに囚われないあなたの軽やかさを肯定。"},{title: "車輪の下", author: "ヘッセ", desc: "社会的重力に押し潰されないために. 未来という重圧から解放されたいあなたの心を癒やし、自由を再定義する名作。"}]}
+            ALT: { 
+                en: "ALT", k: "アルトルイスト", n: "利他主義者", c: "「時代を救済する慈愛の聖者」", img: "PITA-ALT.png", 
+                celebs: ["マザー-テレサ", "ガンジー", "シュバイツァー", "ナイチンゲール", "キング牧師", "デスモンド-ツツ", "ダイアナ妃", "ヘレン-ケラー", "杉原千畝", "新渡戸稲造", "孔子", "ソクラテス", "アリストテレス", "プラトン", "リンカーン", "聖徳太子", "宮沢賢治", "ジャンヌ-ダルク", "アンネ-フランク", "ヘンリー-デュナン", "緒方貞子", "ペスタロッチ", "渋沢栄一", "ジョン-ラスキン", "トマ-ピケティ", "カント", "ヘーゲル", "ハイデガー", "アインシュタイン", "チャップリン"],
+                chars: ["竈門炭治郎", "緑谷出久", "沢田綱吉", "ベル・クラネル", "夏目貴志", "乙骨憂太", "竈門禰󠄀豆子", "藤丸立香", "アルフォンス", "潮田渚", "アレン・ウォーカー", "花垣武道", "有馬かな", "黒子テツヤ", "澤村大地", "清水潔子", "木之本桜", "本田透", "鹿目まどか", "赤城", "ウェンティ", "ナウシカ", "エミリア", "レム", "ジョナサン", "ファルコ", "日向ヒナタ", "井上織姫", "ヨル・フォージャー", "通形ミリオ"], 
+                d: "【慈愛の性質】あなたは存在そのものが光です。他者の幸福を自らの喜びとし、自己犠牲すら厭わない精神性は、枯渇した現代社会における唯一の良心と言えるでしょう。周囲の感情に極めて敏感で、痛みを感じている者を見捨てることができません。【社会的役割】調和と癒やしの中心として機能します。あなたが輪の中にいるだけで、トゲのある空気が和らぎ、人々は本来の優しさを取り戻します。コミュニティの守護者であり、潤滑油でもあります。【潜在的リスク】他人の問題を自分のことのように抱え込みすぎ、自己を摩耗させる危険があります。自分を後回しにすることが習慣化すると、いつの間にか魂が空っぽになってしまうかもしれません。", 
+                dir: "✦【強みの最大化】あなたの類まれなる『共感力』を、単なる感情的な同情で終わらせず、社会的な連帯やチームの心理的安全性を構築するアーキテクトとしての側面を自覚しましょう。具体的なアクションへ昇華させることで、世界を救う実利的な力となります。✦【弱点の克服】『自己犠牲の閾値』を明確に設定することを学びましょう。他者のために自分を削るのではなく、自分が満たされた状態で溢れ出た愛を配分する循環モデルを意識してください。NOと言うことは冷酷さではなく、長期的な支援を続けるための賢明な判断です。✦【理想の環境】互いに支え合う文化が根付いており、あなたの献身が「当たり前」と搾取されず、正当な感謝として還元される温かな組織や居場所が最適です。",
+                books: [
+                    { title: "ギブ・アンド・テイク", author: "アダム・グラント", desc: "「与える人」が最も成功することを証明した一冊。利他性が持つ実利的な力を再定義し、あなたの生き方に戦略的慈愛を与えます。" },
+                    { title: "夜と霧", author: "ヴィクトール・フランクル", desc: "極限状態での慈愛と精神の尊厳。あなたの献身的な姿勢の根底にある「意味」を深め、揺るぎない魂の土台を築きます。" },
+                    { title: "置かれた場所で咲きなさい", author: "渡辺和子", desc: "日常の献身と癒やしの知恵。周囲を照らすあなたの性質に寄り添う温かな言葉が、自己摩耗を防ぐ処方箋となります。" }
+                ]
+            },
+            EGO: { 
+                en: "EGO", k: "エゴイスト", n: "利己主義者", c: "「自己を統治する気高き孤高の王」", img: "PITA-EGO.png", 
+                celebs: ["ナポレオン", "スティーブ-ジョブズ", "織田信長", "カエサル", "アレクサンダー大王", "ハワード-ヒューズ", "ダリ", "マキアヴェッリ", "フリードリヒ2世", "エリザベス1世", "ルイ14世", "チンギス-ハン", "ピョートル大帝", "ビスマルク", "ロックフェラー", "カーネギー", "シャネル", "ピカソ", "ミケランジェロ", "ベートーヴェン", "ワーグナー", "ニーチェ", "三島由紀夫", "本田宗一郎", "堀江貴文", "トランプ", "マスク", "ベゾス", "ゲイツ", "ザッカーバーグ"],
+                chars: ["ギルガメッシュ", "海馬瀬人", "ルルーシュ", "夜神月", "ベジータ", "フリーザ", "爆豪勝己", "志々雄真実", "クロロ", "エレン", "藍染惣右介", "DIO", "赤司征十郎", "跡部景吾", "殺生丸", "飛影", "綾小路清隆", "司波達也", "五条悟", "両面宿儺", "馬狼照英", "糸師凛", "高杉晋助", "範馬勇次郎", "言峰綺礼", "シャルル", "エンデヴァー", "ボア-ハンコック"], 
+                d: "【独立の性質】あなたは圧倒的な自己の確立者です。群れに媚びず、自らの欲望と目的に忠実であるその姿勢は、真の意味での『自由』を体現しています。他人の評価に左右されず、自分の価値基準のみで世界を裁定します。【社会的役割】停滞した状況を打破する「開拓者」や「カリスマ」として君臨します。あなたの揺るぎない自信は、迷える大衆を惹きつけ、新しい時代を創造する強力なエンジンとなります。【潜在적リスク】他者を自分の目的の「道具」として見なしやすく、孤独を招くことがあります。また、自分の弱さを認めることが難しく、限界に達しても周囲を頼れない強情さが仇となることもあるでしょう。", 
+                dir: "✦【強みの最大化】その圧倒的な自己愛を、世界を動かす『ビジョン』へと昇華させてください。あなたが自己の欲望を極限まで追求した結果、それが新しいスタンダードとなり、結果として多くの人を幸せにする可能性があります。✦【弱点の克服】自分以外の『独立した才能』を認める度量を持ちましょう。他者の卓越さを敵視するのではなく、王としての風格を完成させ、真の協力者が集まるようになります。✦【理想の環境】実力がすべてを語り、あなたが絶対的なリーダーシップを発揮できる舞台がふさわしいでしょう。",
+                books: [
+                    { title: "利己的な遺伝子", author: "リチャード・ドーキンス", desc: "生命の本質は「自己複製」にある。徹底した個の追求を生物学的視点から肯定し、王としての生存戦略を裏付けます。" },
+                    { title: "君主論", author: "マキアヴェッリ", desc: "目的達成のための冷徹なリアリズム。カリスマとして周囲を動かすための知恵を磨くための必読書です。"},
+                    { title: "水源 (アイランド)", author: "アイン・ランド", desc: "妥協しない個人の意志。周囲に媚びないあなたの気高さと一致する個人主義の聖典であり、孤独に誇りを与えます。"}
+                ]
+            },
+            OPT: { 
+                en: "OPT", k: "オプティミスト", n: "楽観主義者", c: "「世界に光を灯す不滅の希望」", img: "PITA-OPT.png", 
+                celebs: ["ディズニー", "エディソン", "松下幸之助", "本田宗一郎", "大谷翔平", "孫正義", "モーツァルト", "リチャード-ブランソン", "ジム-キャリー", "オプラ-ウィンフリー", "ジョン-レノン", "シェイクスピア", "ゲーテ", "シュリーマン", "ダーウィン", "ファーブル", "牧野富太郎", "手塚治虫", "藤子-F-不二雄", "宮崎駿", "黒澤明", "北野武", "イチロー", "孫正義", "ルーベン-フェイン", "ダ-ヴィンチ", "坂本九", "アンネ-フランク", "ヘンリー-デュナン", "ダイアナ妃", "孔子"], 
+                chars: ["孫悟空", "うずまきナルト", "サトシ", "ゴン", "月野うさぎ", "両津勘吉", "アーニャ", "星野アイ", "虎杖悠仁", "野原しんのすけ", "佐藤和真", "アクア", "ナツ", "アスタ", "江戸川コナン", "ドラえもん", "星馬烈", "喜多郁代", "日向翔陽", "切島鋭児郎", "パック", "ベアトリス", "フェルト", "ラインハルト", "諸星あたる", "ポプ子", "ピピ美", "高坂穂乃果", "湊あくあ", "神楽"], 
+                d: "【希望の性質】あなたは絶望を塗り替える天才です。どんな暗闇の中でも未来の輝きを見出し、周囲を明るく照らすそのエネルギーは、人類が前進し続けるための動力源です。失敗をプロセスと信じ、常に前を向く姿勢は他者に勇気を与えます。【社会的役割】ムードメーカー。沈みかけたチームの士気を一瞬で引き上げ、不可能な挑戦に火をつける点火者。あなたの「きっと大丈夫」という言葉は、魔法の力となります。【潜在的リスク】現実的なリスクを軽視しがちで、無謀な行動に出てしまうことがあります。周囲の悲しみに対しても明るさを強要してしまい、デリカシーの欠如による反発を招く可能性がある点は注意が必要です。", 
+                dir: "✦【強みの最大化】その根拠のない自信を『継続力』へ繋げてください。挑戦し続ける限り、あなたの楽観は必然の予言となります。✦【弱点の克服】冷徹な『現実主義者』の視点を安全装置として借りましょう。彼らの警告はあなたの翼をより高く飛ばすための重りです。✦【理想の環境】新しい試みが常に歓迎され、ポジティブなエネルギーに満ちたクリエイティブな場所が最適です。",
+                books: [
+                    { title: "道は開ける", author: "デール・カーネギー", desc: "不安を克服し、行動へと変える。あなたの不滅の希望を具体的な人生の指針へと変える、楽観主義者のためのバイブル。" },
+                    { title: "幸福論", author: "アラン", desc: "幸福は意志である。あなたの「大丈夫」という直感的感覚を、哲学的な強靭さへと昇華させ、意志としての幸福を確立します。" },
+                    { title: "楽観主義者の未来予測", author: "ピーター・ディアマンディス", desc: "テクノロジーが人類を豊かにする。未来を信じるあなたの性質と深く共鳴する、エビデンスに基づいた希望の展望。"}
+                ]
+            },
+            NIH: { 
+                en: "NIH", k: "ニヒリスト", n: "虚無主義者", c: "「真理を悟りし超越の静観者」", img: "PITA-NIH.png", 
+                celebs: ["ニーチェ", "太宰治", "カフカ", "ショーペンハウアー", "カミュ", "三島由紀夫", "中原中也", "芥川龍之介", "江戸川乱歩", "萩原朔太郎", "ボードレール", "ランボー", "ポオ", "ドストエフスキー", "トルストイ", "サルトル", "ボーヴォワール", "アラン", "パスカル", "モンテーニュ", "スピノザ", "ライプニッツ", "ウィトゲンシュタイン", "フーコー", "デリダ", "ドゥルーズ", "バタイユ", "チョムスキー", "ジジェク"], 
+                chars: ["ウルキオラ", "L", "綾波レイ", "槙島聖護", "夏油傑", "金木研", "碇シンジ", "渚カヲル", "伏黒甚爾", "ディアボロ", "鬼舞辻無惨", "ガッツ", "暁美ほむら", "メルエム", "フェイタン", "九条玲那", "忍野メメ", "サイタマ", "阿良々木暦", "不死川実弥", "童磨", "芥川龍之介", "ジン", "スカー", "オビト", "マダラ", "虚", "貝木泥舟", "キルア", "セバスチャン"], 
+                d: "【空の性質】あなたは世界の『無』を見抜いた賢者です。虚飾から脱却し、何物にも執着しない視点は、あらゆる苦悩を超越した自由を象徴しています。虚無の果てに立つあなたの姿は、気高く美しい。【社会的役割】観察者。熱狂や混乱に呑まれず、無駄なエネルギー消費を止める『ブレーキ』の役割を果たします. 冷徹に本質を見抜く目は、組織が幻想に踊らされるのを防ぎます。【潜在性リスク】『どうせ意味がない』という考えに支配され、必要な行動まで放棄してしまう可能性があります。無気力が長期化すると、生命感さえも希薄になり、他者との接続を断ってしまう危険があります。", 
+                dir: "✦【強みの最大化】『意味がないからこそ、何をやっても自由だ』という能動的な虚無主義を楽しんで。何物にも依存しないあなたの視点は、独創的な表現を生み出します。✦【弱点の克服】一過性の『感覚の快楽』を否定せずに受け入れましょう。今飲む茶の美味しさは否定できない事実です。✦【理想の環境】知的な思索に耽ることができる静かな環境。過度な期待を押し付けられない一人の時間が確保された場所がベストです。",
+                books: [
+                    { title: "異邦人", author: "アルベール・カミュ", desc: "世界の不条理と虚無を直視する。意味のなさを肯定するあなたの静かな自由を代弁し、魂を救済する物語。" },
+                    { title: "ツァラトゥストラはこう言った", author: "ニーチェ", desc: "虚無を越え、超人へ。あなたの観察眼を、生を肯定するための力へ変革させる哲学の頂点。"},
+                    { title: "死にいたる病", author: "キェルケゴール", desc: "絶望と向き合い真の自己を見つめる. 深淵まで潜るあなたの思考に、より深い実存的洞察を与えます。"}
+                ]
+            },
+            IDE: { 
+                en: "IDE", k: "イデアリスト", n: "理想主義者", c: "「至高なる未来を紡ぐ美の建築家」", img: "PITA-IDE.png", 
+                celebs: ["レノン", "宮沢賢治", "サン=テグジュペリ", "ゴッホ", "ワイルド", "プラトン", "ソクラテス", "ルソー", "ゲーテ", "シラー", "カント", "フィヒテ", "シェリング", "ヘーゲル", "夏目漱石", "島崎藤村", "泉鏡花", "谷崎潤一郎", "川端康成", "三島由紀夫", "村上春樹", "手塚治虫", "宮崎駿", "高畑勲", "庵野秀明", "新海誠", "細田守", "湯浅政明", "押井守", "大友克洋"], 
+                chars: ["衛宮士郎", "アルトリア", "ジャンヌ", "ハンジ", "ロイ・マスタング", "及川徹", "宮園かをり", "千反田える", "エルヴィン", "グリフィス", "ド-ゴール", "アーサー", "本田菊", "雲雀恭弥", "六道骸", "獄寺隼人", "山本武", "雨宮蓮", "鳳凰院凶真", "枢木スザク", "ユーフェミア", "アルミン", "エドワード", "ニコ・ロビン", "星海光来", "宮侑", "宮治", "北信介", "中島敦", "太宰治"], 
+                d: "【イデアの性質】あなたは現実というキャンバスに理想を描く芸術家です。目に見える事実よりも、心にある『あるべき姿』を信じる情熱は、崇高な意志です。泥の中でも空を見上げ続けられる人です。【社会的役割】導師や予言者。凡庸な現実に飽き足らない人々を鼓舞し、不可能と思われたイノベーションを成し遂げる原動力となります。あなたのビジョンは未来の道標です。【潜在的リスク】不完全な現実を激しく拒絶してしまう潔癖さがあります。理想と現実のギャップに絶望し、世捨て人のようになってしまう脆さも持ち合わせています。完璧主義による過度な自己批判には注意が必要です。", 
+                dir: "✦【強みの最大化】脳内の完璧な世界を『具体化の力』で現実に翻訳してください。あなたの理想が共有されたとき、それは世界を変える巨大な力となります。✦【弱点の克服】不完全さの中にある『美しさ』を見出す訓練を。完璧ではないからこそ愛おしいという感覚があなたを救います。✦【理想の環境】高い志を嘲笑せず、その価値を理解し協力してくれる仲間がいる場所。理念が重んじられる価値観主導のコミュニティが最適です。",
+                books: [
+                    { title: "ソクラテスの弁明", author: "プラトン", desc: "真の正義とイデア。揺るぎない確信を持つあなたの魂を支える、西洋思想の原点にして至高の書。" },
+                    { title: "アルケミスト", author: "パウロ・コエーリョ", desc: "不完全な現実の中で理想を信じるあなたの旅を肯定。夢を追う勇気と世界との調和を説く物語。"},
+                    { title: "銀河鉄道の夜", author: "宮沢賢治", desc: "「本当の幸い」を求めて。美しい空想世界と崇高な自己犠牲が描かれた、あなたのための文学。"}
+                ]
+            },
+            REA: { 
+                en: "REA", k: "リアリスト", n: "現実主義者", c: "「混沌を切り裂く真実の体現者」", img: "PITA-REA.png", 
+                celebs: ["福沢諭吉", "徳川家康", "ビスマルク", "ロックフェラー", "フランクリン", "チャーチル", "鄧小平", "カエサル", "アウグストゥス", "トラヤヌス", "ハドリアヌス", "アウレリウス", "コンスタンティヌス", "ユスティニアヌス", "カール大帝", "オットー1世", "バルバロッサ", "フィリップ2世", "エドワード1世", "アンリ4世", "リシュリュー", "マザラン", "コルベール", "タルレーラン", "メッテルニヒ", "キャニング", "パーマストン", "ディズレーリ", "グラッドストン"], 
+                chars: ["奈良シカマル", "比企谷八幡", "リヴァイ", "サンジ", "トラファルガー・ロー", "狡噛慎也", "加藤恵", "雪ノ下雪乃", "堀北鈴音", "龍園翔", "坂柳有栖", "加持リョウジ", "葛城ミサト", "赤木リツコ", "岩泉一", "角名倫太郎", "佐久早聖臣", "昼神幸郎", "岸辺", "天沢一夏", "堀北学", "灰崎祥吾", "花宮真", "吉良吉影", "高坂麗奈", "黄前久美子", "鎧塚みぞれ", "比企谷小町", "一条将輝", "折木奉太郎"], 
+                d: "【実利の性質】あなたは揺るぎない地平に立つ実力者です。幻想を排除し、事実と論理で世界を読み解く知性は現代を生き抜く最も強力な武器です。生存確率を計算し勝機を掴む手腕は芸術的ですらあります。【社会的役割】組織の頭脳や土台. 熱狂に流されず冷静に数値を分析し、リスクを管理するあなたの存在はプロジェクトの成功率を飛躍的に高めます。頼れるアドバイザーであり実務家です。【潜在的リスク】人の感情や直感を軽視しがちで、冷酷な印象を与えることがあります。計算できないイレギュラーに直面すると必要以上に混乱することも。論理の檻に閉じ込められないよう自制してください。", 
+                dir: "✦【強みの最大化】その圧倒的な論理に『心理学』の知見を加えてください。人間の非合理さも計算式に入れれば、あなたの現実は無敵となります。✦【弱点の克服】たまには『意図的な無駄』を。非効率な体験の中に、論理では導き出せなかった新しい発見が眠っています。✦【理想の環境】成果が数値化され、合理的な判断が評価される、プロフェッショナルな自立が求められる職場。",
+                books: [
+                    { title: "FACTFULNESS", author: "ハンス・ロスリング", desc: "事実に基づいて世界を正しく見る。あなたの冷静な分析眼をさらに研ぎ澄ます現代の必読書。" },
+                    { title: "影響力の武器", author: "ロバート・チャルディーニ", desc: "人の行動を支配する心理学的原理. 実利を追求するあなたのための、社会という戦場を生き抜く強力な武器。"},
+                    { title: "完訳 7つの習慣", author: "スティーブン-R-コヴィー", desc: "長期的な成功への原理原則。感情ではなく「効果性」を重視するあなたの性質に完璧にフィットします。"}
+                ]
+            },
+            MOD: { 
+                en: "MOD", k: "モダニスト", n: "秩序主義者", c: "「調和を維持する世界の守護者」", img: "PITA-MOD.png", 
+                celebs: ["カント", "リンカーン", "聖徳太子", "ドラッカー", "ワシントン", "孔子", "ウェーバー", "ミル", "ハミルトン", "北条泰時", "北条時宗", "徳川吉宗", "松平定信", "水野忠邦", "井伊直弼", "岩倉具視", "大久保利通", "伊藤博文", "山県有朋", "松方正義", "西園寺公望", "原敬", "高橋是清", "犬養毅", "広田弘毅", "吉田茂", "池田勇人", "佐藤栄作", "中曽根弘", "小泉純一郎"], 
+                chars: ["飯田天哉", "影山飛雄", "国木田独歩", "手塚国光", "真田弦一郎", "影山飛雄", "常守朱", "宜野座伸元", "銭形警部", "目暮十三", "佐藤美和子", "安室透", "赤井秀一", "ターニャ", "ラインハルト", "ヤン", "オーベルシュタイン", "ロイ", "三雲修", "七海建人", "朽木白哉", "山口忠", "縁下力", "近藤勲", "土方十四郎", "ミッターマイヤー", "ロイエンタール", "夜久衛輔", "二階堂永亮", "白鳥任三郎", "鏑木虎徹"], 
+                d: "【規律の性質】あなたは文明の根幹を支える守護神です. 誠実に秩序を維持する姿勢は、社会が崩壊することなく存続するための要石です。あなたがルーチンを守る時、世界は初めて安心して自転を続けることができます。【社会的役割】管理、教育。ルールを公平に運用することで組織に安定感をもたらします。人々が安心して能力を発揮できる場を創る人です。あなたの誠実さがチームの土台となります。【潜在적リスク】固定観念に縛られやすく、既存ルールの破壊に対して強い拒絶反応を示します。柔軟性を欠いた対応で、周囲を息苦しくさせてしまうことがある点は改善の余地があります。", 
+                dir: "✦【強みの最大化】ルールを守る側から『創る側』へ。あなたの公平な視点は、堅牢なシステム構築にこそ活かされます。✦【弱点の克服】完璧な秩序よりも『ゆらぎ』の価値を認めましょう。多少の遊びがある方が、システム強度は高まります。✦【理想の環境】役割分担が明確で、プロセスと安定性が正当に評価される、歴史や伝統のある秩序立った組織。",
+                books: [
+                    { title: "マネジメント", author: "ドラッカー", desc: "組織の秩序と成果の出し方。管理と安定を重んじるあなたの社会的役割に、深い論理的根拠を与えてくれます。" },
+                    { title: "職業としての政治", author: "マックス・ウェーバー", desc: "責任と倫理の哲学。堅牢な秩序を維持しようとするあなたの誠実さと志に深く共鳴する一冊。"},
+                    { title: "論語", author: "孔子", desc: "調和して生きるためのシステムの原点. 歴史に裏打ちされた知恵が、あなたの秩序形成を強力に助けます。"}
+                ]
+            },
+            ANA: { 
+                en: "ANA", k: "アナーキスト", n: "混沌主義者", c: "「無限の可能性を解き放つ自由の解放者」", img: "PITA-ANA.png", 
+                celebs: ["坂本龍馬", "ピカソ", "チェ-ゲバラ", "ボブ-ディラン", "バクーニン", "マルコムX", "ディオゲネス", "シド-ヴィシャス", "ジャン-ジュネ", "バタイユ", "ブルトン", "デュシャン", "ウォーホル", "バスキア", "バンクシー", "ケルアック", "バロウズ", "ギンズバーグ", "ジム-モリソン", "ボウイ", "マーキュリー", "カート-コバーン", "ジョン-ライドン", "イギー-ポップ", "ルー-リード", "パティ-スミス", "ビョーク", "レディー-ガガ"], 
+                chars: ["ヒソカ", "ジョーカー", "坂田銀時", "デンジ", "パワー", "我妻由乃", "雨流みねね", "ルフィ", "キッド", "空条承太郎", "徐倫", "仗助", "ジャイロ", "リゾット", "プロシュート", "レヴィ", "纏流子", "エスデス", "アーサー・ボイル", "諸星あたる", "範馬刃牙", "折原臨也", "ラッド・ルッソ", "セルティ", "東堂葵", "トガヒミコ", "両面宿儺", "死柄木弔", "バギー", "ジェビル"], 
+                d: "【変革の性質】あなたはあらゆる鎖を断ち切る変革者です。既存のルールを破壊し、真っ白な大地に新たな風を吹き込む衝動は、進化のために不可欠な生命的根源力です. 檻の中にいることに耐えられない、真の自由人です。【社会的役割】「破壊的イノベーター」。常識が通用しない新しい視点を持ち込み、硬直した社会に風穴を開けます。あなたが動くとき、新しい時代の幕が上がります。停滞した空気の解毒剤です。【潜在的リスク】破壊のあとに何を遺すかを考えないため、周囲に混乱を残してしまうことがあります。持続性に欠け、人生が流浪しがちです. 破壊そのものが目的化しないよう自制が必要です。", 
+                dir: "✦【強みの最大化】理屈を超えた行動こそが停滞した世界の唯一の解毒剤となります。破壊を恐れず嵐を起こし続けましょう。✦【弱点の克服】『破壊の後の更地』を管理してくれるパートナーを。バトンを渡せば、あなたの変革は完遂されます。✦【理想の環境】制約が一切なく、毎日が予測不能な現場. あなたの突飛な行動が歓迎されるエネルギッシュな現場が最適です。",
+                books: [
+                    { title: "現代思想入門", author: "千葉雅也", desc: "固定観念を脱構築（デコンストラクト）する. あなたの直感的で破壊的な思考に、最強の論理的基盤を与えます。" },
+                    { title: "野生の思考", author: "レヴィ＝ストロース", desc: "文明の枠を超えた根源的な知。野生の直感で生きるあなたの価値を再発見できる一冊。"},
+                    { title: "資本論", author: "カール-マルクス", desc: "既存システムの構造的矛盾を突き、混沌から再編しようとする情熱の理論. 世界のルールを疑うあなたのための聖典。"}
+                ]
+            },
+            EPH: {
+                en: "EPH", k: "エフェメラリスト", n: "刹那主義者", c: "「今この瞬間に全てを懸ける閃光の自由人」", img: "PITA-EPH.png",
+                celebs: [], chars: [], 
+                d: "【瞬間の性質】あなたは「未来」や「継続」といった時間的重力から解き放たれた存在です。100問の果てにある結論よりも、今この瞬間に沸き起こる「飽きた」「面白くない」という直感を何よりも尊重します. 完遂を美徳とする社会において、あなたの「軽やかさ」は究極の自由を体現しています。【社会的役割】停滞した空気を一瞬で破壊し、新しい風を呼び込む「トリガー」となります。既存のレールを平然と降りるその姿は、周囲に「生き方の多様性」を無言で突きつけます。刹那の輝きで場を支配する力があります。【潜在性リスク】持続力が極めて低く、形に残る成果を築く前に次の刺激へ移ってしまうため、周囲からは「無責任」と誤解されがちです。信頼の積み上げが必要な場面で、孤立してしまうリスクを抱えています。※あなたは100問の壁を直感で飛び越えた、特別な存在です。",
+                dir: "✦【強みの最大化】一瞬で誰かを魅了する表現やアイデアにおいて、あなたは無敵の力を発揮します。爆発的な瞬発力を即興性が求められる場に注いでください。✦【弱点の克服】「飽きた後のバトンタッチ」を覚えましょう。あなたの破壊的衝動は創造的変革へと昇華されます。✦【理想の環境】毎日が違う景色で、変化し続けるクリエイティブな現場。スタートアップの初期などが最適です。",
+                books: [
+                    { title: "オン・ザ-ロード", author: "ジャック-ケルアック", desc: "瞬間を燃焼させるビート・ジェネレーションの聖典. あなたの刹那的な生の輝きと完璧に一致します。" },
+                    { title: "ライ麦畑でつかまえて", author: "サリンジャー", desc: "虚飾を嫌い、今を守る物語。サンクコストに囚われないあなたの軽やかさを肯定。"},
+                    { title: "車輪の下", author: "ヘッセ", desc: "社会的重力に押し潰されないために. 未来という重圧から解放されたいあなたの心を癒やし、自由を再定義する名作。"}
+                ]
+            }
         };
 
         const qL = [
-            {t:"レジの会計。後ろに人が並んでいるとき、小銭で支払いたくても、お札やカードなど時間のかからない方法を選んでしまう。",a:"ALT",w:1},{t:"他人の失敗談を聞くと、口では同情しながらどこか「安心」を感じるほうだ。",a:"EGO",w:2},{t:"グループの空気が悪いとき、自分がピエロになってでも場を和ませる努力をする。",a:"ALT",w:2},{t:"自分を犠牲にしてまで守るべきものを長時間考えても、ひとつも思いつかない。",a:"EGO",w:3},{t:"電車で席を譲る際、「誰かに見られているのではないか」と自意識が過剰に働く。",a:"EGO",w:1},{t:"SNSで誰かが炎上しているのを見ると、詳細を積極的に追ってしまう。",a:"EGO",w:2},{t:"友人の恋人ができた報告を聞くと、お祝いの前に「焦り」や「対抗心」が芽生える。",a:"EGO",w:2},{t:"チームの勝利よりも、自分自身の成果を重視する。",a:"EGO",w:3},{t:"道に迷っている人を見かけたら、積極的に声をかけようとする。",a:"ALT",w:1},{t:"悩み相談。解決策を提示するより、ただ相手の気持ちに深く寄り添う。",a:"ALT",w:2},{t:"自分が損をしても、周囲が幸せならそれでいい。",a:"ALT",w:3},{t:"嫌いな相手が苦境に立たされているのを知ると、密かに喜びを感じる。",a:"EGO",w:2},{t:"対立を避けるためなら、自分の本当の意見を飲み込む選択をする。",a:"ALT",w:2},{t:"飲み会で他人の話しを聞くくらいなら、家で一人でご飯を食べる方が有意義だ",a:"EGO",w:3},{t:"誰かに必要とされているということが分かると本当に嬉しい。",a:"ALT",w:3},{t:"匿名掲示板やSNSで、誰かの落ち度を厳しく指摘した経験がある。",a:"EGO",w:2},{t:"相手が喜ぶ姿を想像しながら、お土産を真剣に選ぶことが好きだ。",a:"ALT",w:1},{t:"行列でマナーの悪い人を見ても、トラブルを起こさないため見て見ぬふりをする。",a:"ALT",w:1},{t:"公共の場で騒いでいる子供を、親のしつけ不足だと思う。",a:"EGO",w:2},{t:"一番親しい友人が借金で困っていたら、返ってこない覚悟でお金を貸す。",a:"ALT",w:3},{t:"自分のミスを他人のせいにできる状況なら、そうする。",a:"EGO",w:2},{t:"SNSの「いいね」の数は、自分の価値を証明する尺度だ。",a:"EGO",w:1},{t:"少し前を歩いている人がハンカチを落としたら、急いで拾って追いかける。",a:"ALT",w:1},{t:"限定商品の最後の一個を見つけた時、周囲に他のお客さんがいないか確認せずに即座に手に取る",a:"EGO",w:2},{t:"他人の顔色を伺って、自分の発言を微調整することが日常的だ。",a:"ALT",w:1},{t:"寝る前、明日の予定を考えるとワクワクして眠れないことがある。",a:"OPT",w:1},{t:"成功者の体験談を読むと、成功は単なる運だと思う。",a:"NIH",w:2},{t:"100円の宝くじで、1億円が当たったら何に使うか想像して楽しむタイプだ。",a:"OPT",w:1},{t:"どんなに努力しても、生まれ持った才能の壁は超えられない。",a:"NIH",w:3},{t:"自然災害や凄惨な事件のニュースを見ても、どこか他人事のように感じる。",a:"NIH",w:2},{t:"「人生は一度きり」という言葉に、希望よりも重圧を感じる。",a:"NIH",w:2},{t:"自分が死んだ後の世界がどうなっていようが、別にどうでもよい。",a:"NIH",w:3},{t:"映画の感動的なシーンを見ても、「これは観客を泣かせるための演出だな」と冷静に分析してしまう。",a:"NIH",w:3},{t:"失敗したときは「今回は運が悪かった、次は大丈夫」と思う。",a:"OPT",w:2},{t:"初対面の人と接して、「いい人だ」とよく思う。",a:"OPT",w:1},{t:"ゲームや目標をやり遂げた直後、充実感よりも「で、これが何になるんだ？」という虚しさが勝る。",a:"NIH",w:3},{t:"流行りの服や、靴、アクセサリー、バッグを見ても、価値を感じず、「なぜこんなものにこんな値段がつくのか」と疑問に思う。",a:"NIH",w:2},{t:"新しいことに挑戦する時、成功した時の報酬を常に先に考えて行動する。",a:"OPT",w:2},{t:"過去の失敗は、すべて今の自分にとって必要不可欠なことだった。",a:"OPT",w:2},{t:"自分には、まだ誰にも見せていない特別な才能が眠っていると思っている。",a:"OPT",w:2},{t:"ネットの悲観的な意見を読むと、自分の不安を正しく代弁されていると感じる。",a:"NIH",w:2},{t:"賑やかなパーティーや飲み会で、自分だけが透明人間になって眺めているような感覚になる。",a:"NIH",w:2},{t:"誰かが熱く夢を語っているのを見ると、「痛々しさ」を感じてしまう",a:"NIH",w:2},{t:"「努力は必ず報われる」という言葉は正しいと思う。",a:"OPT",w:3},{t:"人生において「意味」を探す行為は、時間の無駄である。",a:"NIH",w:3},{t:"どん底の状況でも、「ここから逆転したら面白いことになるぞ」と楽しめる余裕がある。",a:"OPT",w:2},{t:"「自分探し」をしている人を見ると、存在しないものを探しているようで滑稽に思える。",a:"NIH",w:2},{t:"道端に咲く花を見て、生命の力強さに感動する。",a:"OPT",w:1},{t:"いつか人類は滅亡するため、いま人間がやっていることはすべて無意味である。",a:"NIH",w:3},{t:"もし生まれ変わるなら、また「自分自身」に生まれたいと思う。",a:"OPT",w:3},{t:"映画や小説を楽しむ前に、あらすじや結末が気になって調べてしまう。",a:"REA",w:1},{t:"「愛があればお金はいらない」という言葉の意味が正直わかっていない。",a:"REA",w:3},{t:"行列ができる人気店でも、待ち時間が1時間を超えるなら、すぐに空いている隣の店に入る。",a:"REA",w:1},{t:"自分の部屋や持ち物、服装には、他人には理解されない独自の「こだわり」が詰まっている。",a:"IDE",w:2},{t:"目的地へ向かう時、最短ルートで行くよりも、あえて遠回りしてでも「景色が良い道」を歩きたい。",a:"IDE",w:2},{t:"スペックの数値よりも、直感的に「好きだ」と思ったデザインで買う物を決める。",a:"IDE",w:2},{t:"直感や占いよりも、客観的なデータや検索結果を信頼する。",a:"REA",w:2},{t:"映画や小説を見る時、結末が「ハッピーエンド」でないと、見たことを後悔する。",a:"IDE",w:2},{t:"欲しいものを語るよりも、今月、自分が何に何円使ったかを把握したい。",a:"REA",w:3},{t:"自分の意見に対して正論を言われると、悔しい気持ちになるが、それでも自分は間違ってないと思う。",a:"IDE",w:2},{t:"お金と時間があるなら、自分の「ロマン」を突き詰めたい。",a:"IDE",w:2},{t:"ネット上の口コミや評価スコアは、自分の主観よりも信頼できる判断材料だ。",a:"REA",w:2},{t:"自分にしか見えていない「世界の真理」が存在すると密かに信じている。",a:"IDE",w:3},{t:"仕事や勉強において、「頑張り」などの過程よりも、最終的な「結果」のほうが重要だと思う。",a:"REA",w:2},{t:"新しいアプリや機械を使う時、説明書を読まずに、自分の力でやろうとする。",a:"IDE",w:1},{t:"「普通はこうする」という世間の常識を、自分らしさを殺すための言葉のように感じる。",a:"IDE",w:3},{t:"旅行は計画を完璧に立て、実際に行くときはその予定に忠実に動く。",a:"REA",w:2},{t:"結婚相手を選ぶなら、性格の相性や愛情よりも、年収や職業などの「生活基盤の安定」を何より重視すべきだ。",a:"REA",w:3},{t:"会議中や授業中に空想にふけって、話がどこまで進んでいるかが分からなくなってしまう。",a:"IDE",w:2},{t:"芸術作品を金を払って買う人の気持ちが分からず、そのお金で美味しいものを食べた方がマシだと思う。",a:"REA",w:2},{t:"この世に「絶対」はなく、すべては数字と確率で説明できるものだ。",a:"REA",w:3},{t:"劇的な出会いや運命的な出来事が、自分の人生にもいつか必ず起こると信じている。",a:"IDE",w:3},{t:"素晴らしい製品の開発秘話を語るTV番組があったら、つい見てしまう",a:"IDE",w:2},{t:"投資やギャンブルをする際、勝つ確率が80%あったとしても、20%の負けるリスクが気になって手が出せない。",a:"REA",w:2},{t:"趣味を始める時、「それが将来の仕事やスキルアップに役立つか」という実利を考えてしまう。",a:"REA",w:2},{t:"スマホの充電が 30% を切ると、落ち着かなくなり充電器を探す。",a:"MOD",w:1},{t:"予定がない休日でも、何時に起きるかを前日に決めてアラームをかけてから眠る。",a:"MOD",w:1},{t:"他人の靴が揃っていないのを見ると、直したくなる。",a:"MOD",w:1},{t:"旅行中に計画が崩れるようなトラブルが起きても、「これも旅の醍醐味だ」と笑って楽しめる。",a:"ANA",w:3},{t:"自分の葬式は、従来の宗教的・形式的な儀礼を一切排除したい。",a:"ANA",w:2},{t:"毎日同じ時間に起き、同じルーティンをこなす生活に、退屈さを感じる",a:"ANA",w:2},{t:"整理整頓が完璧な空間よりも、少し生活感のある空間のほうが好きだ。",a:"ANA",w:1},{t:"PCのデスクトップにあるアイコンやファイルは、常にフォルダ分けして整理されている。",a:"MOD",w:1},{t:"「締め切り」という束縛を感じると、すべてを放り出して逃げたくなる。",a:"ANA",w:2},{t:"初めての場所へ行く時、あえて地図を見ずに直感だけで歩くことが好きだ。",a:"ANA",w:2},{t:"深夜の赤信号。車が1台も来ないと分かっていても、青に変わるまで律儀に待ち続ける。",a:"MOD",w:2},{t:"明確なルールがあるからこそ、その中で「自由」を満喫できるのだと信じている。",a:"MOD",w:2},{t:"新しいお店に入る時、事前にSNSやネットで内装やメニュー、価格帯を調べてから入る。",a:"MOD",w:1},{t:"「まず準備する」ほうが「とりあえずやってみる」より、最終的な効率が良いと考える。",a:"MOD",w:2},{t:"カフェや電車で、空いていれば「お気に入りの特定の席」をいつも選んでしまう。",a:"MOD",w:2},{t:"予測不可能な行動をとって、周囲の反応を伺うことが好きだ。",a:"ANA",w:2},{t:"誰かに「指示されること」を、自分の尊厳に対する侵害だと感じる。",a:"ANA",w:3},{t:"ゴミの分別が適当な人に対し、強い嫌悪感を抱く。",a:"MOD",w:2},{t:"正解が一つに決まっている問題よりも、答えのない議論のほうがワクワクする。",a:"ANA",w:2},{t:"行列の並び方がバラバラだったり、ルールを守らない人がいたりすると、注意したくてたまらなくなる。",a:"MOD",w:1},{t:"「マニュアル通り」に進めることは、手抜きではなく、最も誠実で効率的な方法だと思う。",a:"MOD",w:2},{t:"「常識外れ」や「空気が読めない」、「変人」と言われることは、自分にとって褒め言葉に近い。",a:"ANA",w:3},{t:"カバンの中身が常に整理されており、どこになにが入っているか把握している。",a:"MOD",w:1},{t:"他人の「5分程度の遅刻」が、どうしても許しがたい不誠実だと感じる。",a:"MOD",w:2},{t:"予定が埋まっているカレンダーを見ると、檻に閉じ込められたかのような息苦しさを感じる。",a:"ANA",w:3}
+            {t:"レジの会計。後ろに人が並んでいるとき、小銭で支払いたくても、お札やカードなど時間のかからない方法を選んでしまう。",a:"ALT",w:1},
+            {t:"他人の失敗談を聞くと、口では同情しながらどこか「安心」を感じるほうだ。",a:"EGO",w:2},
+            {t:"グループの空気が悪いとき、自分がピエロになってでも場を和ませる努力をする。",a:"ALT",w:2},
+            {t:"自分を犠牲にしてまで守るべきものを長時間考えても、ひとつも思いつかない。",a:"EGO",w:3},
+            {t:"電車で席を譲る際、「誰かに見られているのではないか」と自意識が過剰に働く。",a:"EGO",w:1},
+            {t:"SNSで誰かが炎上しているのを見ると、詳細を積極的に追ってしまう。",a:"EGO",w:2},
+            {t:"友人の恋人ができた報告を聞くと、お祝いの前に「焦り」や「対抗心」が芽生える。",a:"EGO",w:2},
+            {t:"チームの勝利よりも、自分自身の成果を重視する。",a:"EGO",w:3},
+            {t:"道に迷っている人を見かけたら、積極的に声をかけようとする。",a:"ALT",w:1},
+            {t:"悩み相談。解決策を提示するより、ただ相手の気持ちに深く寄り添う。",a:"ALT",w:2},
+            {t:"自分が損をしても、周囲が幸せならそれでいい。",a:"ALT",w:3},
+            {t:"嫌いな相手が苦境に立たされているのを知ると、密かに喜びを感じる。",a:"EGO",w:2},
+            {t:"対立を避けるためなら、自分の本当の意見を飲み込む選択をする。",a:"ALT",w:2},
+            {t:"飲み会で他人の話しを聞くくらいなら、家で一人でご飯を食べる方が有意義だ",a:"EGO",w:3},
+            {t:"誰かに必要とされているということが分かると本当に嬉しい。",a:"ALT",w:3},
+            {t:"匿名掲示板やSNSで、誰かの落ち度を厳しく指摘した経験がある。",a:"EGO",w:2},
+            {t:"相手が喜ぶ姿を想像しながら、お土産を真剣に選ぶことが好きだ。",a:"ALT",w:1},
+            {t:"行列でマナーの悪い人を見ても、トラブルを起こさないため見て見ぬふりをする。",a:"ALT",w:1},
+            {t:"公共の場で騒いでいる子供を、親のしつけ不足だと思う。",a:"EGO",w:2},
+            {t:"一番親しい友人が借金で困っていたら、返ってこない覚悟でお金を貸す。",a:"ALT",w:3},
+            {t:"自分のミスを他人のせいにできる状況なら、そうする。",a:"EGO",w:2},
+            {t:"SNSの「いいね」の数は、自分の価値を証明する尺度だ。",a:"EGO",w:1},
+            {t:"少し前を歩いている人がハンカチを落としたら、急いで拾って追いかける。",a:"ALT",w:1},
+            {t:"限定商品の最後の一個を見つけた時、周囲に他のお客さんがいないか確認せずに即座に手に取る",a:"EGO",w:2},
+            {t:"他人の顔色を伺って、自分の発言を微調整することが日常的だ。",a:"ALT",w:1},
+            {t:"寝る前、明日の予定を考えるとワクワクして眠れないことがある。",a:"OPT",w:1},
+            {t:"成功者の体験談を読むと、成功は単なる運だと思う。",a:"NIH",w:2},
+            {t:"100円の宝くじで、1億円が当たったら何に使うか想像して楽しむタイプだ。",a:"OPT",w:1},
+            {t:"どんなに努力しても、生まれ持った才能の壁は超えられない。",a:"NIH",w:3},
+            {t:"自然災害や凄惨な事件のニュースを見ても、どこか他人事のように感じる。",a:"NIH",w:2},
+            {t:"「人生は一度きり」という言葉に、希望よりも重圧を感じる。",a:"NIH",w:2},
+            {t:"自分が死んだ後の世界がどうなっていようが、別にどうでもよい。",a:"NIH",w:3},
+            {t:"映画の感動的なシーンを見ても、「これは観客を泣かせるための演出だな」と冷静に分析してしまう。",a:"NIH",w:3},
+            {t:"失敗したときは「今回は運が悪かった、次は大丈夫」と思う。",a:"OPT",w:2},
+            {t:"初対面の人と接して、「いい人だ」とよく思う。",a:"OPT",w:1},
+            {t:"ゲームや目標をやり遂げた直後、充実感よりも「で、これが何になるんだ？」という虚しさが勝る。",a:"NIH",w:3},
+            {t:"流行りの服や、靴、アクセサリー、バッグを見ても、価値を感じず、「なぜこんなものにこんな値段がつくのか」と疑問に思う。",a:"NIH",w:2},
+            {t:"新しいことに挑戦する時、成功した時の報酬を常に先に考えて行動する。",a:"OPT",w:2},
+            {t:"過去の失敗は、すべて今の自分にとって必要不可欠なことだった。",a:"OPT",w:2},
+            {t:"自分には、まだ誰にも見せていない特別な才能が眠っていると思っている。",a:"OPT",w:2},
+            {t:"ネットの悲観的な意見を読むと、自分の不安を正しく代弁されていると感じる。",a:"NIH",w:2},
+            {t:"賑やかなパーティーや飲み会で、自分だけが透明人間になって眺めているような感覚になる。",a:"NIH",w:2},
+            {t:"誰かが熱く夢を語っているのを見ると、「痛々しさ」を感じてしまう",a:"NIH",w:2},
+            {t:"「努力は必ず報われる」という言葉は正しいと思う。",a:"OPT",w:3},
+            {t:"人生において「意味」を探す行為は、時間の無駄である。",a:"NIH",w:3},
+            {t:"どん底の状況でも、「ここから逆転したら面白いことになるぞ」と楽しめる余裕がある。",a:"OPT",w:2},
+            {t:"「自分探し」をしている人を見ると、存在しないものを探しているようで滑稽に思える。",a:"NIH",w:2},
+            {t:"道端に咲く花を見て、生命の力強さに感動する。",a:"OPT",w:1},
+            {t:"いつか人類は滅亡するため、いま人間がやっていることはすべて無意味である。",a:"NIH",w:3},
+            {t:"もし生まれ変わるなら、また「自分自身」に生まれたいと思う。",a:"OPT",w:3},
+            {t:"映画や小説を楽しむ前に、あらすじや結末が気になって調べてしまう。",a:"REA",w:1},
+            {t:"「愛があればお金はいらない」という言葉の意味が正直わかっていない。",a:"REA",w:3},
+            {t:"行列ができる人気店でも、待ち時間が1時間を超えるなら、すぐに空いている隣の店に入る。",a:"REA",w:1},
+            {t:"自分の部屋や持ち物、服装には、他人には理解されない独自の「こだわり」が詰まっている。",a:"IDE",w:2},
+            {t:"目的地へ向かう時、最短ルートで行くよりも、あえて遠回りしてでも「景色が良い道」を歩きたい。",a:"IDE",w:2},
+            {t:"スペックの数値よりも、直感的に「好きだ」と思ったデザインで買う物を決める。",a:"IDE",w:2},
+            {t:"直感や占いよりも、客観的なデータや検索結果を信頼する。",a:"REA",w:2},
+            {t:"映画や小説を見る時、結末が「ハッピーエンド」でないと、見たことを後悔する。",a:"IDE",w:2},
+            {t:"欲しいものを語るよりも、今月、自分が何に何円使ったかを把握したい。",a:"REA",w:3},
+            {t:"自分の意見に対して正論を言われると、悔しい気持ちになるが、それでも自分は間違ってないと思う。",a:"IDE",w:2},
+            {t:"お金と時間があるなら、自分の「ロマン」を突き詰めたい。",a:"IDE",w:2},
+            {t:"ネット上の口コミや評価スコアは、自分の主観よりも信頼できる判断材料だ。",a:"REA",w:2},
+            {t:"自分にしか見えていない「世界の真理」が存在すると密かに信じている。",a:"IDE",w:3},
+            {t:"仕事や勉強において、「頑張り」などの過程よりも、最終的な「結果」のほうが重要だと思う。",a:"REA",w:2},
+            {t:"新しいアプリや機械を使う時、説明書を読まずに、自分の力でやろうとする。",a:"IDE",w:1},
+            {t:"「普通はこうする」という世間の常識を、自分らしさを殺すための言葉のように感じる。",a:"IDE",w:3},
+            {t:"旅行は計画を完璧に立て、実際に行くときはその予定に忠実に動く。",a:"REA",w:2},
+            {t:"結婚相手を選ぶなら、性格の相性や愛情よりも、年収や職業などの「生活基盤の安定」を何より重視すべきだ。",a:"REA",w:3},
+            {t:"会議中や授業中に空想にふけって、話がどこまで進んでいるかが分からなくなってしまう。",a:"IDE",w:2},
+            {t:"芸術作品を金を払って買う人の気持ちが分からず、そのお金で美味しいものを食べた方がマシだと思う。",a:"REA",w:2},
+            {t:"この世に「絶対」はなく、すべては数字と確率で説明できるものだ。",a:"REA",w:3},
+            {t:"劇的な出会いや運命的な出来事が、自分の人生にもいつか必ず起こると信じている。",a:"IDE",w:3},
+            {t:"素晴らしい製品の開発秘話を語るTV番組があったら、つい見てしまう",a:"IDE",w:2},
+            {t:"投資やギャンブルをする際、勝つ確率が80%あったとしても、20%の負けるリスクが気になって手が出せない。",a:"REA",w:2},
+            {t:"趣味を始める時、「それが将来の仕事やスキルアップに役立つか」という実利を考えてしまう。",a:"REA",w:2},
+            {t:"スマホの充電が 30% を切ると、落ち着かなくなり充電器を探す。",a:"MOD",w:1},
+            {t:"予定がない休日でも、何時に起きるかを前日に決めてアラームをかけてから眠る。",a:"MOD",w:1},
+            {t:"他人の靴が揃っていないのを見ると、直したくなる。",a:"MOD",w:1},
+            {t:"旅行中に計画が崩れるようなトラブルが起きても、「これも旅の醍醐味だ」と笑って楽しめる。",a:"ANA",w:3},
+            {t:"自分の葬式は、従来の宗教的・形式的な儀礼を一切排除したい。",a:"ANA",w:2},
+            {t:"毎日同じ時間に起き、同じルーティンをこなす生活に、退屈さを感じる",a:"ANA",w:2},
+            {t:"整理整頓が完璧な空間よりも、少し生活感のある空間のほうが好きだ。",a:"ANA",w:1},
+            {t:"PCのデスクトップにあるアイコンやファイルは、常にフォルダ分けして整理されている。",a:"MOD",w:1},
+            {t:"「締め切り」という束縛を感じると、すべてを放り出して逃げたくなる。",a:"ANA",w:2},
+            {t:"初めての場所へ行く時、あえて地図を見ずに直感だけで歩くことが好きだ。",a:"ANA",w:2},
+            {t:"深夜の赤信号。車が1台も来ないと分かっていても、青に変わるまで律儀に待ち続ける。",a:"MOD",w:2},
+            {t:"明確なルールがあるからこそ、その中で「自由」を満喫できるのだと信じている。",a:"MOD",w:2},
+            {t:"新しいお店に入る時、事前にSNSやネットで内装やメニュー、価格帯を調べてから入る。",a:"MOD",w:1},
+            {t:"「まず準備する」ほうが「とりあえずやってみる」より、最終的な効率が良いと考える。",a:"MOD",w:2},
+            {t:"カフェや電車で、空いていれば「お気に入りの特定の席」をいつも選んでしまう。",a:"MOD",w:2},
+            {t:"予測不可能な行動をとって、周囲の反応を伺うことが好きだ。",a:"ANA",w:2},
+            {t:"誰かに「指示されること」を、自分の尊厳に対する侵害だと感じる。",a:"ANA",w:3},
+            {t:"ゴミの分別が適当な人に対し、強い嫌悪感を抱く。",a:"MOD",w:2},
+            {t:"正解が一つに決まっている問題よりも、答えのない議論のほうがワクワクする。",a:"ANA",w:2},
+            {t:"行列の並び方がバラバラだったり、ルールを守らない人がいたりすると、注意したくてたまらなくなる。",a:"MOD",w:1},
+            {t:"「マニュアル通り」に進めることは、手抜きではなく、最も誠実で効率的な方法だと思う。",a:"MOD",w:2},
+            {t:"「常識外れ」や「空気が読めない」、「変人」と言われることは、自分にとって褒め言葉に近い。",a:"ANA",w:3},
+            {t:"カバンの中身が常に整理されており、どこになにが入っているか把握している。",a:"MOD",w:1},
+            {t:"他人の「5分程度の遅刻」が、どうしても許しがたい不誠実だと感じる。",a:"MOD",w:2},
+            {t:"予定が埋まっているカレンダーを見ると、檻に閉じ込められたかのような息苦しさを感じる。",a:"ANA",w:3}
         ];
 
         let cur=0,scr={ALT:0,EGO:0,OPT:0,NIH:0,IDE:0,REA:0,MOD:0,ANA:0},hst=[],ans=[],fT='';
@@ -252,7 +449,7 @@
             const c=document.getElementById('ism-intro-grid');if(!c)return;c.innerHTML='';
             ['ALT','EGO','OPT','NIH','IDE','REA','MOD','ANA'].forEach(k=>{
                 const d=resultData[k];
-                c.innerHTML+=`<div class="ism-card"><div class="img-slot w-12 h-12 mb-3 mx-auto"><img src="${d.img}" class="list-img" onerror="this.style.display='none'"><div class="text-[8px] text-gray-300 font-black">${k}</div></div><div class="text-[10px] font-black">${d.n}</div><div class="text-[8px] font-bold text-blue-500 italic">(${d.k})</div></div>`;
+                c.innerHTML+=`<div class="ism-card"><div class="img-slot w-12 h-12 mb-3 mx-auto flex items-center justify-center overflow-hidden"><img src="${d.img}" class="list-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none" class="w-full h-full items-center justify-center text-[8px] text-gray-300 font-black">${k}</div></div><div class="text-[10px] font-black">${d.n}</div><div class="text-[8px] font-bold text-blue-500 italic">(${d.k})</div></div>`;
             });
         };
         window.toggleIndexModal=(s)=>{const m=document.getElementById('index-modal');m.classList.toggle('hidden',!s);document.body.style.overflow=s?'hidden':'auto';};
@@ -285,9 +482,9 @@
             document.getElementById('result-title').innerText=d.n;
             document.getElementById('result-en').innerText=d.en;
             document.getElementById('result-catch').innerText=d.c;
-            document.getElementById('result-desc').innerHTML=d.d.split('【').filter(s=>s).map(s=>`<div class="mb-12"><span class="block font-black text-blue-600 text-lg mb-4">【${s.split('】')[0]}】</span><p class="pl-4 border-l-4 border-blue-50 text-gray-700">${s.split('】')[1]}</p></div>`).join('');
-            document.getElementById('recommended-books').innerHTML=d.books.map(b=>`<div onclick="window.open('https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title+'+'+b.author)}&tag=${amazonId}','_blank','noopener,noreferrer')" class="book-card p-8"><div class="text-[9px] font-black text-blue-500 uppercase mb-2">Recommended</div><div class="text-base font-bold mb-1">${b.title}</div><div class="text-[11px] text-gray-400 font-bold mb-4">${b.author}</div><p class="text-[12px] text-gray-500 mb-6">${b.desc}</p><div class="text-[10px] text-gray-300 font-black border-t pt-4">Amazonで見る →</div></div>`).join('');
-            document.getElementById('result-direction').innerHTML=d.dir.split('✦').filter(s=>s).map(s=>`<div class="mb-10 mx-auto max-w-lg"><span class="block font-black text-blue-100 text-lg mb-3">✦【${s.split('】')[0].replace('【','')}】</span><p class="text-blue-50 opacity-90">${s.split('】')[1]}</p></div>`).join('');
+            document.getElementById('result-desc').innerHTML=d.d.split('【').filter(s=>s).map(s=>`<div class="mb-12 text-left"><span class="block font-black text-blue-600 text-lg mb-4">【${s.split('】')[0]}】</span><p class="pl-4 border-l-4 border-blue-50 text-gray-700">${s.split('】')[1]}</p></div>`).join('');
+            document.getElementById('recommended-books').innerHTML=d.books.map(b=>`<div onclick="window.open('https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title+'+'+b.author)}&tag=${amazonId}','_blank','noopener,noreferrer')" class="book-card p-8 cursor-pointer text-left"><div class="text-[9px] font-black text-blue-500 uppercase mb-2">Recommended</div><div class="text-base font-bold mb-1">${b.title}</div><div class="text-[11px] text-gray-400 font-bold mb-4">${b.author}</div><p class="text-[12px] text-gray-500 mb-6">${b.desc}</p><div class="text-[10px] text-gray-300 font-black border-t pt-4">Amazonで見る →</div></div>`).join('');
+            document.getElementById('result-direction').innerHTML=d.dir.split('✦').filter(s=>s).map(s=>`<div class="mb-10 mx-auto max-w-lg text-center"><span class="block font-black text-blue-100 text-lg mb-3">✦【${s.split('】')[0].replace('【','')}】</span><p class="text-blue-50 opacity-90">${s.split('】')[1]}</p></div>`).join('');
             document.getElementById('stat-1').innerText=(fT==='EPH'?77.7:(100+Math.random()*80)).toFixed(1);
             document.getElementById('result-art-container').innerHTML=`<img src="${d.img}" class="result-img" onload="this.parentElement.classList.add('img-loaded')" onerror="this.parentElement.innerHTML='<span class=\'text-gray-200\'>${fT}</span>'">`;
             
