@@ -643,10 +643,14 @@
                 }, 1000);
 
             } else {
-                // 【通常ルート】IDがない場合（トップページや結果画面など）
+                // 【通常ルート】IDがない場合
                 const path = location.pathname;
                 if(path.startsWith('/type/')) {
                     window.showIsmDetail(path.replace('/type/', ''));
+                } else if(path.startsWith('/q')) {
+                    // ★ここを復元：診断画面を表示し、質問を描画する
+                    window.showView('quiz');
+                    showQ(); 
                 } else if(path === '/result') {
                     window.showView('result');
                 } else if(path === '/analyzing') {
@@ -771,7 +775,7 @@
             const ax=document.getElementById('axis-details');ax.innerHTML='';
             [{l:"献身",r:"孤高",lk:'ALT',rk:'EGO'},{l:"渇望",r:"静観",lk:'OPT',rk:'NIH'},{l:"夢幻",r:"実利",lk:'IDE',rk:'REA'},{l:"調和",r:"変革",lk:'MOD',rk:'ANA'}].forEach(p=>{
                 const sum=(scr[p.lk]||0)+(scr[p.rk]||0),lp=sum===0?50:Math.round((scr[p.lk]/sum)*100),rp=100-lp;
-                ax.innerHTML+=`<div class="space-y-4 text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="flex justify-between text-[10px] font-black text-gray-400 uppercase italic text-balance text-balance text-balance text-balance text-balance text-balance"><span>${p.l} ${lp}%</span><span>${rp}% ${p.r}</span></div><div class="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="bg-blue-400 h-full" style="width:${lp}%"></div><div class="bg-gray-800 h-full" style="width:${rp}%"></div></div></div>`;
+                ax.innerHTML+=`<div class="space-y-4 text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="flex justify-between text-[10px] font-black text-gray-400 uppercase italic text-balance text-balance text-balance text-balance text-balance text-balance"><span>${p.l} ${lp}%</span><span>${rp}% ${p.r}</span></div><div class="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="bg-blue-400 h-full" style="width:${lp}%"></div><div class="bg-gray-800 h-full" style="width:${rp}%"></div></div></div>`;
             });
             
             signInAnonymously(auth).then(() => {
