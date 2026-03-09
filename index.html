@@ -791,16 +791,16 @@
         window.devClick=()=>{window.dc=(window.dc||0)+1;if(window.dc>=5){document.getElementById('dev-menu').classList.remove('hidden');window.dc=0;}};
         window.generatePaidPDF = async (sessionId) => {
             const uid = localStorage.getItem('pita_user_id');
-            if (!uid) { alert("ID未検出。診断をやり直してください。"); return; }
+            if (!uid) return;
 
             // 1. Firebaseから生データを取得
             const docRef = doc(db, 'artifacts', 'pita', 'users', uid, 'userData', 'answers');
             const snap = await getDoc(docRef);
-            if (!snap.exists()) { alert("データが見つかりません。"); return; }
+            if (!snap.exists()) return;
             const data = snap.data();
-            const { ans, fT, index, finishedAt } = data;
+            const { ans, fT, index } = data;
 
-            // 2. 解析ロジック（検証用HTMLより移植：Fn計算含む）
+            // 2. 解析・定数準備（検証版の計算ロジックを完全再現）
             const attrMap = { ALT:'利他', OPT:'楽観', IDE:'理想', MOD:'秩序', EGO:'利己', NIH:'虚無', REA:'現実', ANA:'混沌' };
             const attrIds = ['ALT', 'OPT', 'IDE', 'MOD', 'EGO', 'NIH', 'REA', 'ANA'];
             const CLR = { w1: '#93c5fd', w2: '#3b82f6', w3: '#1e40af', w4: '#1e3a8a' };
@@ -810,16 +810,17 @@
             const root = document.getElementById('report-content');
             root.innerHTML = ''; 
 
-            // 3. 全ページビルド（検証用HTMLのデザイン・構成を完全維持）
+            // 3. 全ページHTMLビルド（検証用HTMLの内容を一切省略せず移植）
             root.innerHTML = `
                 <section class="a4-page">
+                    <div class="hanko-stamp" style="top:40px; right:40px;"><div class="hanko-inner"><span style="font-size:10px;">認定</span><span style="font-size:14px;">保存版</span></div></div>
                     <header style="border-bottom:2px solid #1e3a8a; padding-bottom:30px; margin-bottom:100px; color:#1e3a8a;">
                         <p style="font-size:10px; font-weight:900; letter-spacing:0.4em;">SECTION 00 / IDENTITY ANALYSIS</p>
                         <h1 class="serif" style="font-size:48px; font-style:italic;">PITA 鑑定書</h1>
                     </header>
                     <div style="color:#1e3a8a; flex:1; display:flex; flex-direction:column; justify-content:center;">
                         <h2 class="serif" style="font-size:56px; font-weight:900; margin-bottom:40px; line-height:1.1;">${ismName}の深淵に立つ者</h2>
-                        <div class="serif" style="font-size:18px; font-style:italic; border-left:4px solid #1e3a8a; padding-left:40px; margin-bottom:80px; line-height:1.6;">思想核：${ismName}。臨界深度への回答は、あなたの自己存在の定義そのものを象徴しています。</div>
+                        <div class="serif" style="font-size:18px; font-style:italic; border-left:4px solid #1e3a8a; padding-left:40px; margin-bottom:80px; line-height:1.6;">思想核：${ismName}主義。臨界深度への回答は、あなたの自己存在の定義そのものを象徴しています。</div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px;">
                             <div style="border:1px solid #bfdbfe; padding:30px; background:rgba(239,246,255,0.3);"><p style="font-size:10px; font-weight:900; margin-bottom:5px;">FINISH TYPE</p><p class="serif" style="font-size:32px; font-style:italic;">${ismName}主義</p></div>
                             <div style="border:1px solid #bfdbfe; padding:30px; background:rgba(239,246,255,0.3);"><p style="font-size:10px; font-weight:900; margin-bottom:5px;">PITA INDEX</p><p class="serif" style="font-size:32px; font-style:italic;">${index}</p></div>
@@ -841,75 +842,95 @@
 
                 <section class="a4-page">
                     <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:40px;">01 / 多層レーダーチャート</h2>
-                    <div style="width:500px; margin:0 auto 40px;"><canvas id="pdfRadar"></canvas></div>
-                    <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:40px;">02 / 垂直アイスバーグ</h2>
-                    <div id="pdfIceGrid" style="display:flex; justify-content:center; gap:15px; height:300px; align-items:flex-end;"></div>
+                    <div style="width:520px; margin:0 auto;"><canvas id="pdfRadar"></canvas></div>
                     <footer style="margin-top:auto; pt-6; border-top:1px solid #dbeafe; display:flex; justify-content:space-between; font-size:9px; opacity:0.3; color:#1e3a8a;"><span>PAGE 03</span></footer>
                 </section>
 
-                <div id="pdfLogArea"></div>
+                <section class="a4-page">
+                    <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:40px;">02 / 垂直アイスバーグ分析</h2>
+                    <div id="pdfIceGrid" style="display:flex; justify-content:center; gap:12px; height:450px; align-items:flex-end; padding:20px; background:#f8fbff;"></div>
+                    <footer style="margin-top:auto; pt-6; border-top:1px solid #dbeafe; display:flex; justify-content:space-between; font-size:9px; opacity:0.3; color:#1e3a8a;"><span>PAGE 04</span></footer>
+                </section>
+
+                <section class="a4-page">
+                    <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:40px;">03 / 回答ラグ解析：思考の摩擦</h2>
+                    <div id="pdfHeatGrid" style="display:grid; grid-template-columns:repeat(10, 1fr); gap:4px; max-width:550px; margin:0 auto;"></div>
+                    <footer style="margin-top:auto; pt-6; border-top:1px solid #dbeafe; display:flex; justify-content:space-between; font-size:9px; opacity:0.3; color:#1e3a8a;"><span>PAGE 05</span></footer>
+                </section>
+
+                <div id="pdfLogRoot"></div>
             `;
 
-            // 4. ログページの生成（22問/ページ）
-            const logArea = document.getElementById('pdfLogArea');
+            // 4. 100問回答ログの生成（22問ずつ改ページ）
+            const logRoot = document.getElementById('pdfLogRoot');
             for (let i = 0; i < 100; i += 22) {
                 const chunk = ans.slice(i, i + 22);
-                const sec = document.createElement('section');
-                sec.className = 'a4-page';
+                const sec = document.createElement('section'); sec.className = 'a4-page';
                 sec.innerHTML = `
                     <header style="border-bottom:2px solid #1e3a8a; padding-bottom:10px; margin-bottom:20px; color:#1e3a8a; display:flex; justify-content:space-between; align-items:flex-end;">
-                        <p style="font-size:10px; font-weight:900; letter-spacing:0.2em;">保存版 / PITA ANSWER DATA LOG</p>
-                        <p style="font-size:9px; opacity:0.3;">PAGE ${Math.floor(i/22) + 4}</p>
+                        <p style="font-size:10px; font-weight:900; letter-spacing:0.2em;">PITA ANSWER DATA LOG (${Math.floor(i/22)+1}/5)</p>
                     </header>
                     <table class="report-table">
                         <thead><tr><th width="35">No.</th><th>質問内容</th><th width="35">深度</th><th width="45">解答</th><th width="45">時間</th></tr></thead>
-                        <tbody>${chunk.map(q=>`<tr><td>#${String(q.n).padStart(2,'0')}</td><td style="font-size:8px;">${q.q}</td><td>w${q.w}</td><td style="color:${q.a==='はい'?'#3b82f6':'#ef4444'}; font-weight:900;">${q.a}</td><td>${q.t}s</td></tr>`).join('')}</tbody>
+                        <tbody>${chunk.map(q=>`<tr><td>#${String(q.n).padStart(2,'0')}</td><td style="font-size:7px;">${q.q}</td><td>w${q.w}</td><td style="color:${q.a==='はい'?'#3b82f6':'#ef4444'}; font-weight:900;">${q.a}</td><td>${q.t}s</td></tr>`).join('')}</tbody>
                     </table>
                 `;
-                logArea.appendChild(sec);
+                logRoot.appendChild(sec);
             }
 
-            // 5. グラフ描画（検証用エンジンの起動）
+            // 5. グラフ描画（検証用HTMLの計算式を忠実に再現）
             const template = document.getElementById('paid-report-template');
             template.style.display = 'block';
 
-            // レーダーチャート
+            // レーダー描画
             new Chart(document.getElementById('pdfRadar'), {
                 type: 'radar',
                 data: {
                     labels: Object.values(attrMap),
-                    datasets: [{ data: attrIds.map(id => ans.filter(q=>q.s===id&&q.a==='はい').reduce((s,q)=>s+q.w,0)), backgroundColor: 'rgba(59,130,246,0.15)', borderColor: '#1e3a8a', borderWidth: 2, pointRadius: 0, tension: 0.4 }]
+                    datasets: [1,2,3,4].map(w => ({
+                        data: attrIds.map(id => {
+                            const group = ans.filter(q => q.s === id && q.w === w);
+                            const yes = group.filter(q => q.a === "はい").length;
+                            return group.length > 0 ? (yes / group.length) * 100 : 0;
+                        }),
+                        backgroundColor: CLR['w'+w].replace('#', 'rgba(')+', 0.2)', 
+                        borderColor: CLR['w'+w], borderWidth: 1, pointRadius: 0, fill: true
+                    }))
                 },
-                options: { animation: false, scales: { r: { min: 0, ticks: { display: false }, grid: { color: 'rgba(30,58,138,0.1)' } } }, plugins: { legend: { display: false } } }
+                options: { animation: false, scales: { r: { min:0, max:100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
             });
 
-            // アイスバーグ
+            // アイスバーグ描画
             const iceGrid = document.getElementById('pdfIceGrid');
             attrIds.forEach(id => {
                 const col = document.createElement('div'); col.style.cssText = "width:45px; display:flex; flex-direction:column-reverse;";
                 [1,2,3,4].forEach(w => {
-                    const count = ans.filter(q => q.s === id && q.w === w && q.a === "はい").length;
-                    if (count > 0) {
+                    const cnt = ans.filter(q => q.s === id && q.w === w && q.a === "はい").length;
+                    if (cnt > 0) {
                         const seg = document.createElement('div');
-                        seg.style.cssText = `background:${CLR['w'+w]}; height:${count * 15}px; width:100%; border:0.5px solid rgba(255,255,255,0.2);`;
+                        seg.style.cssText = `background:${CLR['w'+w]}; height:${cnt * 20}px; width:100%; border-bottom:1px solid rgba(255,255,255,0.2);`;
                         col.appendChild(seg);
                     }
                 });
                 const label = document.createElement('p'); label.innerText = attrMap[id];
                 label.style.cssText = "font-size:9px; font-weight:900; color:#1e3a8a; margin-top:10px; text-align:center; writing-mode:vertical-rl;";
-                const container = document.createElement('div'); container.appendChild(col); container.appendChild(label);
-                iceGrid.appendChild(container);
+                const cont = document.createElement('div'); cont.appendChild(col); cont.appendChild(label);
+                iceGrid.appendChild(cont);
+            });
+
+            // ヒートマップ描画
+            const heatGrid = document.getElementById('pdfHeatGrid');
+            const maxT = Math.max(...ans.map(q => parseFloat(q.t)));
+            ans.forEach(q => {
+                const box = document.createElement('div');
+                const ratio = parseFloat(q.t) / maxT;
+                box.style.cssText = `aspect-ratio:1/1; background:#1e3a8a; opacity:${0.1 + (ratio * 0.9)}; border:0.5px solid white; display:flex; align-items:center; justify-content:center; color:white; font-size:10px;`;
+                box.innerText = q.n;
+                heatGrid.appendChild(box);
             });
 
             // 6. PDF出力
-            const opt = { 
-                margin: 0, 
-                filename: `PITA_Master_Record_${fT}.pdf`, 
-                image: { type: 'jpeg', quality: 1.0 }, 
-                html2canvas: { scale: 2, useCORS: true, logging: false }, 
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } 
-            };
-            
+            const opt = { margin:0, filename:`PITA_Record_${fT}.pdf`, image:{type:'jpeg', quality:1.0}, html2canvas:{scale:2, useCORS:true}, jsPDF:{unit:'mm', format:'a4'} };
             await html2pdf().set(opt).from(template).save();
             template.style.display = 'none';
         };
@@ -926,5 +947,6 @@
     </script>
 </body>
 </html>
+
 
 
