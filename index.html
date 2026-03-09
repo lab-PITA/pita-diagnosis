@@ -21,10 +21,18 @@
     <link rel="canonical" href="https://pita-diagnosis.com/">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
+        /* 有料レポート専用デザインルール（検証用HTMLより移植） */
+        .a4-page { width: 210mm; min-height: 297mm; padding: 25mm; margin: 0 auto; background: #ffffff; position: relative; box-sizing: border-box; break-after: always; display: flex; flex-direction: column; overflow: hidden; }
+        .hanko-stamp { position: absolute; width: 100px; height: 100px; border: 3px solid rgba(220, 38, 38, 0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(220, 38, 38, 0.7); font-family: 'Noto Serif JP', serif; font-weight: 900; transform: rotate(12deg); background: rgba(255, 255, 255, 0.1); }
+        .hanko-inner { border: 1px solid rgba(220, 38, 38, 0.7); border-radius: 50%; width: 88px; height: 88px; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
+        .report-table { width: 100%; border-collapse: collapse; font-size: 8.5px; table-layout: fixed; }
+        .report-table th { background: #f8fbff; color: #1e3a8a; padding: 8px 4px; border-bottom: 2px solid #1e3a8a; text-align: left; font-weight: 900; }
+        .report-table td { padding: 9px 4px; border-bottom: 1px solid #eee; color: #334155; vertical-align: top; line-height: 1.4; font-weight: 500; word-wrap: break-word; }
         :root { --primary: #111111; --accent: #3b82f6; --bg-gray: #fcfcfc; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans JP', sans-serif; background-color: #ffffff; color: var(--primary); -webkit-font-smoothing: antialiased; text-wrap: balance; overflow-x: hidden; }
@@ -267,28 +275,13 @@
         </p>
     </footer>
 
-    <div id="paid-report-template" style="display: none; background: white; color: #111; font-family: 'Noto Serif JP', serif; padding: 0;">
-        <div style="padding: 40px; border: 15px solid #3b82f6; min-height: 1000px; position: relative; background: white;">
-            <div style="text-align: center; margin-top: 50px;">
-                <p style="font-size: 12px; letter-spacing: 0.5em; color: #3b82f6; margin-bottom: 20px;">IDENTITY ANALYSIS REPORT</p>
-                <h1 style="font-size: 42px; font-weight: 900; line-height: 1.2; margin-bottom: 30px;">PITA精密診断<br>深層心理分析報告書</h1>
-                <div style="width: 60px; height: 4px; background: #111; margin: 0 auto 30px;"></div>
-                <p style="font-size: 18px;">あなたは「<strong id="pdf-type-name" style="font-size: 24px; color: #3b82f6;"></strong>」である</p>
-            </div>
-            <div style="margin-top: 60px; padding: 30px; background: #f8fafc; border-radius: 20px;">
-                <h2 style="font-size: 20px; border-left: 5px solid #3b82f6; padding-left: 15px; margin-bottom: 20px;">診断結果の要約</h2>
-                <div id="pdf-desc-content" style="line-height: 2; font-size: 15px; color: #333;">
-                    </div>
-            </div>
-            <div style="position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; font-size: 10px; color: #aaa;">
-                &copy; 2026 pita-diagnosis.com | Order ID: <span id="pdf-session-id"></span>
-            </div>
-        </div>
+    <div id="paid-report-template" style="display: none; background: #ffffff;">
+        <div id="report-content"></div>
     </div>
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+        import { getFirestore, doc , setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -746,7 +739,9 @@
             
             signInAnonymously(auth).then(() => {
                 if(auth.currentUser) {
-                    setDoc(doc(db, 'artifacts', 'pita', 'users', auth.currentUser.uid, 'userData', 'answers'), {
+                    const uid = auth.currentUser.uid;
+                    localStorage.setItem('pita_user_id', uid); // ★決済後に呼び出すためのメモを追加
+                    setDoc(doc(db, 'artifacts', 'pita', 'users', uid, 'userData', 'answers'), {
                         ans: ans, fT: fT, index: idxVal.toFixed(1), finishedAt: serverTimestamp()
                     }).catch(e => console.error("Data Save Failed", e));
                 }
@@ -757,33 +752,129 @@
         window.shareOnLINE=()=>{const t=encodeURIComponent(`PITA診断結果：私は【${resultData[fT].n}】でした。${resultData[fT].c}\n#PITA診断`);window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(location.href)}&text=${t}`,'_blank');};
         
         window.devClick=()=>{window.dc=(window.dc||0)+1;if(window.dc>=5){document.getElementById('dev-menu').classList.remove('hidden');window.dc=0;}};
-        window.generatePaidPDF = (sessionId) => {
-            const typeData = resultData[fT];
-            if (!typeData) return;
+        window.generatePaidPDF = async (sessionId) => {
+            const uid = localStorage.getItem('pita_user_id');
+            if (!uid) { alert("ID未検出。診断をやり直してください。"); return; }
 
-            // テンプレートにデータを流し込む
+            // 1. Firebaseから生データを取得
+            const docRef = doc(db, 'artifacts', 'pita', 'users', uid, 'userData', 'answers');
+            const snap = await getDoc(docRef);
+            if (!snap.exists()) { alert("データが見つかりません。"); return; }
+            const data = snap.data();
+            const { ans, fT, index, finishedAt } = data;
+
+            // 2. 解析ロジック（検証用HTMLより移植：Fn計算含む）
+            const attrMap = { ALT:'利他', OPT:'楽観', IDE:'理想', MOD:'秩序', EGO:'利己', NIH:'虚無', REA:'現実', ANA:'混沌' };
+            const attrIds = ['ALT', 'OPT', 'IDE', 'MOD', 'EGO', 'NIH', 'REA', 'ANA'];
+            const CLR = { w1: '#93c5fd', w2: '#3b82f6', w3: '#1e40af', w4: '#1e3a8a' };
+            ans.forEach(q => { q.Fn = (parseFloat(q.t || 0) * 1.5) + (parseFloat(q.b || 0) * 10.0); });
+
+            const ismName = attrMap[fT] || "不明";
+            const root = document.getElementById('report-content');
+            root.innerHTML = ''; 
+
+            // 3. 全ページビルド（検証用HTMLのデザイン・構成を完全維持）
+            root.innerHTML = `
+                <section class="a4-page">
+                    <header style="border-bottom:2px solid #1e3a8a; padding-bottom:30px; margin-bottom:100px; color:#1e3a8a;">
+                        <p style="font-size:10px; font-weight:900; letter-spacing:0.4em;">SECTION 00 / IDENTITY ANALYSIS</p>
+                        <h1 class="serif" style="font-size:48px; font-style:italic;">PITA 鑑定書</h1>
+                    </header>
+                    <div style="color:#1e3a8a; flex:1; display:flex; flex-direction:column; justify-content:center;">
+                        <h2 class="serif" style="font-size:56px; font-weight:900; margin-bottom:40px; line-height:1.1;">${ismName}の深淵に立つ者</h2>
+                        <div class="serif" style="font-size:18px; font-style:italic; border-left:4px solid #1e3a8a; padding-left:40px; margin-bottom:80px; line-height:1.6;">思想核：${ismName}。臨界深度への回答は、あなたの自己存在の定義そのものを象徴しています。</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px;">
+                            <div style="border:1px solid #bfdbfe; padding:30px; background:rgba(239,246,255,0.3);"><p style="font-size:10px; font-weight:900; margin-bottom:5px;">FINISH TYPE</p><p class="serif" style="font-size:32px; font-style:italic;">${ismName}主義</p></div>
+                            <div style="border:1px solid #bfdbfe; padding:30px; background:rgba(239,246,255,0.3);"><p style="font-size:10px; font-weight:900; margin-bottom:5px;">PITA INDEX</p><p class="serif" style="font-size:32px; font-style:italic;">${index}</p></div>
+                        </div>
+                    </div>
+                    <footer style="margin-top:auto; pt-6; border-top:1px solid #dbeafe; display:flex; justify-content:space-between; font-size:9px; opacity:0.3; color:#1e3a8a;"><span>PITA SYSTEM</span><span>PAGE 01</span></footer>
+                </section>
+
+                <section class="a4-page">
+                    <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:60px; font-style:italic;">Structure Verification / Logic 01</h2>
+                    <div class="serif" style="font-size:16px; color:#1e3a8a; line-height:2.0; font-style:italic;">
+                        <h3 style="font-size:32px; margin-bottom:40px; font-weight:bold; font-style:normal;">思想の地層構造について</h3>
+                        <p style="margin-bottom:30px;">この鑑定書は、あなたが回答した100の設問データを多角的に解析し、精神構造を「思想の地層調査」として可視化したものです。質問は8つの思想属性と心の深さを測る4つの深度（w1-w4）を組み合わせています。</p>
+                        <p style="margin-bottom:30px;">全100問は、『社会的適応層(w1)』から始まり、『思考の核(w2)』『深層心理(w3)』、そして『生存本能(w4)』に至る領域を測定するように設計されています。</p>
+                        <p style="padding-top:30px; border-top:1px solid #dbeafe; opacity:0.6; font-size:14px;">本鑑定書は統計的データに基づいたエンターテインメントであり、自己の新たな側面を発見するためのインスピレーションとしてお楽しみください。</p>
+                    </div>
+                    <footer style="margin-top:auto; pt-6; border-top:1px solid #dbeafe; display:flex; justify-content:space-between; font-size:9px; opacity:0.3; color:#1e3a8a;"><span>PAGE 02</span></footer>
+                </section>
+
+                <section class="a4-page">
+                    <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:40px;">01 / 多層レーダーチャート</h2>
+                    <div style="width:500px; margin:0 auto 40px;"><canvas id="pdfRadar"></canvas></div>
+                    <h2 style="font-size:12px; font-weight:900; text-align:center; color:#1e3a8a; margin-bottom:40px;">02 / 垂直アイスバーグ</h2>
+                    <div id="pdfIceGrid" style="display:flex; justify-content:center; gap:15px; height:300px; align-items:flex-end;"></div>
+                    <footer style="margin-top:auto; pt-6; border-top:1px solid #dbeafe; display:flex; justify-content:space-between; font-size:9px; opacity:0.3; color:#1e3a8a;"><span>PAGE 03</span></footer>
+                </section>
+
+                <div id="pdfLogArea"></div>
+            `;
+
+            // 4. ログページの生成（22問/ページ）
+            const logArea = document.getElementById('pdfLogArea');
+            for (let i = 0; i < 100; i += 22) {
+                const chunk = ans.slice(i, i + 22);
+                const sec = document.createElement('section');
+                sec.className = 'a4-page';
+                sec.innerHTML = `
+                    <header style="border-bottom:2px solid #1e3a8a; padding-bottom:10px; margin-bottom:20px; color:#1e3a8a; display:flex; justify-content:space-between; align-items:flex-end;">
+                        <p style="font-size:10px; font-weight:900; letter-spacing:0.2em;">保存版 / PITA ANSWER DATA LOG</p>
+                        <p style="font-size:9px; opacity:0.3;">PAGE ${Math.floor(i/22) + 4}</p>
+                    </header>
+                    <table class="report-table">
+                        <thead><tr><th width="35">No.</th><th>質問内容</th><th width="35">深度</th><th width="45">解答</th><th width="45">時間</th></tr></thead>
+                        <tbody>${chunk.map(q=>`<tr><td>#${String(q.n).padStart(2,'0')}</td><td style="font-size:8px;">${q.q}</td><td>w${q.w}</td><td style="color:${q.a==='はい'?'#3b82f6':'#ef4444'}; font-weight:900;">${q.a}</td><td>${q.t}s</td></tr>`).join('')}</tbody>
+                    </table>
+                `;
+                logArea.appendChild(sec);
+            }
+
+            // 5. グラフ描画（検証用エンジンの起動）
             const template = document.getElementById('paid-report-template');
-            document.getElementById('pdf-type-name').innerText = typeData.n;
-            document.getElementById('pdf-session-id').innerText = sessionId;
-            document.getElementById('pdf-desc-content').innerHTML = typeData.d;
+            template.style.display = 'block';
 
-            template.style.display = 'block'; // 一時的に表示
-
-            const opt = {
-                margin: 10,
-                filename: `PITA_Report_${fT}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            // PDF保存を実行
-            html2pdf().set(opt).from(template).save().then(() => {
-                template.style.display = 'none'; // 終わったら隠す
-            }).catch(err => {
-                console.error("PDF作成エラー:", err);
-                template.style.display = 'none';
+            // レーダーチャート
+            new Chart(document.getElementById('pdfRadar'), {
+                type: 'radar',
+                data: {
+                    labels: Object.values(attrMap),
+                    datasets: [{ data: attrIds.map(id => ans.filter(q=>q.s===id&&q.a==='はい').reduce((s,q)=>s+q.w,0)), backgroundColor: 'rgba(59,130,246,0.15)', borderColor: '#1e3a8a', borderWidth: 2, pointRadius: 0, tension: 0.4 }]
+                },
+                options: { animation: false, scales: { r: { min: 0, ticks: { display: false }, grid: { color: 'rgba(30,58,138,0.1)' } } }, plugins: { legend: { display: false } } }
             });
+
+            // アイスバーグ
+            const iceGrid = document.getElementById('pdfIceGrid');
+            attrIds.forEach(id => {
+                const col = document.createElement('div'); col.style.cssText = "width:45px; display:flex; flex-direction:column-reverse;";
+                [1,2,3,4].forEach(w => {
+                    const count = ans.filter(q => q.s === id && q.w === w && q.a === "はい").length;
+                    if (count > 0) {
+                        const seg = document.createElement('div');
+                        seg.style.cssText = `background:${CLR['w'+w]}; height:${count * 15}px; width:100%; border:0.5px solid rgba(255,255,255,0.2);`;
+                        col.appendChild(seg);
+                    }
+                });
+                const label = document.createElement('p'); label.innerText = attrMap[id];
+                label.style.cssText = "font-size:9px; font-weight:900; color:#1e3a8a; margin-top:10px; text-align:center; writing-mode:vertical-rl;";
+                const container = document.createElement('div'); container.appendChild(col); container.appendChild(label);
+                iceGrid.appendChild(container);
+            });
+
+            // 6. PDF出力
+            const opt = { 
+                margin: 0, 
+                filename: `PITA_Master_Record_${fT}.pdf`, 
+                image: { type: 'jpeg', quality: 1.0 }, 
+                html2canvas: { scale: 2, useCORS: true, logging: false }, 
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } 
+            };
+            
+            await html2pdf().set(opt).from(template).save();
+            template.style.display = 'none';
         };
         window.toggleIndexModal=(s)=>{const m=document.getElementById('index-modal');m.classList.toggle('hidden',!s);document.body.style.overflow=s?'hidden':'auto';};
         window.closeIndexModal=(e)=>{if(e.target.id==='index-modal')window.toggleIndexModal(false);};
@@ -798,4 +889,5 @@
     </script>
 </body>
 </html>
+
 
