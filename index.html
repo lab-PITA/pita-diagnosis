@@ -21,6 +21,7 @@
     <link rel="canonical" href="https://pita-diagnosis.com/">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -237,7 +238,7 @@
                 <section class="max-w-5xl mx-auto px-6 text-balance text-center text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><h4 class="text-[9px] font-bold text-gray-300 mb-10 uppercase tracking-[0.5em] text-center italic text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance">RECOMMENDED BOOKS</h4><div id="recommended-books" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left text-balance text-left text-balance text-left text-balance text-left text-balance text-left text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"></div></section>
                 <div class="animate-bounce text-center text-balance text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><div class="text-blue-400 text-2xl text-center text-center text-center text-center text-center text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance">▼</div><p class="text-[9px] text-gray-300 mt-2 font-bold uppercase tracking-widest text-center text-balance text-balance text-balance text-balance text-balance">今後の指針</p></div>
                 <section class="bg-blue-600 text-white p-8 md:p-24 rounded-[3rem] shadow-2xl relative overflow-hidden text-balance text-center text-balance text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><h4 class="text-[9px] font-bold text-blue-200 mb-10 uppercase tracking-[0.6em] text-center text-balance text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance">Future Guidance</h4><div id="result-direction" class="text-blue-50 leading-relaxed md:leading-[2.6] text-base md:text-xl space-y-10 relative z-10 mb-12 text-left text-balance text-balance text-balance text-left text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"></div>
-                    <div id="purchase-container" class="relative z-10 text-center text-balance text-center text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><a href="https://buy.stripe.com/test_placeholder" target="_blank" class="btn-stripe inline-flex flex-col items-center px-12 py-6 rounded-2xl font-bold shadow-2xl transition hover:scale-105 text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><span class="text-lg text-balance text-balance text-balance text-balance">回答履歴＆詳細分析レポート（PDF版）を購入</span><span class="text-xs opacity-70 mt-1 text-balance text-balance text-balance">Stripeで安全に決済 ¥300</span></a></div>
+                    <div id="purchase-container" class="relative z-10 text-center text-balance text-center text-center text-center text-center text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><a href="https://buy.stripe.com/4gM3cx5Rm2DUbk89XCg7e00" target="_blank" class="btn-stripe inline-flex flex-col items-center px-12 py-6 rounded-2xl font-bold shadow-2xl transition hover:scale-105 text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance text-balance"><span class="text-lg text-balance text-balance text-balance text-balance">回答履歴＆詳細分析レポート（PDF版）を購入</span><span class="text-xs opacity-70 mt-1 text-balance text-balance text-balance">Stripeで安全に決済 ¥300</span></a></div>
                     <div class="mt-8 relative z-10 text-center text-balance text-balance text-balance text-balance">
                         <button id="btn-go-detail" onclick="" class="text-[10px] font-bold text-blue-200 uppercase tracking-widest border-b border-blue-400 pb-1 transition text-balance text-balance text-balance text-balance text-balance">属性の詳細解説を読む →</button>
                     </div>
@@ -266,6 +267,25 @@
         </p>
     </footer>
 
+    <div id="paid-report-template" style="display: none; background: white; color: #111; font-family: 'Noto Serif JP', serif; padding: 0;">
+        <div style="padding: 40px; border: 15px solid #3b82f6; min-height: 1000px; position: relative; background: white;">
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 12px; letter-spacing: 0.5em; color: #3b82f6; margin-bottom: 20px;">IDENTITY ANALYSIS REPORT</p>
+                <h1 style="font-size: 42px; font-weight: 900; line-height: 1.2; margin-bottom: 30px;">PITA精密診断<br>深層心理分析報告書</h1>
+                <div style="width: 60px; height: 4px; background: #111; margin: 0 auto 30px;"></div>
+                <p style="font-size: 18px;">あなたは「<strong id="pdf-type-name" style="font-size: 24px; color: #3b82f6;"></strong>」である</p>
+            </div>
+            <div style="margin-top: 60px; padding: 30px; background: #f8fafc; border-radius: 20px;">
+                <h2 style="font-size: 20px; border-left: 5px solid #3b82f6; padding-left: 15px; margin-bottom: 20px;">診断結果の要約</h2>
+                <div id="pdf-desc-content" style="line-height: 2; font-size: 15px; color: #333;">
+                    </div>
+            </div>
+            <div style="position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; font-size: 10px; color: #aaa;">
+                &copy; 2026 pita-diagnosis.com | Order ID: <span id="pdf-session-id"></span>
+            </div>
+        </div>
+    </div>
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
         import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
@@ -581,7 +601,19 @@
 
         window.handleRoute=()=>{
             const path = location.pathname;
-            if(path.startsWith('/type/')) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            // 決済IDがある場合（決済成功して戻ってきた時）
+            if (sessionId) {
+                window.showView('result'); 
+                alert('決済を確認しました。分析レポートを作成します。少々お待ちください。');
+                setTimeout(() => {
+                    if(typeof window.generatePaidPDF === "function"){
+                        window.generatePaidPDF(sessionId);
+                    }
+                }, 1000);
+            } else if(path.startsWith('/type/')) {
                 const type = path.replace('/type/', '');
                 window.showIsmDetail(type);
             } else if(path.startsWith('/q')) {
@@ -725,6 +757,34 @@
         window.shareOnLINE=()=>{const t=encodeURIComponent(`PITA診断結果：私は【${resultData[fT].n}】でした。${resultData[fT].c}\n#PITA診断`);window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(location.href)}&text=${t}`,'_blank');};
         
         window.devClick=()=>{window.dc=(window.dc||0)+1;if(window.dc>=5){document.getElementById('dev-menu').classList.remove('hidden');window.dc=0;}};
+        window.generatePaidPDF = (sessionId) => {
+            const typeData = resultData[fT];
+            if (!typeData) return;
+
+            // テンプレートにデータを流し込む
+            const template = document.getElementById('paid-report-template');
+            document.getElementById('pdf-type-name').innerText = typeData.n;
+            document.getElementById('pdf-session-id').innerText = sessionId;
+            document.getElementById('pdf-desc-content').innerHTML = typeData.d;
+
+            template.style.display = 'block'; // 一時的に表示
+
+            const opt = {
+                margin: 10,
+                filename: `PITA_Report_${fT}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // PDF保存を実行
+            html2pdf().set(opt).from(template).save().then(() => {
+                template.style.display = 'none'; // 終わったら隠す
+            }).catch(err => {
+                console.error("PDF作成エラー:", err);
+                template.style.display = 'none';
+            });
+        };
         window.toggleIndexModal=(s)=>{const m=document.getElementById('index-modal');m.classList.toggle('hidden',!s);document.body.style.overflow=s?'hidden':'auto';};
         window.closeIndexModal=(e)=>{if(e.target.id==='index-modal')window.toggleIndexModal(false);};
 
@@ -738,3 +798,4 @@
     </script>
 </body>
 </html>
+
